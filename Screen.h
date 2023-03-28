@@ -8,7 +8,9 @@
 #include "ncurses.h"
 #include "Character.h"
 #include "PlayableMap.h"
-
+#include <unistd.h>
+#include <thread>
+#include <chrono>
 const std::string  BORDER_VERT = "║║";
 const std::string  BORDER_HORIZ = "══";
 const std::string  BORDER_CORNER_TL = "##";
@@ -27,26 +29,18 @@ class Screen
         //getters
         int getHeight();
         int getWidth();
-        
-        //gameobject register
-        void addObject(GameObject* object);
 
         //render functions
-        void render();
+        void render(std::vector<GameObject*> &handle);
 
     private:
         //member variables
         int width,height;
         std::string** frame;
         PlayableMap map_ptr;
-        std::vector<GameObject*> object_list;
 
         //render functions
         void resetFrame();
-        void printCurrentFrame();
-        void updateObjectsIntoFrame();
-
-
-        
+        void printCurrentFrame(std::vector<GameObject*> &handle);
 };
 #endif // _SCREEN_

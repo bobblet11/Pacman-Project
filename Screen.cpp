@@ -5,6 +5,9 @@ Screen :: Screen (int width, int height, PlayableMap & map)
     this->width = width+2;
     this->height = height+2;
     this->map_ptr = map;
+
+
+    
     //parameter width and height is internal area, the class member width, height include borders
     //initialisation
 
@@ -22,7 +25,6 @@ Screen :: Screen (int width, int height, PlayableMap & map)
    }
 
     resetFrame();
-    printCurrentFrame();
     refresh();
 
 }
@@ -79,7 +81,7 @@ void Screen::resetFrame()
     }
 }
 
-void Screen::printCurrentFrame()
+void Screen::printCurrentFrame(std::vector<GameObject*> &handle)
 {
     for(int i=0;i<getHeight();i++)
     {
@@ -88,38 +90,21 @@ void Screen::printCurrentFrame()
         {
             printw("%s", frame[i][j].c_str());
         } 
-        
     }   
-
-    for (int a=0; a<object_list.size(); a++)
+    for (int i=0; i < handle.size()-1; i++)
     {
-        object_list[a]->printCharacterAtPosition();
-    }
 
+        handle.at(i)->printCharacterAtPosition();
+    }
+    move(0,0);
+    handle.at(5)->printCharacterAtPosition();
     refresh();
     move(0,0);
 }
 
-void Screen::addObject(GameObject* object)
-{
-    object_list.push_back(object);
-}
-
-void Screen::updateObjectsIntoFrame()
-{
-    resetFrame();
-    int x_pos,y_pos;
-    for (int a=0; a<object_list.size(); a++)
-    {
-        int obj_width = object_list[a]->getWidth();
-        std::string sprite = object_list[a]->getCurrentSprite();
-        frame[object_list[a]->getY()][object_list[a]->getX()] = sprite;
-    }
-}
-
-void Screen::render()
+void Screen::render(std::vector<GameObject*> &handle)
 {   
     resetFrame();
-    printCurrentFrame();
+    printCurrentFrame(handle);
 }
 

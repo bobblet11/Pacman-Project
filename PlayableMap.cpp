@@ -1,6 +1,9 @@
 #include "PlayableMap.h"
-
 PlayableMap :: PlayableMap()
+{
+
+}
+PlayableMap :: PlayableMap(std::vector<GameObject*> &handle)
 {
     std::string line;
     std::fstream file;
@@ -31,6 +34,10 @@ PlayableMap :: PlayableMap()
             {
                 // make a pill object at this pos   
                 map_layout[count][i] = DEFAULT_EMPTY_CHAR;
+                GameObject * pill_ptr = new GameObject("Pills.txt", i+1,count+1,COLOR_WHITE,COLOR_BLACK);
+       
+                handle.push_back(pill_ptr);
+
             }
             else if (line[i] == '@')
             {
@@ -82,5 +89,6 @@ std::string PlayableMap :: mapToString()
     }
     return out;
 }
+
 
 

@@ -5,6 +5,13 @@
 #include <string>
 #include <fstream>
 #include <iostream>
+#include <vector>
+
+#include "GameObject.h"
+
+#include <unistd.h>
+#include <thread>
+#include <chrono>
 
 const int MAP_WIDTH = 28;
 const int MAP_HEIGHT = 31;
@@ -20,6 +27,7 @@ class PlayableMap
 {
     public:
         PlayableMap();
+        PlayableMap(std::vector<GameObject*> &handle);
         ~PlayableMap();
         std::string getCharAtPos(int x, int y);
         bool IsMoveable(int x, int y);

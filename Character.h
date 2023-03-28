@@ -18,8 +18,8 @@ class Character : public GameObject
         Character(std::string sprite_sheet, int screen_width, int screen_height, PlayableMap& map, int posX, int posY, int colour_f, int colour_b);
         ~Character();
 
-        void updateAnimationState();
-        void handleCharacterMove();
+        virtual void updateAnimationState();
+        virtual void handleCharacterMove();
         virtual void printCharacterAtPosition();
 
     private:

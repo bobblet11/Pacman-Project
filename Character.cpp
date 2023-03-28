@@ -1,26 +1,31 @@
 #include "Character.h"
 
 Character::Character(std::string sprite_sheet, int screen_width, int screen_height, PlayableMap& map, int posX, int posY, int colour_f, int colour_b)
-:GameObject(sprite_sheet, posX, posY), screen_height(screen_height), screen_width(screen_width), map(map)
+:GameObject(sprite_sheet, posX, posY, colour_f,colour_b), screen_height(screen_height), screen_width(screen_width), map(map)
 {
+    std::cout << "Character constructor invoked" << std::endl;
+    std::cout << "Current state index :"<< current_state_index << std::endl;
+    std::cout << animation_sprites.at(current_state_index) << std::endl;
     if(!map.IsMoveable(posX-1,posY-1))
     {
         std::cout << "Invalid haracter starting coordinates" << std::endl;
         exit(-1);
     }
-    CHARACTER_BACK_COLOUR = colour_b;
-    CHARACTER_FORE_COLOUR = colour_f;
-    init_pair(1, CHARACTER_FORE_COLOUR, CHARACTER_BACK_COLOUR);
-    setState(DEFAULT);
 
+    setState(DEFAULT);
 }
+
+
 Character::~Character()
 {
-    
+    std::cout << "Character deconstructor invoked" << std::endl;
+    std::cout << "Current state index :"<< current_state_index << std::endl;
+    std::cout << animation_sprites.at(current_state_index) << std::endl;
 }
 
 void Character::handleCharacterMove()
 {
+    // std::cout << "CHARACTER MOVE" << std::endl;
     if (selectGetch()) //there is an actual key available in getch() queue
     {
         input = getch();
@@ -87,22 +92,23 @@ int Character :: selectGetch()
 
 void Character :: updateAnimationState()
 {
+    // std::cout << "UPDATE ANIM CHARACTER " << std::endl;
     if (anim_counter < ANIMATION_DURATION)
         {
-            setState(0); //default state
+            setState(DEFAULT); //default state
         }
         else
         {
             setState(current_direction);
         }
-        anim_counter++;
-        anim_counter%=(ANIMATION_DURATION*2);
+    anim_counter++;
+    anim_counter%=(ANIMATION_DURATION*2);
 
 }
 
 void Character :: printCharacterAtPosition()
 {
-	attron(COLOR_PAIR(1));
-    mvprintw(y,x*2, "%s", animation_sprites[current_state_index].c_str());
-    attroff(COLOR_PAIR(1));
+	// wattron(stdscr,COLOR_PAIR(10));
+    mvprintw(y,x*2, "%s", getCurrentSprite().c_str());
+    // wattroff(stdscr,COLOR_PAIR(10));
 }
