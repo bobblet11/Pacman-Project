@@ -1,7 +1,8 @@
 #include "Character.h"
 
-Character::Character(std::string sprite_sheet, int screen_width, int screen_height, PlayableMap& map, int posX, int posY, int colour_f, int colour_b)
-:GameObject(sprite_sheet, posX, posY, colour_f,colour_b), screen_height(screen_height), screen_width(screen_width), map(map)
+
+Character::Character(std::string sprite_sheet, int screen_width, int screen_height, PlayableMap& map, int posX, int posY, int colour_f, int colour_b, int obj_type)
+:GameObject(sprite_sheet, posX, posY, colour_f,colour_b, obj_type), screen_height(screen_height), screen_width(screen_width), map(map)
 {
     std::cout << "Character constructor invoked" << std::endl;
     std::cout << "Current state index :"<< current_state_index << std::endl;
@@ -23,7 +24,7 @@ Character::~Character()
     std::cout << animation_sprites.at(current_state_index) << std::endl;
 }
 
-void Character::handleCharacterMove()
+void Character::handleCharacterMove(std::vector<GameObject*> & handle ,int & character_index)
 {
     // std::cout << "CHARACTER MOVE" << std::endl;
     if (selectGetch()) //there is an actual key available in getch() queue
@@ -34,13 +35,13 @@ void Character::handleCharacterMove()
             if (ERR_count > BUTTON_MASH_CONSTANT) //singular press, case where the time between each button press is large enough to not be considered holding down
             {
                 move_count=0;
-                moveCharacter();
+                moveCharacter(handle,character_index);
             }
             else //if holding down
             {
                 if (move_count == 0)
                 {
-                    moveCharacter();
+                    moveCharacter(handle,character_index);
                 }
                 move_count++;
                 move_count%=MOVEDELAY;
@@ -48,7 +49,7 @@ void Character::handleCharacterMove()
         }
         else //changing direction
         { 
-            moveCharacter();
+            moveCharacter(handle,character_index);
         }
         ERR_count = 0;
         last_input = input;
@@ -60,7 +61,7 @@ void Character::handleCharacterMove()
 }
 
 
-void Character::moveCharacter() //actually moves the character 
+void Character::moveCharacter(std::vector<GameObject*> & handle, int & character_index) //actually moves the character 
 {
     int moveY = (input == 'w') ? -1 : (input == 's') ? 1 : 0;
     int moveX = (input == 'd') ? 1 : (input == 'a') ? -1 : 0;
@@ -73,6 +74,35 @@ void Character::moveCharacter() //actually moves the character
     {
         setX(new_pos_X);
         setY(new_pos_Y);
+
+
+        //BINARY SEARCH FOR PILL
+        int length = handle.size()-1,pivot=0,start=0;
+        while (true)
+        {
+            pivot = ((length-start)+1/2);
+            for (int i = start; i < pivot;i++)
+            {
+                if (handle.at(i)->object_type == 1 && handle.at(i)->getX() == x  && handle.at(i)->getY() == y)
+                {
+                    //player has hit a pill
+                    delete handle.at(i);
+                    //removes the pointer
+                    handle.erase(handle.begin()+i);
+                    // std::cout << handle.size()<<std::endl;
+                    // std::cout << character_index<<std::endl;
+                    character_index-=1;
+                    // std::cout << character_index<<std::endl;
+                    break;
+                }
+            }
+            length -= pivot;
+            start = pivot;
+            if (length <=0)
+            {
+                break;
+            }
+        }
     }
 }
 

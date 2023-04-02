@@ -8,6 +8,7 @@
 #include <vector>
 
 #include "GameObject.h"
+#include "Pill.h"
 
 #include <unistd.h>
 #include <thread>
@@ -15,6 +16,11 @@
 
 const int MAP_WIDTH = 28;
 const int MAP_HEIGHT = 31;
+
+const int LARGE_PILL = 1;
+const int SMALL_PILL = 0;
+const int LARGE_PILL_PTS = 500;
+const int SMALL_PILL_PTS = 100;
 
 const std::string LAYOUT_SPRITE_SHEET = "PlayableMap.txt";
 const std::string DEFAULT_WALL_CHAR = "▩ ";

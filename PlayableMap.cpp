@@ -34,7 +34,7 @@ PlayableMap :: PlayableMap(std::vector<GameObject*> &handle)
             {
                 // make a pill object at this pos   
                 map_layout[count][i] = DEFAULT_EMPTY_CHAR;
-                GameObject * pill_ptr = new GameObject("Pills.txt", i+1,count+1,COLOR_WHITE,COLOR_BLACK);
+                GameObject * pill_ptr = new Pill("Pills.txt", i+1,count+1,COLOR_WHITE,COLOR_BLACK, 1,SMALL_PILL,SMALL_PILL_PTS);
        
                 handle.push_back(pill_ptr);
 
@@ -43,6 +43,9 @@ PlayableMap :: PlayableMap(std::vector<GameObject*> &handle)
             {
                 // make a super pill object at this pos
                 map_layout[count][i] = DEFAULT_EMPTY_CHAR;
+                GameObject * pill_ptr = new Pill("Pills.txt", i+1,count+1,COLOR_WHITE,COLOR_BLACK, 1,LARGE_PILL,LARGE_PILL_PTS);
+       
+                handle.push_back(pill_ptr);
             }
             else if (line[i] == '*')
             {

@@ -2,7 +2,7 @@ CXX = g++
 CXXFLAGS = -pedantic -std=c++11
 EXECUTABLE = pacman
 LDFLAGS = -lncursesw
-OBJECTS = Character.o main.o Screen.o GameObject.o PlayableMap.o 
+OBJECTS = Character.o main.o Screen.o GameObject.o PlayableMap.o Pill.o 
 
 compile: $(OBJECTS)
 	$(CXX) $(CXXFLAGS) -o $(EXECUTABLE) $(OBJECTS) $(LDFLAGS)
@@ -21,6 +21,9 @@ GameObject.o: GameObject.cpp GameObject.h
 
 PlayableMap.o: PlayableMap.cpp PlayableMap.h
 	$(CXX) $(FLAGS) -c $<
+
+Pill.o: Pill.cpp Pill.h GameObject.h
+	 $(CXX) $(FLAGS) -c $<
 
 .PHONY: run
 run:

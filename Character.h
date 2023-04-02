@@ -15,11 +15,11 @@ const int BUTTON_MASH_CONSTANT = 6; //number of frames between key presses to co
 class Character : public GameObject
 {
     public:
-        Character(std::string sprite_sheet, int screen_width, int screen_height, PlayableMap& map, int posX, int posY, int colour_f, int colour_b);
+        Character(std::string sprite_sheet, int screen_width, int screen_height, PlayableMap& map, int posX, int posY, int colour_f, int colour_b, int obj_type);
         ~Character();
 
         virtual void updateAnimationState();
-        virtual void handleCharacterMove();
+        virtual void handleCharacterMove(std::vector<GameObject*> & handle,int & character_index);
         virtual void printCharacterAtPosition();
 
     private:
@@ -28,7 +28,7 @@ class Character : public GameObject
         int current_direction=0;
         int screen_width, screen_height;
         PlayableMap map;
-        void moveCharacter();
+        void moveCharacter(std::vector<GameObject*> & handle,int & character_index);
 
         int ERR_count;
         char input,last_input;
@@ -37,6 +37,7 @@ class Character : public GameObject
 
         int CHARACTER_FORE_COLOUR;
         int CHARACTER_BACK_COLOUR; 
+        
 
 };
 

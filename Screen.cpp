@@ -72,8 +72,6 @@ void Screen::resetFrame()
             }
             else
             {
-                //empty
-                //replace this with a map_layout_get char at position
                 frame[i][j] = map_ptr.getCharAtPos(j-1,i-1);
             }
 
@@ -91,13 +89,14 @@ void Screen::printCurrentFrame(std::vector<GameObject*> &handle)
             printw("%s", frame[i][j].c_str());
         } 
     }   
-    for (int i=0; i < handle.size()-1; i++)
+    
+    for (int i=0; i < handle.size(); i++)
     {
 
         handle.at(i)->printCharacterAtPosition();
     }
     move(0,0);
-    handle.at(5)->printCharacterAtPosition();
+
     refresh();
     move(0,0);
 }

@@ -13,7 +13,7 @@ class GameObject
 {
     //inhertied classes will ahve built it animation states and indexes
     public:
-        GameObject(std::string,int,int,int colour_f, int colour_b);    //copy constructor
+        GameObject(std::string,int,int,int colour_f, int colour_b, int obj_type);    //copy constructor
         GameObject(const GameObject &t);
         virtual ~GameObject();
 
@@ -26,6 +26,7 @@ class GameObject
         int getCurrentStateIndex();
         std::string& getCurrentSprite();
 
+        int object_type = 0;
         //have a vector of game objects in the screen or main, constantly update.
 
         void setState(const int state);
@@ -35,7 +36,7 @@ class GameObject
         //virtuals
         virtual void printCharacterAtPosition();
         virtual void updateAnimationState();
-        virtual void handleCharacterMove();
+        virtual void handleCharacterMove(std::vector<GameObject*> & handle, int& character_index);
 
     protected:
         int x,y;

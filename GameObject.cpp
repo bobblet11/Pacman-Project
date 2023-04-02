@@ -1,8 +1,9 @@
 #include "GameObject.h"
 
-GameObject::GameObject(std::string sprite_sheet, int posX,  int posY,int colour_f, int colour_b)
+GameObject::GameObject(std::string sprite_sheet, int posX,  int posY,int colour_f, int colour_b, int obj_type)
 :x(posX), y(posY)
-{
+{   
+    object_type = obj_type;
     std::cout << "GO constructor invoked" << std::endl;
     readSpriteSheet(sprite_sheet);
     current_state_index = 0;
@@ -30,9 +31,6 @@ GameObject :: GameObject(const GameObject &t)
 
 GameObject::~GameObject()
 {
-    std::cout << "GO deconstructor invoked" << std::endl;
-    std::cout << "Current state index :"<< current_state_index << std::endl;
-    std::cout << animation_sprites.at(current_state_index) << std::endl;
 }
 
 std::vector<std::string> GameObject :: getAnimationSprites()
@@ -114,7 +112,7 @@ void GameObject :: updateAnimationState()
 {
     // std::cout<<"GO UPDATE ANIM" << std::endl;
 }
-void GameObject :: handleCharacterMove()
+void GameObject :: handleCharacterMove(std::vector<GameObject*> & handle,int& character_index)
 {
     //  std::cout<<"GO  HANDLE CHARACTER MOVE" << std::endl;
 }

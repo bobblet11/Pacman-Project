@@ -3,6 +3,11 @@
 #include <thread>
 #include <chrono>
 #include "Character.h"
+
+//define object types
+#define  CHARACTER 0
+#define  PILL 1
+
 const int FRAMERATE = 60;
 
     //since gameObjects have the neccesary functions that screen uses, i can pass a pointer thru to screen
@@ -36,13 +41,11 @@ int main(int argc, char *argv[])
     
     PlayableMap map(handle);
 
-    Screen screen(28,31,map);
-
+    Screen screen(120,55,map);
+    
     Character* character_ptr;
-    character_ptr = new Character("CharacterSprites.txt",screen.getWidth(), screen.getHeight(), map, 2,2,COLOR_YELLOW,COLOR_BLACK);
+    character_ptr = new Character("CharacterSprites.txt",screen.getWidth(), screen.getHeight(), map, 2,2,COLOR_YELLOW,COLOR_BLACK, CHARACTER);
     handle.push_back(character_ptr);
-   
-    std::this_thread::sleep_for(std::chrono::milliseconds(3000));
     
         //terminal setup
     cbreak();
@@ -57,25 +60,27 @@ int main(int argc, char *argv[])
 	}
 	start_color();			/* Start color 			*/
 
+
+    int character_index = handle.size() -1;
     while(running)
     {
-        for (int i=0; i < handle.size(); i++)
+
+        handle.at(character_index)->handleCharacterMove(handle, character_index);
+        handle.at(character_index)->updateAnimationState();
+        if ( handle.size() == 1)
         {
-            handle.at(i)->handleCharacterMove();
-            handle.at(i)->updateAnimationState();
+            delete handle.at(character_index);
+            handle.erase(handle.begin()+character_index);
+            break;
         }
-        
         screen.render(handle);
         std::this_thread::sleep_for(std::chrono::milliseconds(1000/FRAMERATE));
-    }
 
 
-    for (int i=0; i < handle.size(); i++)
-    {
-        delete[] handle.at(i);
+
     }
     endwin();
-
+    std::cout << "YOU WIN!" << std::endl;
 }
 
 

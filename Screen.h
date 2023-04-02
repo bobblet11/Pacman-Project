@@ -19,6 +19,8 @@ const std::string  BORDER_CORNER_BL = "##";
 const std::string  BORDER_CORNER_BR = "##";
 const std::string  BORDER_EMPTY = "  ";
 
+const int MAP_OFFSET_X  = 46; // max x is 120
+const int MAP_OFFSET_Y = 12; //max y is 55
 class Screen
 {
     public:
