@@ -3,10 +3,16 @@
 #include <thread>
 #include <chrono>
 #include "Character.h"
+#include "RedGhost.h"
+
+//colour pairs
+#define WALL_COLOUR 2
 
 //define object types
-#define  CHARACTER 0
-#define  PILL 1
+#define  CHARACTER 1
+#define WALL 2
+#define  PILL 3
+#define GHOST 4
 
 const int FRAMERATE = 60;
 
@@ -35,18 +41,26 @@ const int FRAMERATE = 60;
 
 int main(int argc, char *argv[])
 {
-    init_pair(10, COLOR_YELLOW, COLOR_BLACK );
     bool running = true;
     std::vector<GameObject*> handle;
     
     PlayableMap map(handle);
 
-    Screen screen(120,55,map);
-    
+    Screen screen(28,31,map);
+
+    RedGhost* r_ghost_ptr;
+    r_ghost_ptr = new RedGhost("GhostSprites.txt",4,4,GHOST);
+    handle.push_back(r_ghost_ptr);
+
+
     Character* character_ptr;
-    character_ptr = new Character("CharacterSprites.txt",screen.getWidth(), screen.getHeight(), map, 2,2,COLOR_YELLOW,COLOR_BLACK, CHARACTER);
+    character_ptr = new Character("CharacterSprites.txt",screen.getWidth(), screen.getHeight(), map, 2,2, CHARACTER);
     handle.push_back(character_ptr);
-    
+
+        
+
+
+
         //terminal setup
     cbreak();
     noecho();
@@ -60,6 +74,12 @@ int main(int argc, char *argv[])
 	}
 	start_color();			/* Start color 			*/
 
+    //colour init
+    init_pair(CHARACTER, COLOR_YELLOW,COLOR_BLACK);
+    init_pair(WALL, COLOR_BLUE, COLOR_BLACK);
+    init_pair(PILL, COLOR_WHITE, COLOR_BLACK);
+    init_pair(GHOST, COLOR_RED, COLOR_BLACK);
+    
 
     int character_index = handle.size() -1;
     while(running)
@@ -67,6 +87,7 @@ int main(int argc, char *argv[])
 
         handle.at(character_index)->handleCharacterMove(handle, character_index);
         handle.at(character_index)->updateAnimationState();
+        handle.at(character_index-1)->handleState();
         if ( handle.size() == 1)
         {
             delete handle.at(character_index);

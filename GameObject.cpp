@@ -1,31 +1,18 @@
 #include "GameObject.h"
 
-GameObject::GameObject(std::string sprite_sheet, int posX,  int posY,int colour_f, int colour_b, int obj_type)
+GameObject::GameObject(std::string sprite_sheet, int posX,  int posY, int obj_type)
 :x(posX), y(posY)
 {   
     object_type = obj_type;
-    std::cout << "GO constructor invoked" << std::endl;
     readSpriteSheet(sprite_sheet);
     current_state_index = 0;
-    CHARACTER_BACK_COLOUR = colour_b;
-    CHARACTER_FORE_COLOUR = colour_f;
-    
-    init_pair(1, CHARACTER_FORE_COLOUR, CHARACTER_BACK_COLOUR);
-    std::cout << "Current state index :"<< current_state_index << std::endl;
-    std::cout << animation_sprites.at(current_state_index) << std::endl;
 }
 
 GameObject :: GameObject(const GameObject &t)
 :x(t.x), y(t.y)
 {
-    std::cout << "GO COPY constructor invoked" << std::endl;
     animation_sprites =  t.animation_sprites;
     current_state_index = 0;
-    CHARACTER_BACK_COLOUR = t.CHARACTER_BACK_COLOUR;
-    CHARACTER_FORE_COLOUR = t.CHARACTER_FORE_COLOUR;
-    init_pair(1, CHARACTER_FORE_COLOUR, CHARACTER_BACK_COLOUR);
-    std::cout << "Current state index :"<< current_state_index << std::endl;
-    std::cout << animation_sprites.at(current_state_index) << std::endl;
 }
 
 
@@ -106,7 +93,9 @@ void GameObject::setY(const int y)
 
 void GameObject :: printCharacterAtPosition()
 {
-    mvprintw(y,x*2, "%s", animation_sprites.at(current_state_index).c_str());
+	attron(COLOR_PAIR(object_type));
+    mvprintw(y,x*2, "%s", getCurrentSprite().c_str());
+    attroff(COLOR_PAIR(object_type));
 }
 void GameObject :: updateAnimationState()
 {
@@ -115,4 +104,9 @@ void GameObject :: updateAnimationState()
 void GameObject :: handleCharacterMove(std::vector<GameObject*> & handle,int& character_index)
 {
     //  std::cout<<"GO  HANDLE CHARACTER MOVE" << std::endl;
+}
+
+void GameObject :: handleState()
+{
+    
 }

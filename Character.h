@@ -7,20 +7,18 @@
 #include "ncurses.h"
 
 const int DEFAULT =0, RIGHT = 1, DOWN = 2, LEFT = 3, UP = 4; // animation indexes
-const int ANIMATION_DURATION = 30; //number of frames for each idle state animation
-const int MOVEDELAY = 3;//the number of frames that equals to 1 mvoement when holding down, ie speed of character when holding down
-const int BUTTON_MASH_CONSTANT = 6; //number of frames between key presses to count as holding down
-
+const int ANIMATION_DURATION = 15; //number of frames for each idle state animation
+const int MOVEDELAY = 12;//the number of frames that equals to 1 mvoement when holding down, ie speed of character when holding down
+const int BUTTON_MASH_CONSTANT = 10; //number of frames between key presses to count as holding down
+#define PACMAN_COLOUR 1
 
 class Character : public GameObject
 {
     public:
-        Character(std::string sprite_sheet, int screen_width, int screen_height, PlayableMap& map, int posX, int posY, int colour_f, int colour_b, int obj_type);
+        Character(std::string sprite_sheet, int screen_width, int screen_height, PlayableMap& map, int posX, int posY, int obj_type);
         ~Character();
-
         virtual void updateAnimationState();
         virtual void handleCharacterMove(std::vector<GameObject*> & handle,int & character_index);
-        virtual void printCharacterAtPosition();
 
     private:
         int anim_counter=0;
@@ -34,11 +32,6 @@ class Character : public GameObject
         char input,last_input;
 
         int selectGetch();
-
-        int CHARACTER_FORE_COLOUR;
-        int CHARACTER_BACK_COLOUR; 
-        
-
 };
 
 

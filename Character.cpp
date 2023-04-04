@@ -1,28 +1,22 @@
 #include "Character.h"
 
 
-Character::Character(std::string sprite_sheet, int screen_width, int screen_height, PlayableMap& map, int posX, int posY, int colour_f, int colour_b, int obj_type)
-:GameObject(sprite_sheet, posX, posY, colour_f,colour_b, obj_type), screen_height(screen_height), screen_width(screen_width), map(map)
+Character::Character(std::string sprite_sheet, int screen_width, int screen_height, PlayableMap& map, int posX, int posY, int obj_type)
+:GameObject(sprite_sheet, posX, posY, obj_type), screen_height(screen_height), screen_width(screen_width), map(map)
 {
-    std::cout << "Character constructor invoked" << std::endl;
-    std::cout << "Current state index :"<< current_state_index << std::endl;
-    std::cout << animation_sprites.at(current_state_index) << std::endl;
     if(!map.IsMoveable(posX-1,posY-1))
     {
         std::cout << "Invalid haracter starting coordinates" << std::endl;
         exit(-1);
     }
-
     setState(DEFAULT);
 }
 
 
 Character::~Character()
 {
-    std::cout << "Character deconstructor invoked" << std::endl;
-    std::cout << "Current state index :"<< current_state_index << std::endl;
-    std::cout << animation_sprites.at(current_state_index) << std::endl;
 }
+
 
 void Character::handleCharacterMove(std::vector<GameObject*> & handle ,int & character_index)
 {
@@ -83,7 +77,7 @@ void Character::moveCharacter(std::vector<GameObject*> & handle, int & character
             pivot = ((length-start)+1/2);
             for (int i = start; i < pivot;i++)
             {
-                if (handle.at(i)->object_type == 1 && handle.at(i)->getX() == x  && handle.at(i)->getY() == y)
+                if (handle.at(i)->object_type == 3 && handle.at(i)->getX() == x  && handle.at(i)->getY() == y)
                 {
                     //player has hit a pill
                     delete handle.at(i);
@@ -136,9 +130,3 @@ void Character :: updateAnimationState()
 
 }
 
-void Character :: printCharacterAtPosition()
-{
-	// wattron(stdscr,COLOR_PAIR(10));
-    mvprintw(y,x*2, "%s", getCurrentSprite().c_str());
-    // wattroff(stdscr,COLOR_PAIR(10));
-}

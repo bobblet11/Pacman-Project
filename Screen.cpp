@@ -11,7 +11,7 @@ Screen :: Screen (int width, int height, PlayableMap & map)
     //parameter width and height is internal area, the class member width, height include borders
     //initialisation
 
-   if (width < 0 || width > 100 || height < 0 || height > 100)
+   if (width < 0 || width > 200 || height < 0 || height > 200)
    {
         printw("[ERROR] Invalid Screen parameters...");
         refresh();
@@ -81,12 +81,24 @@ void Screen::resetFrame()
 
 void Screen::printCurrentFrame(std::vector<GameObject*> &handle)
 {
+    //draw map
     for(int i=0;i<getHeight();i++)
     {
         move(i,0);
         for(int j=0;j<getWidth();j++)
         {
-            printw("%s", frame[i][j].c_str());
+          
+            if (i > 0 && i < getHeight()-1 && j >0 && j < getWidth()-1)
+            {
+                attron(COLOR_PAIR(2));
+                printw("%s", frame[i][j].c_str());
+                attroff(COLOR_PAIR(2));
+            }
+            else
+            {
+                printw("%s", frame[i][j].c_str());
+            }
+            
         } 
     }   
     

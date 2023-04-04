@@ -13,7 +13,7 @@ class GameObject
 {
     //inhertied classes will ahve built it animation states and indexes
     public:
-        GameObject(std::string,int,int,int colour_f, int colour_b, int obj_type);    //copy constructor
+        GameObject(std::string,int,int, int obj_type);    //copy constructor
         GameObject(const GameObject &t);
         virtual ~GameObject();
 
@@ -32,18 +32,14 @@ class GameObject
         void setState(const int state);
         void setX(const int x);
         void setY(const int y);
-
+        void printCharacterAtPosition();
         //virtuals
-        virtual void printCharacterAtPosition();
         virtual void updateAnimationState();
         virtual void handleCharacterMove(std::vector<GameObject*> & handle, int& character_index);
-
+        virtual void handleState();
     protected:
         int x,y;
         int width, height;
-        int CHARACTER_FORE_COLOUR;
-        int CHARACTER_BACK_COLOUR; 
-
 
         int num_of_sprite_states, current_state_index;
         std::vector<std::string> animation_sprites;

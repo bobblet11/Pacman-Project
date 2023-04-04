@@ -12,7 +12,7 @@ class Pill: public GameObject
 private:
     int pill_point;
 public:
-    Pill(std::string sprite_sheet, int posX, int posY, int colour_f, int colour_b, int obj_type, int pill_type, int pill_point);
+    Pill(std::string sprite_sheet, int posX, int posY, int obj_type, int pill_type, int pill_point);
     ~Pill();
 
 };
