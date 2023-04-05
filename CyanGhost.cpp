@@ -1,42 +1,42 @@
-#include "RedGhost.h"
+#include "CyanGhost.h"
 
-RedGhost::RedGhost(std::string sprite_sheet,int posX, int posY, int obj_type)
+CyanGhost::CyanGhost(std::string sprite_sheet,int posX, int posY, int obj_type)
 :Ghosts(sprite_sheet, posX, posY, obj_type)
 {
 
 }
 
-RedGhost::~RedGhost()
+CyanGhost::~CyanGhost()
 {
 
 }
 
-void RedGhost:: Chase()
+void CyanGhost:: Chase()
 {
 
 }
-void RedGhost::Scatter()
+void CyanGhost::Scatter()
 {
     //if in position for scatter movement, ie in one of the SCATTER POSITIONS
         //SCATTER
     //else try pathfind to a scatter position
     if (move_counter == 0)
     {
-        int new_X = SCATTER_PATTERN_R[scatter_counter][0], new_Y = SCATTER_PATTERN_R[scatter_counter][1];
+        int new_X = SCATTER_PATTERN_C[scatter_counter][0], new_Y = SCATTER_PATTERN_C[scatter_counter][1];
         x = new_X + 1;
         y = new_Y + 1;
         scatter_counter++;
-        scatter_counter%=18;
+        scatter_counter%=34;
     }
     move_counter ++;
     move_counter%=FRAMES_PER_MOVE;
 }
-void RedGhost::Freightened()
+void CyanGhost::Freightened()
 {
 
 }
 
-void RedGhost:: handleState()
+void CyanGhost:: handleState()
 {
     Scatter();
 }

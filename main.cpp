@@ -4,7 +4,9 @@
 #include <chrono>
 #include "Character.h"
 #include "RedGhost.h"
-
+#include "YellowGhost.h"
+#include "PinkGhost.h"
+#include "CyanGhost.h"
 //colour pairs
 #define WALL_COLOUR 2
 
@@ -12,7 +14,10 @@
 #define  CHARACTER 1
 #define WALL 2
 #define  PILL 3
-#define GHOST 4
+#define GHOST_R 4
+#define GHOST_Y 5
+#define GHOST_P 6
+#define GHOST_C 7
 
 const int FRAMERATE = 60;
 
@@ -48,14 +53,23 @@ int main(int argc, char *argv[])
 
     Screen screen(28,31,map);
 
-    RedGhost* r_ghost_ptr;
-    r_ghost_ptr = new RedGhost("GhostSprites.txt",4,4,GHOST);
-    handle.push_back(r_ghost_ptr);
+    GameObject* game_obj_ptr;
 
+ 
+    game_obj_ptr = new YellowGhost("GhostSprites.txt",4,4,GHOST_Y);
+    handle.push_back(game_obj_ptr);
+    
+    game_obj_ptr = new RedGhost("GhostSprites.txt",4,4,GHOST_R);
+    handle.push_back(game_obj_ptr);
+    
+    game_obj_ptr = new PinkGhost("GhostSprites.txt",4,4,GHOST_R);
+    handle.push_back(game_obj_ptr);
 
-    Character* character_ptr;
-    character_ptr = new Character("CharacterSprites.txt",screen.getWidth(), screen.getHeight(), map, 2,2, CHARACTER);
-    handle.push_back(character_ptr);
+    game_obj_ptr = new CyanGhost("GhostSprites.txt",4,4,GHOST_C);
+    handle.push_back(game_obj_ptr);
+
+    game_obj_ptr = new Character("CharacterSprites.txt",screen.getWidth(), screen.getHeight(), map, 2,2, CHARACTER);
+    handle.push_back(game_obj_ptr);
 
         
 
@@ -78,16 +92,25 @@ int main(int argc, char *argv[])
     init_pair(CHARACTER, COLOR_YELLOW,COLOR_BLACK);
     init_pair(WALL, COLOR_BLUE, COLOR_BLACK);
     init_pair(PILL, COLOR_WHITE, COLOR_BLACK);
-    init_pair(GHOST, COLOR_RED, COLOR_BLACK);
-    
+    init_pair(GHOST_R, COLOR_RED, COLOR_BLACK);
+    init_pair(GHOST_Y, COLOR_YELLOW, COLOR_BLACK);
+    init_pair(GHOST_P, COLOR_MAGENTA, COLOR_BLACK);
+    init_pair(GHOST_C, COLOR_CYAN, COLOR_BLACK);
 
     int character_index = handle.size() -1;
     while(running)
     {
-
+        auto start = std::chrono::steady_clock::now();
         handle.at(character_index)->handleCharacterMove(handle, character_index);
         handle.at(character_index)->updateAnimationState();
-        handle.at(character_index-1)->handleState();
+
+        for (int i = 0; i < handle.size(); i++)
+        {
+            if (handle.at(i)->object_type == GHOST_R || handle.at(i)->object_type == GHOST_Y || handle.at(i)->object_type == GHOST_P || handle.at(i)->object_type == GHOST_C )
+            {
+                handle.at(i)->handleState();
+            }
+        }
         if ( handle.size() == 1)
         {
             delete handle.at(character_index);
@@ -95,7 +118,9 @@ int main(int argc, char *argv[])
             break;
         }
         screen.render(handle);
-        std::this_thread::sleep_for(std::chrono::milliseconds(1000/FRAMERATE));
+        auto end = std::chrono::steady_clock::now();
+
+        std::this_thread::sleep_for(std::chrono::milliseconds((1000/FRAMERATE) - std::chrono::duration_cast<std::chrono::milliseconds>(end-start).count()));
 
 
 

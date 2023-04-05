@@ -1,14 +1,14 @@
 #pragma once
-#ifndef _GHOSTS_R_
-#define _GHOSTS_R_
+#ifndef _GHOSTS_Y_
+#define _GHOSTS_Y_
 
 #include "Ghosts.h"
 
-class RedGhost: public Ghosts
+class YellowGhost: public Ghosts
 {
     public:
-        RedGhost(std::string,int,int,int obj_type);
-        ~RedGhost();
+        YellowGhost(std::string,int,int,int obj_type);
+        ~YellowGhost();
         void handleState();
         void Chase(); //red chase
         void Scatter() ; //red scatter
@@ -17,4 +17,5 @@ class RedGhost: public Ghosts
         int move_counter = 0;
         int scatter_counter = 0;
 };
+
 #endif
