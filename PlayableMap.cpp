@@ -73,7 +73,7 @@ std::string PlayableMap :: getCharAtPos(int x, int y)
 
 bool PlayableMap :: IsMoveable(int x, int y)
 {
-    if (map_layout[y][x] == DEFAULT_WALL_CHAR)
+    if (map_layout[y][x] != DEFAULT_EMPTY_CHAR) // make it so any x and y value can be passed and update all functions using this
     {
         return false;
     }

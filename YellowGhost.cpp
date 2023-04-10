@@ -1,7 +1,7 @@
 #include "YellowGhost.h"
 
-YellowGhost::YellowGhost(std::string sprite_sheet,int posX, int posY, int obj_type)
-:Ghosts(sprite_sheet, posX, posY, obj_type)
+YellowGhost::YellowGhost(std::string sprite_sheet,int posX, int posY, int obj_type, PlayableMap &map)
+:Ghosts(sprite_sheet, posX, posY, obj_type,map)
 {
 
 }

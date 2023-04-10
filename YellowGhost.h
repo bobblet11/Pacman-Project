@@ -7,7 +7,7 @@
 class YellowGhost: public Ghosts
 {
     public:
-        YellowGhost(std::string,int,int,int obj_type);
+        YellowGhost(std::string,int,int,int obj_type, PlayableMap & map);
         ~YellowGhost();
         void handleState();
         void Chase(); //red chase

@@ -3,6 +3,7 @@
 #define _GHOSTS_
 
 #include "GameObject.h"
+#include "PlayableMap.h"
 
     //ghost system works as such
     //start - only red
@@ -10,7 +11,7 @@
     //1000 points - red,blue, pink
     //1500 points - all ghosts 1.5 speed
     //2000 points - all ghosts 2 speed
-    
+    const int UP_G = 0, RIGHT_G = 1, DOWN_G  = 2, LEFT_G = 3;
     const int FRAMES_PER_MOVE = 10; //ghanges this to a global variable to allow for speed changes, ie value will decrease to diff values
     const int SCATTER_PATTERN_Y[34][2] = {
         {1,29},{2,29},{3,29},{4,29},{5,29},{6,29},{7,29},{8,29},{9,29},{10,29},{11,29},{12,29},    //left to right
@@ -46,7 +47,7 @@
 class Ghosts: public GameObject
 {
     public:
-        Ghosts(std::string,int,int,int obj_type);
+        Ghosts(std::string,int,int,int obj_type, PlayableMap map);
         ~Ghosts();
         virtual void handleState();
     private:
@@ -57,6 +58,8 @@ class Ghosts: public GameObject
         void move(int delta_x, int delta_y);
         int current_state = 0;
     protected:
+        PlayableMap map;
+        int current_direction = -1;
 };
 
 #endif 

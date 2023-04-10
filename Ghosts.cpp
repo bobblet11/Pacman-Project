@@ -1,8 +1,8 @@
 #include "Ghosts.h"
-Ghosts::Ghosts(std::string sprite_sheet,int posX,int posY,int obj_type)
+Ghosts::Ghosts(std::string sprite_sheet,int posX,int posY,int obj_type, PlayableMap map)
 :GameObject(sprite_sheet, posX, posY, obj_type)
 {
-
+    this->map = map;
 }
 
 Ghosts::~Ghosts()

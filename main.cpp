@@ -56,16 +56,16 @@ int main(int argc, char *argv[])
     GameObject* game_obj_ptr;
 
  
-    game_obj_ptr = new YellowGhost("GhostSprites.txt",4,4,GHOST_Y);
+    game_obj_ptr = new YellowGhost("GhostSprites.txt",2,2,GHOST_Y, map);
     handle.push_back(game_obj_ptr);
     
-    game_obj_ptr = new RedGhost("GhostSprites.txt",4,4,GHOST_R);
+    game_obj_ptr = new RedGhost("GhostSprites.txt",2,2,GHOST_R, map);
     handle.push_back(game_obj_ptr);
     
-    game_obj_ptr = new PinkGhost("GhostSprites.txt",4,4,GHOST_R);
+    game_obj_ptr = new PinkGhost("GhostSprites.txt",2,2,GHOST_P, map);
     handle.push_back(game_obj_ptr);
 
-    game_obj_ptr = new CyanGhost("GhostSprites.txt",4,4,GHOST_C);
+    game_obj_ptr = new CyanGhost("GhostSprites.txt",2,2,GHOST_C, map);
     handle.push_back(game_obj_ptr);
 
     game_obj_ptr = new Character("CharacterSprites.txt",screen.getWidth(), screen.getHeight(), map, 2,2, CHARACTER);
