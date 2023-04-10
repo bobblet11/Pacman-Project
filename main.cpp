@@ -21,7 +21,7 @@
 #define GHOST_C 7
 
 const int FRAMERATE = 60;
-
+//main function
 int main(int argc, char *argv[])
 {
     bool running = true;
