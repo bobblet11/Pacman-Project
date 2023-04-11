@@ -21,29 +21,6 @@
 
 const int FRAMERATE = 60;
 
-    //since gameObjects have the neccesary functions that screen uses, i can pass a pointer thru to screen
-
-
-    //initalise
-        //make all game objects, variables, states and mem allocs
-    //game loops
-        //do a check for the current game state
-        //if in game mode:
-            //check for any input, on another thread?
-            //perform a input check, see if the instruction is valid and doabel ie x, y check
-            //do a collectable check, see if any pills need to be deleted and points need to be modified
-            //do a ghost check, see if any ghosts are in way of character
-            //update position and anim state of character
-                //if game is ended beacuse of last pill or death
-                    //commence ending procedure
-            //if game is still continuing
-            //do a ghost path findiing check
-            //update all ghost positions and states
-
-            //do a render process, update all objects (?that have had a change) into the frame
-            //render the frame
-            //wait frame rate
-
 int main(int argc, char *argv[])
 {
     bool running = true;
@@ -110,18 +87,20 @@ int main(int argc, char *argv[])
                 handle.at(i)->handleState(handle.at(character_index));
             }
         }
-        if ( handle.size() == 1)
+        if ( handle.size() == 5)
         {
-            delete handle.at(character_index);
-            handle.erase(handle.begin()+character_index);
+            for (int i=0; i < 5 ; i++)
+            {
+                delete handle.at(i);
+                handle.erase(handle.begin()+i);
+            }
             break;
         }
+
         screen.render(handle);
         auto end = std::chrono::steady_clock::now();
 
         std::this_thread::sleep_for(std::chrono::milliseconds((1000/FRAMERATE) - std::chrono::duration_cast<std::chrono::milliseconds>(end-start).count()));
-
-
 
     }
     endwin();
