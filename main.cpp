@@ -3,10 +3,10 @@
 #include <thread>
 #include <chrono>
 #include "Character.h"
-#include "RedGhost.h"
-#include "YellowGhost.h"
-#include "PinkGhost.h"
-#include "CyanGhost.h"
+#include "Ghosts.h"
+// #include "YellowGhost.h"
+// #include "PinkGhost.h"
+// #include "CyanGhost.h"
 //colour pairs
 #define WALL_COLOUR 2
 
@@ -55,19 +55,18 @@ int main(int argc, char *argv[])
 
     GameObject* game_obj_ptr;
 
- 
-    game_obj_ptr = new YellowGhost("GhostSprites.txt",2,2,GHOST_Y, map);
-    handle.push_back(game_obj_ptr);
-    
-    game_obj_ptr = new RedGhost("GhostSprites.txt",2,2,GHOST_R, map);
-    handle.push_back(game_obj_ptr);
-    
-    game_obj_ptr = new PinkGhost("GhostSprites.txt",2,2,GHOST_P, map);
+    game_obj_ptr = new Ghosts("GhostSprites.txt",2,2,GHOST_R, map);
     handle.push_back(game_obj_ptr);
 
-    game_obj_ptr = new CyanGhost("GhostSprites.txt",2,2,GHOST_C, map);
+    game_obj_ptr = new Ghosts("GhostSprites.txt",2,2,GHOST_Y, map);
     handle.push_back(game_obj_ptr);
 
+    game_obj_ptr = new Ghosts("GhostSprites.txt",2,2,GHOST_C, map);
+    handle.push_back(game_obj_ptr);
+
+    game_obj_ptr = new Ghosts("GhostSprites.txt",2,2,GHOST_P, map);
+    handle.push_back(game_obj_ptr);
+    
     game_obj_ptr = new Character("CharacterSprites.txt",screen.getWidth(), screen.getHeight(), map, 2,2, CHARACTER);
     handle.push_back(game_obj_ptr);
 
@@ -108,7 +107,7 @@ int main(int argc, char *argv[])
         {
             if (handle.at(i)->object_type == GHOST_R || handle.at(i)->object_type == GHOST_Y || handle.at(i)->object_type == GHOST_P || handle.at(i)->object_type == GHOST_C )
             {
-                handle.at(i)->handleState();
+                handle.at(i)->handleState(handle.at(character_index));
             }
         }
         if ( handle.size() == 1)

@@ -13,6 +13,7 @@
     //2000 points - all ghosts 2 speed
     const int UP_G = 0, RIGHT_G = 1, DOWN_G  = 2, LEFT_G = 3;
     const int FRAMES_PER_MOVE = 10; //ghanges this to a global variable to allow for speed changes, ie value will decrease to diff values
+    
     const int SCATTER_PATTERN_Y[34][2] = {
         {1,29},{2,29},{3,29},{4,29},{5,29},{6,29},{7,29},{8,29},{9,29},{10,29},{11,29},{12,29},    //left to right
         {12,28},{12,27},{12,26},
@@ -44,22 +45,27 @@
         {18,24},{18,25},{18,26},
         {17,26},{16,26},{15,26},      
         {15,27},{15,28}};  
+    
+    
 class Ghosts: public GameObject
 {
     public:
         Ghosts(std::string,int,int,int obj_type, PlayableMap map);
         ~Ghosts();
-        virtual void handleState();
+        void handleState(GameObject* charac_obj_ptr);
     private:
-        virtual void Chase() = 0;
-        virtual void Scatter() =0;
-        virtual void Freightened()=0;
+        void Chase(GameObject* charac_obj_ptr);
+        void Scatter() ;
+        void Freightened();
 
         void move(int delta_x, int delta_y);
         int current_state = 0;
-    protected:
         PlayableMap map;
         int current_direction = -1;
+        int move_counter = 0;
+        int scatter_counter = 0;
+
+        int ghost_chase_prob_R = 75, ghost_chase_prob_Y = 55, ghost_chase_prob_P = 20, ghost_chase_prob_C = 20;
 };
 
 #endif 

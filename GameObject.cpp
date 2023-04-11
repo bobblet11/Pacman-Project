@@ -106,7 +106,7 @@ void GameObject :: handleCharacterMove(std::vector<GameObject*> & handle,int& ch
     //  std::cout<<"GO  HANDLE CHARACTER MOVE" << std::endl;
 }
 
-void GameObject :: handleState()
+void GameObject ::  handleState(GameObject* charac_obj_ptr)
 {
     
 }
