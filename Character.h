@@ -8,8 +8,7 @@
 
 const int DEFAULT =0, RIGHT = 1, DOWN = 2, LEFT = 3, UP = 4; // animation indexes
 const int ANIMATION_DURATION = 15; //number of frames for each idle state animation
-const int MOVEDELAY = 12;//the number of frames that equals to 1 mvoement when holding down, ie speed of character when holding down
-const int BUTTON_MASH_CONSTANT = 10; //number of frames between key presses to count as holding down
+const int MOVE_SPEED = 15;//the number of frames that equals to 1 mvoement when holding down, ie speed of character when holding down
 #define PACMAN_COLOUR 1
 
 class Character : public GameObject
@@ -28,8 +27,7 @@ class Character : public GameObject
         PlayableMap map;
         void moveCharacter(std::vector<GameObject*> & handle,int & character_index);
 
-        int ERR_count;
-        char input,last_input;
+        char last_input;
 
         int selectGetch();
 };

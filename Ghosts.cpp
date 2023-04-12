@@ -56,6 +56,7 @@ void Ghosts::Chase(GameObject* player)
                 move_Directions[counter][1] = Directions[i][1] + y;
                 move_Directions[counter][2] = i;
 
+                //make a seperate length calcualtion for tunneling coordinates?
                 if (abs(Directions[i][0] + x - player->getX()) + abs(Directions[i][1] + y - player->getY()) < length)
                 {
                     length = abs(Directions[i][0] + x - player->getX()) + abs(Directions[i][1] + y - player->getY());
@@ -71,15 +72,13 @@ void Ghosts::Chase(GameObject* player)
         //move towards which ever selected path
         if (choose_shortest_path)
         {
-            x = move_Directions[pos][0];
-            y = move_Directions[pos][1];
+            moveToNewPos(move_Directions[pos][0],move_Directions[pos][1]);
             current_direction = move_Directions[pos][2];
         }
         else
         {
             int random_choice = rand()%(counter);
-            x = move_Directions[random_choice][0];
-            y = move_Directions[random_choice][1];
+            moveToNewPos(move_Directions[random_choice][0],move_Directions[random_choice][1]);
             current_direction = move_Directions[random_choice][2];
         }
     }

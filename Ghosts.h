@@ -65,7 +65,7 @@ class Ghosts: public GameObject
         int move_counter = 0;
         int scatter_counter = 0;
 
-        int ghost_chase_prob_R = 75, ghost_chase_prob_Y = 55, ghost_chase_prob_P = 20, ghost_chase_prob_C = 20;
+        int ghost_chase_prob_R = 100, ghost_chase_prob_Y = 55, ghost_chase_prob_P = 20, ghost_chase_prob_C = 20;
 };
 
 #endif 

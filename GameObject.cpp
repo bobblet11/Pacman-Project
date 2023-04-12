@@ -110,3 +110,22 @@ void GameObject ::  handleState(GameObject* charac_obj_ptr)
 {
     
 }
+
+void GameObject :: moveToNewPos(int x,int y)
+{
+    if (x == 29 && y == 15 )
+    {
+        this-> x = 1;
+        this -> y = 15;
+    }
+    else if (x == 0 && y == 15)
+    {
+        this-> x = 28;
+        this -> y = 15;
+    }
+    else
+    {
+        this->x = x;
+        this->y = y;
+    }
+}

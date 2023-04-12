@@ -23,53 +23,35 @@ void Character::handleCharacterMove(std::vector<GameObject*> & handle ,int & cha
     // std::cout << "CHARACTER MOVE" << std::endl;
     if (selectGetch()) //there is an actual key available in getch() queue
     {
-        input = getch();
-        if (input == last_input) // moving in one direction
+        char input = getch();
+        if (input != last_input) // new direction
         {
-            if (ERR_count > BUTTON_MASH_CONSTANT) //singular press, case where the time between each button press is large enough to not be considered holding down
-            {
-                move_count=0;
-                moveCharacter(handle,character_index);
-            }
-            else //if holding down
-            {
-                if (move_count == 0)
-                {
-                    moveCharacter(handle,character_index);
-                }
-                move_count++;
-                move_count%=MOVEDELAY;
-            }
+            last_input = input;
+            move_count=0;
         }
-        else //changing direction
-        { 
-            moveCharacter(handle,character_index);
-        }
-        ERR_count = 0;
-        last_input = input;
     }
-    else //if the getch is an ERR
-    {
-        ERR_count++;
-    }
+    moveCharacter(handle,character_index);
+    move_count++;
+    move_count%=MOVE_SPEED;
 }
 
 
 void Character::moveCharacter(std::vector<GameObject*> & handle, int & character_index) //actually moves the character 
 {
-    int moveY = (input == 'w') ? -1 : (input == 's') ? 1 : 0;
-    int moveX = (input == 'd') ? 1 : (input == 'a') ? -1 : 0;
-    int new_pos_X = moveX + getX(); 
-    int new_pos_Y = moveY + getY(); 
+    int moveY = (last_input == 'w') ? -1 : (last_input == 's') ? 1 : 0;
+    int moveX = (last_input == 'd') ? 1 : (last_input == 'a') ? -1 : 0;
+
+    int new_pos_X = moveX + x; 
+    int new_pos_Y = moveY + y; 
 
     current_direction = (moveX==1) ? RIGHT : (moveX==-1) ? LEFT : (moveY==-1) ? UP : (moveY==1) ? DOWN : current_direction;
 
-    if (map.IsMoveable(new_pos_X-1,new_pos_Y-1) && (new_pos_X < screen_width-1 &&  new_pos_X > 0 && new_pos_Y < screen_height-1 &&  new_pos_Y > 0 ))
+    if (map.IsMoveable(new_pos_X-1,new_pos_Y-1))
     {
-        setX(new_pos_X);
-        setY(new_pos_Y);
-
-
+        if (move_count == 0)
+        {
+            moveToNewPos(new_pos_X,new_pos_Y);
+        }
         //BINARY SEARCH FOR PILL
         int length = handle.size()-1,pivot=0,start=0;
         while (true)
@@ -121,7 +103,7 @@ void Character :: updateAnimationState()
         {
             setState(DEFAULT); //default state
         }
-        else
+    else
         {
             setState(current_direction);
         }

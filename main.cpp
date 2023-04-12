@@ -28,13 +28,13 @@ int main(int argc, char *argv[])
 
     GameObject* game_obj_ptr;
 
-    game_obj_ptr = new Ghosts("GhostSprites.txt",2,2,GHOST_R, map);
+    game_obj_ptr = new Ghosts("GhostSprites.txt",28,15,GHOST_R, map);
     handle.push_back(game_obj_ptr);
 
-    game_obj_ptr = new Ghosts("GhostSprites.txt",2,2,GHOST_Y, map);
+    game_obj_ptr = new Ghosts("GhostSprites.txt",1,15,GHOST_Y, map);
     handle.push_back(game_obj_ptr);
 
-    game_obj_ptr = new Ghosts("GhostSprites.txt",2,2,GHOST_C, map);
+    game_obj_ptr = new Ghosts("GhostSprites.txt",1,15,GHOST_C, map);
     handle.push_back(game_obj_ptr);
 
     game_obj_ptr = new Ghosts("GhostSprites.txt",2,2,GHOST_P, map);

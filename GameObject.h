@@ -37,10 +37,12 @@ class GameObject
         virtual void updateAnimationState();
         virtual void handleCharacterMove(std::vector<GameObject*> & handle, int& character_index);
         virtual void handleState(GameObject* charac_obj_ptr);
+        
+        
     protected:
         int x,y;
         int width, height;
-
+        void moveToNewPos(int x,int y);
         int num_of_sprite_states, current_state_index;
         std::vector<std::string> animation_sprites;
 
