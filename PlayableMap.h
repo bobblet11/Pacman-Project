@@ -19,8 +19,8 @@ const int MAP_HEIGHT = 31;
 
 const int LARGE_PILL = 1;
 const int SMALL_PILL = 0;
-const int LARGE_PILL_PTS = 500;
-const int SMALL_PILL_PTS = 100;
+const int LARGE_PILL_PTS = 100;
+const int SMALL_PILL_PTS = 50;
 
 const std::string LAYOUT_SPRITE_SHEET = "PlayableMap.txt";
 const std::string DEFAULT_WALL_CHAR = "▩ ";
@@ -36,7 +36,7 @@ class PlayableMap
         PlayableMap(std::vector<GameObject*> &handle);
         ~PlayableMap();
         std::string getCharAtPos(int x, int y);
-        bool IsMoveable(int x, int y);
+        bool IsMoveable(int x, int y, int object_type);
         std::string mapToString();
     private:
         std::string map_layout[MAP_HEIGHT][MAP_WIDTH];

@@ -37,6 +37,7 @@ class GameObject
         virtual void updateAnimationState();
         virtual void handleCharacterMove(std::vector<GameObject*> & handle, int& character_index);
         virtual void handleState(GameObject* charac_obj_ptr);
+        virtual int getPoints();
         
         
     protected:

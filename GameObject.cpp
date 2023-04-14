@@ -129,3 +129,8 @@ void GameObject :: moveToNewPos(int x,int y)
         this->y = y;
     }
 }
+
+int GameObject :: getPoints()
+{
+    return  0;
+}

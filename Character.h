@@ -7,8 +7,8 @@
 #include "ncurses.h"
 
 const int DEFAULT =0, RIGHT = 1, DOWN = 2, LEFT = 3, UP = 4; // animation indexes
-const int ANIMATION_DURATION = 15; //number of frames for each idle state animation
-const int MOVE_SPEED = 15;//the number of frames that equals to 1 mvoement when holding down, ie speed of character when holding down
+const int ANIMATION_DURATION = 9; //number of frames for each idle state animation
+const int MOVE_SPEED = 9;//the number of frames that equals to 1 mvoement when holding down, ie speed of character when holding down
 #define PACMAN_COLOUR 1
 
 class Character : public GameObject
@@ -18,7 +18,7 @@ class Character : public GameObject
         ~Character();
         virtual void updateAnimationState();
         virtual void handleCharacterMove(std::vector<GameObject*> & handle,int & character_index);
-
+        int getPoints();
     private:
         int anim_counter=0;
         int move_count=0;
@@ -28,6 +28,8 @@ class Character : public GameObject
         void moveCharacter(std::vector<GameObject*> & handle,int & character_index);
 
         char last_input;
+
+        int points= 0;
 
         int selectGetch();
 };

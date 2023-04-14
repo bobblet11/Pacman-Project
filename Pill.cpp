@@ -11,3 +11,8 @@ Pill:: ~Pill()
 {
 
 }
+
+int Pill:: getPoints()
+{
+    return pill_point;
+}

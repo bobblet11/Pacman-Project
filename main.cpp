@@ -26,22 +26,12 @@ int main(int argc, char *argv[])
 
     Screen screen(28,31,map);
 
-    GameObject* game_obj_ptr;
-
-    game_obj_ptr = new Ghosts("GhostSprites.txt",28,15,GHOST_R, map);
-    handle.push_back(game_obj_ptr);
-
-    game_obj_ptr = new Ghosts("GhostSprites.txt",1,15,GHOST_Y, map);
-    handle.push_back(game_obj_ptr);
-
-    game_obj_ptr = new Ghosts("GhostSprites.txt",1,15,GHOST_C, map);
-    handle.push_back(game_obj_ptr);
-
-    game_obj_ptr = new Ghosts("GhostSprites.txt",2,2,GHOST_P, map);
-    handle.push_back(game_obj_ptr);
-    
-    game_obj_ptr = new Character("CharacterSprites.txt",screen.getWidth(), screen.getHeight(), map, 2,2, CHARACTER);
-    handle.push_back(game_obj_ptr);
+    handle.push_back(new Ghosts("GhostSprites.txt",14,15,GHOST_R, map));
+    handle.push_back(new Ghosts("GhostSprites.txt",14,15,GHOST_Y, map));
+    handle.push_back(new Ghosts("GhostSprites.txt",14,15,GHOST_C, map));
+    handle.push_back(new Ghosts("GhostSprites.txt",14,15,GHOST_P, map));
+   
+    handle.push_back(new Character("CharacterSprites.txt",screen.getWidth(), screen.getHeight(), map, 2,2, CHARACTER));
 
 
     cbreak();
@@ -81,21 +71,19 @@ int main(int argc, char *argv[])
                 handle.at(i)->handleState(handle.at(character_index));
             }
         }
-        if ( handle.size() == 5)
-        {
-            for (int i = 0; i<5; i++)
-            {
-                delete handle.at(i);
-                handle.erase(handle.begin()+i);
-            }
-            break;
-        }
-
+        
         screen.render(handle);
         auto end = std::chrono::steady_clock::now();
-
         std::this_thread::sleep_for(std::chrono::milliseconds((1000/FRAMERATE) - std::chrono::duration_cast<std::chrono::milliseconds>(end-start).count()));
-
+        if (handle.size() == 5)
+        {
+            for (int i = 0; i<handle.size(); i++)
+            {
+                delete handle[i];
+            }
+            handle.clear();
+            break;
+        }
     }
 
     //add win screen using ncurses here

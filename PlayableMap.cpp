@@ -71,13 +71,16 @@ std::string PlayableMap :: getCharAtPos(int x, int y)
     return map_layout[y][x];
 }
 
-bool PlayableMap :: IsMoveable(int x, int y)
+bool PlayableMap :: IsMoveable(int x, int y, int object_type)
 {
     if (map_layout[y][x] != DEFAULT_EMPTY_CHAR && !((y == 14) && (x == -1 || x == 28))) // make it so any x and y value can be passed and update all functions using this
     {
+        if ( map_layout[y][x] == DEFAULT_HORIZ_DOOR && object_type != 1)
+        {
+            return true;
+        }
         return false;
     }
-
     return true;
 }
 

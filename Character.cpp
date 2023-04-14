@@ -4,7 +4,7 @@
 Character::Character(std::string sprite_sheet, int screen_width, int screen_height, PlayableMap& map, int posX, int posY, int obj_type)
 :GameObject(sprite_sheet, posX, posY, obj_type), screen_height(screen_height), screen_width(screen_width), map(map)
 {
-    if(!map.IsMoveable(posX-1,posY-1))
+    if(!map.IsMoveable(posX-1,posY-1, object_type))
     {
         std::cout << "Invalid haracter starting coordinates" << std::endl;
         exit(-1);
@@ -46,7 +46,7 @@ void Character::moveCharacter(std::vector<GameObject*> & handle, int & character
 
     current_direction = (moveX==1) ? RIGHT : (moveX==-1) ? LEFT : (moveY==-1) ? UP : (moveY==1) ? DOWN : current_direction;
 
-    if (map.IsMoveable(new_pos_X-1,new_pos_Y-1))
+    if (map.IsMoveable(new_pos_X-1,new_pos_Y-1, object_type))
     {
         if (move_count == 0)
         {
@@ -61,6 +61,7 @@ void Character::moveCharacter(std::vector<GameObject*> & handle, int & character
             {
                 if (handle.at(i)->object_type == 3 && handle.at(i)->getX() == x  && handle.at(i)->getY() == y)
                 {
+                    points += handle.at(i)->getPoints();
                     //player has hit a pill
                     delete handle.at(i);
                     //removes the pointer
@@ -111,4 +112,10 @@ void Character :: updateAnimationState()
     anim_counter%=(ANIMATION_DURATION*2);
 
 }
+
+int Character:: getPoints()
+{
+    return points;
+}
+
 
