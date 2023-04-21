@@ -55,7 +55,7 @@ void Screen::resetFrame()
     {
         for(int j=0;j<getWidth();j++)
         {
-            if ((i==0 || i == getHeight()-1) && (j > 0 && j < getWidth()-1))
+            if ((i==0 || i == getHeight()-1 ) && (j > 0 && j < getWidth()-1))
             {
                 //horiz
                 frame[i][j] = BORDER_HORIZ; 
@@ -70,9 +70,13 @@ void Screen::resetFrame()
                 std::string BORDER_CORNER =  (i==0 && j==0) ? BORDER_CORNER_TL : (i==0 && j == getWidth()-1) ? BORDER_CORNER_TR : ( i == getHeight()-1 && j==0)  ?  BORDER_CORNER_BL : BORDER_CORNER_BR;
                 frame[i][j] = BORDER_CORNER;
             }
+            else if (i>1 && i < getHeight())
+            {
+                frame[i][j] = map_ptr.getCharAtPos(j-1,i-2);
+            }
             else
             {
-                frame[i][j] = map_ptr.getCharAtPos(j-1,i-1);
+                frame[i][j] = "  ";
             }
 
         }
@@ -87,7 +91,6 @@ void Screen::printCurrentFrame(std::vector<GameObject*> &handle)
         move(i,0);
         for(int j=0;j<getWidth();j++)
         {
-          
             if (i > 0 && i < getHeight()-1 && j >0 && j < getWidth()-1)
             {
                 attron(COLOR_PAIR(2));
@@ -104,12 +107,10 @@ void Screen::printCurrentFrame(std::vector<GameObject*> &handle)
     
     for (int i=0; i < handle.size(); i++)
     {
-
         handle.at(i)->printCharacterAtPosition();
     }
-    move(0,0);
 
-    refresh();
+
     move(0,0);
 }
 

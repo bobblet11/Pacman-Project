@@ -94,7 +94,7 @@ void GameObject::setY(const int y)
 void GameObject :: printCharacterAtPosition()
 {
 	attron(COLOR_PAIR(object_type));
-    mvprintw(y,x*2, "%s", getCurrentSprite().c_str());
+    mvprintw(y+1,x*2, "%s", getCurrentSprite().c_str());
     attroff(COLOR_PAIR(object_type));
 }
 void GameObject :: updateAnimationState()

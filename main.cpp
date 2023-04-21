@@ -18,13 +18,15 @@ const int FRAMERATE = 60;
 
 int main(int argc, char *argv[])
 {
+    int score = 0;
+
     bool running = true;
 
     std::vector<GameObject*> handle;
     
     PlayableMap map(handle);
 
-    Screen screen(28,31,map);
+    Screen screen(28,32,map);
 
     handle.push_back(new Ghosts("GhostSprites.txt",14,15,GHOST_R, map));
     handle.push_back(new Ghosts("GhostSprites.txt",14,15,GHOST_Y, map));
@@ -72,7 +74,11 @@ int main(int argc, char *argv[])
             }
         }
         
+        score = handle.at(character_index)->getPoints();
+    
         screen.render(handle);
+        mvprintw(1,2,"SCORE: %i", score);
+        refresh();
         auto end = std::chrono::steady_clock::now();
         std::this_thread::sleep_for(std::chrono::milliseconds((1000/FRAMERATE) - std::chrono::duration_cast<std::chrono::milliseconds>(end-start).count()));
         if (handle.size() == 5)
@@ -85,12 +91,15 @@ int main(int argc, char *argv[])
             break;
         }
     }
-
-    //add win screen using ncurses here
     endwin();
 
+     //save score to a txt, new txt creatd if not exist
+        //read the txt, find largest score
+        //include the HIGHSCORE in the lose animation
+        //or in the win animation
     if(running == false)
     {
+
         //add your animations here
         std::cout << "YOU LOSE!" << std::endl;
     }
