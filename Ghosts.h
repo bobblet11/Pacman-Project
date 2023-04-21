@@ -13,7 +13,7 @@
     //2000 points - all ghosts 2 speed
     const int UP_G = 0, RIGHT_G = 1, DOWN_G  = 2, LEFT_G = 3;
     const int FRAMES_PER_MOVE = 16; //ghanges this to a global variable to allow for speed changes, ie value will decrease to diff values
-    
+    const int LEAVE_BOX_X = 15, LEAVE_BOX_Y = 12;
     const int SCATTER_PATTERN_Y[34][2] = {
         {1,29},{2,29},{3,29},{4,29},{5,29},{6,29},{7,29},{8,29},{9,29},{10,29},{11,29},{12,29},    //left to right
         {12,28},{12,27},{12,26},
@@ -52,7 +52,7 @@ class Ghosts: public GameObject
     public:
         Ghosts(std::string,int,int,int obj_type, PlayableMap map);
         ~Ghosts();
-        void handleState(GameObject* charac_obj_ptr);
+        void handleState(GameObject* charac_obj_ptr, bool & running);
     private:
         void Chase(GameObject* charac_obj_ptr);
         void Scatter() ;
@@ -76,6 +76,8 @@ class Ghosts: public GameObject
         int ghost_scatter_start_Px = 1, ghost_scatter_start_Py  = 1;
         int ghost_scatter_start_Cx = 16, ghost_scatter_start_Cy  = 29;
         int ghost_scatter_start_Yx = 1, ghost_scatter_start_Yy  = 29;
+        bool checkIfInBox();
 };
+
 
 #endif 

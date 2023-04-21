@@ -16,12 +16,13 @@ void Ghosts::move(int delta_x, int delta_y)
     y += delta_y;
 }
 
-void Ghosts:: handleState(GameObject* charac_obj_ptr)
+void Ghosts:: handleState(GameObject* charac_obj_ptr, bool & running)
 {
     if (charac_obj_ptr->getPoints() < 1000) //easy difficulty
     {
-        if (object_type == 6 || object_type == 7 || object_type == 8)
+        if (object_type == 4 || object_type == 5 || object_type == 6)
         {
+            //add something so that the ghosts cannot overlap, ie modify ismoving so that it recognizes ghosts as walls?
             Resting();
         }
         else
@@ -54,6 +55,12 @@ void Ghosts:: handleState(GameObject* charac_obj_ptr)
         Chase(charac_obj_ptr); 
         current_speed = FRAMES_PER_MOVE-2;
     }
+
+
+    if (this->x == charac_obj_ptr->getX() && this->y == charac_obj_ptr->getY())
+    {
+        running = false;
+    }
 }
 
 void Ghosts::Chase(GameObject* player)
@@ -61,7 +68,15 @@ void Ghosts::Chase(GameObject* player)
     int chase_prob = (object_type == 4) ? ghost_chase_prob_R : (object_type == 5) ? ghost_chase_prob_Y : (object_type == 6) ? ghost_chase_prob_P : ghost_chase_prob_C;
     if (move_counter == 0)
     {
-       Pathfind(player->getX(), player->getY(), chase_prob);
+        if (checkIfInBox())
+        {
+            Pathfind(LEAVE_BOX_X, LEAVE_BOX_Y,75);
+        }
+        else
+        {
+            Pathfind(player->getX(), player->getY(), chase_prob);
+        }
+       
     }
     move_counter ++;
     move_counter%=(current_speed);
@@ -137,6 +152,14 @@ void Ghosts::Resting()
     y = 15;
 }
 
+bool Ghosts::checkIfInBox()
+{
+    if (x > 11 && x < 18 && y > 13 && y < 17)
+    {
+        return true;
+    }
+    return false;
+}
 
 void Ghosts::Scatter()
 {
@@ -160,7 +183,14 @@ void Ghosts::Scatter()
         //move to starting position
         if (move_counter == 0)
         {
-            Pathfind(scatter_start_x + 1, scatter_start_y + 1,75);
+            if (checkIfInBox())
+            {
+                Pathfind(LEAVE_BOX_X, LEAVE_BOX_Y,75);
+            }
+            else
+            {
+                Pathfind(scatter_start_x + 1, scatter_start_y + 1,75);
+            }
         }
     }
     else

@@ -68,7 +68,7 @@ int main(int argc, char *argv[])
         {
             if (handle.at(i)->object_type == GHOST_R || handle.at(i)->object_type == GHOST_Y || handle.at(i)->object_type == GHOST_P || handle.at(i)->object_type == GHOST_C )
             {
-                handle.at(i)->handleState(handle.at(character_index));
+                handle.at(i)->handleState(handle.at(character_index), running);
             }
         }
         
@@ -88,7 +88,18 @@ int main(int argc, char *argv[])
 
     //add win screen using ncurses here
     endwin();
-    std::cout << "YOU WIN!" << std::endl;
+
+    if(running == false)
+    {
+        //add your animations here
+        std::cout << "YOU LOSE!" << std::endl;
+    }
+    else
+    {
+        //add your animations here
+        std::cout << "YOU WIN!" << std::endl;
+    }
+    
 }
 
 
