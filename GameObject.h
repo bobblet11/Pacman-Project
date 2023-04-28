@@ -60,6 +60,7 @@ class GameObject
         int width, height;
         int num_of_sprite_states, current_state_index;
         std::vector<std::string> animation_sprites;
+        int colour;
 
 
         //INTERNAL FUNCTIONS

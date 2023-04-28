@@ -137,21 +137,24 @@ int main(int argc, char *argv[])
         }
         else
         {
+            endwin();
             if (gameState == WIN)
             {
                 //win page
                 std::cout << "YOU WIN!" << std::endl;
+                break;
                 
             }
             else
             {
                 //lose page
                 std::cout << "YOU LOSE!" << std::endl;
+                break;
             }
         }
 
     }
-    endwin();
+
 
 }
 

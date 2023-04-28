@@ -8,6 +8,7 @@ GameObject::GameObject(std::string sprite_sheet, int posX,  int posY, int obj_ty
     object_type = obj_type;
     readSpriteSheet(sprite_sheet);
     current_state_index = 0;
+    colour = obj_type;
 }
 
 
@@ -110,9 +111,9 @@ void GameObject::setY(const int y)
 //EXTERNAL FUNCTIONS
 void GameObject :: printCharacterAtPosition()
 {
-	attron(COLOR_PAIR(object_type));
+	attron(COLOR_PAIR(colour));
     mvprintw(y+1,x*2, "%s", getCurrentSprite().c_str());
-    attroff(COLOR_PAIR(object_type));
+    attroff(COLOR_PAIR(colour));
 }
 
 
