@@ -52,7 +52,7 @@ class Ghosts: public GameObject
     public:
         Ghosts(std::string,int,int,int obj_type, PlayableMap map);
         ~Ghosts();
-        void handleState(GameObject* charac_obj_ptr, bool & running,bool & freightened);
+        void handleState(GameObject* charac_obj_ptr, int & gameState,bool & freightened);
     private:
         void Chase(GameObject* charac_obj_ptr);
         void Scatter() ;

@@ -16,7 +16,7 @@ void Ghosts::move(int delta_x, int delta_y)
     y += delta_y;
 }
 
-void Ghosts:: handleState(GameObject* charac_obj_ptr, bool & running,bool & freigtened)
+void Ghosts:: handleState(GameObject* charac_obj_ptr, int & gameState,bool & freigtened)
 {
     //Scatter for 7 seconds, then Chase for 20 seconds.
     //Scatter for 7 seconds, then Chase for 20 seconds.
@@ -112,7 +112,7 @@ void Ghosts:: handleState(GameObject* charac_obj_ptr, bool & running,bool & frei
     {
         if (freigtened == false)
         {
-            running = false;
+            gameState = 3;
         }else
         {
             std::cout << "ADQDW" << std::endl;

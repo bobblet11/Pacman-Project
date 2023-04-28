@@ -19,6 +19,7 @@
 
 //CONSTANTS
 const int FRAMERATE = 60;
+const int MENU = 0, INGAME = 1, WIN = 2, LOSE = 3;
 
 
 int main(int argc, char *argv[])
@@ -27,6 +28,7 @@ int main(int argc, char *argv[])
     //INITIALISING VARIABLES AND OBJECTS
     int score = 0;
     bool running = true;
+    int gameState = MENU;
     std::vector<GameObject*> handle;
     PlayableMap map(handle);
     Screen screen(28,32,map);
@@ -62,75 +64,84 @@ int main(int argc, char *argv[])
     init_pair(GHOST_C, COLOR_CYAN, COLOR_BLACK);
 
     int character_index = handle.size() -1;
-
+    
 
     //GAMELOOP
     while(running)
     {
-
-
-        auto start = std::chrono::steady_clock::now();
-
-
-        //CHARACTER MOVEMENT
-        handle.at(character_index)->handleCharacterMove(handle, character_index, freightened);
-        handle.at(character_index)->updateAnimationState();
-
-
-        //GHOST MOVEMENT
-        for (int i = 0; i < handle.size(); i++)
+        //MENU LOOP
+        if (gameState == MENU)
         {
-            if (handle.at(i)->object_type == GHOST_R || handle.at(i)->object_type == GHOST_Y || handle.at(i)->object_type == GHOST_P || handle.at(i)->object_type == GHOST_C )
-            {
-                handle.at(i)->handleState(handle.at(character_index), running, freightened);
-            }
+
+
+
+
         }
+        else if (gameState == INGAME) //GAME LOOP
+        {
+
+            auto start = std::chrono::steady_clock::now();
+
+
+            //CHARACTER MOVEMENT
+            handle.at(character_index)->handleCharacterMove(handle, character_index, freightened);
+            handle.at(character_index)->updateAnimationState();
+
+
+            //GHOST MOVEMENT
+            for (int i = 0; i < handle.size(); i++)
+            {
+                if (handle.at(i)->object_type == GHOST_R || handle.at(i)->object_type == GHOST_Y || handle.at(i)->object_type == GHOST_P || handle.at(i)->object_type == GHOST_C )
+                {
+                    //checks for lose scenario
+                    handle.at(i)->handleState(handle.at(character_index), gameState, freightened);
+                }
+            }
+            
+
+            //SCORE UPDATING
+            score = handle.at(character_index)->getPoints();
         
 
-        //SCORE UPDATING
-        score = handle.at(character_index)->getPoints();
-    
-
-        //RENDERING
-        screen.render(handle);
-        mvprintw(1,2,"SCORE: %i", score);
-        refresh();
+            //RENDERING
+            screen.render(handle);
+            mvprintw(1,2,"SCORE: %i", score);
+            refresh();
 
 
-        //FRAMERATE HANDLING
-        auto end = std::chrono::steady_clock::now();
-        std::this_thread::sleep_for(std::chrono::milliseconds((1000/FRAMERATE) - std::chrono::duration_cast<std::chrono::milliseconds>(end-start).count()));
-        
+            //FRAMERATE HANDLING
+            auto end = std::chrono::steady_clock::now();
+            std::this_thread::sleep_for(std::chrono::milliseconds((1000/FRAMERATE) - std::chrono::duration_cast<std::chrono::milliseconds>(end-start).count()));
+            
 
-        //WIN/LOSE CHECK
-        if (handle.size() == 5)
-        {
-            for (int i = 0; i<handle.size(); i++)
+            //checks for win scenario
+            if (handle.size() == 5)
             {
-                delete handle[i];
+                for (int i = 0; i<handle.size(); i++)
+                {
+                    delete handle[i];
+                }
+                handle.clear();
+                gameState = WIN;
+                break;
             }
-            handle.clear();
-            break;
         }
-
+        else
+        {
+            if (gameState == WIN)
+            {
+                //win page
+                std::cout << "YOU WIN!" << std::endl;
+                
+            }
+            else
+            {
+                //lose page
+                std::cout << "YOU LOSE!" << std::endl;
+            }
+        }
 
     }
-
-
     endwin();
-    
 
-    //WIN-LOSE PROTOCOLS
-    if(running == false)
-    {
-
-        std::cout << "YOU LOSE!" << std::endl;
-    }
-    else
-    {
-
-        std::cout << "YOU WIN!" << std::endl;
-    }
-    
-    
 }

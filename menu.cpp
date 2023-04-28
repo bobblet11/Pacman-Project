@@ -1,3 +1,4 @@
+//INCLUDES
 #include <iostream>
 #include "functions.h"
 #include "menu.h"
@@ -28,6 +29,7 @@ int main()
     obj.add("Colors", 3, "Choose your favourite color");
     obj.add("High Scores", 4, "See previous high scores");
     obj.add("Exit", 5, "Exit to the terminal CLI");
+    
     while(true)
     {
         x=obj.display();
