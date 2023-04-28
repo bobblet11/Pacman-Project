@@ -97,7 +97,7 @@ int main(int argc, char *argv[])
         //MENU LOOP
         if (gameState == MENU)
         {
-            x=obj.display();
+            x = obj.display();
             switch(x)
             {
                 case 1:
