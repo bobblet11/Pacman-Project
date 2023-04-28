@@ -69,7 +69,6 @@ int main(int argc, char *argv[])
         //MENU LOOP
         if (gameState == MENU)
         {
-            GETCH();
             x=obj.display();
             switch(x)
             {
@@ -211,7 +210,7 @@ void playG()
     init_pair(GHOST_Y, COLOR_YELLOW, COLOR_BLACK);
     init_pair(GHOST_P, COLOR_MAGENTA, COLOR_BLACK);
     init_pair(GHOST_C, COLOR_CYAN, COLOR_BLACK);
-    
+
     gameState = INGAME;
 }
 void skins()
