@@ -58,10 +58,8 @@ int main(int argc, char *argv[])
                     "⠀⠀⠀⠀⠀⠀⠉⠉⠉⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀                                                   ";
     obj.menu_head(Game);
     obj.add("Play", 1, "Start a new game");
-    obj.add("Skins", 2, "Choose your favourite skin");
-    obj.add("Colors", 3, "Choose your favourite color");
-    obj.add("High Scores", 4, "See previous high scores");
-    obj.add("Exit", 5, "Exit to the terminal CLI");
+    obj.add("High Scores", 2, "See previous high scores");
+    obj.add("Exit", 3, "Exit to the terminal CLI");
 
     //GAMELOOP
     while(running)
@@ -69,7 +67,6 @@ int main(int argc, char *argv[])
         //MENU LOOP
         if (gameState == MENU)
         {
-            GETCH();
             x=obj.display();
             switch(x)
             {
@@ -77,15 +74,9 @@ int main(int argc, char *argv[])
                     playG();
                     break;
                 case 2:
-                    skins();
-                    break;
-                case 3:
-                    colors();
-                    break;
-                case 4:
                     hs();
                     break;
-                case 5:
+                case 3:
                     system("clear");
                     cout << "ThankYOU!!\nBrought to you by Ligma Ballz productions." << "\n";
                     system("setterm -cursor on");
