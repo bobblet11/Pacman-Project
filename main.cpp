@@ -20,7 +20,17 @@
 //CONSTANTS
 const int FRAMERATE = 60;
 const int MENU = 0, INGAME = 1, WIN = 2, LOSE = 3;
-
+const std::string Game =   
+                    "⠀⠀⠀⠀⣀⣤⣴⣶⣶⣶⣦⣤⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀                                             \n"
+                    "⠀⠀⣠⣾⣿⣿⣿⣿⣿⣿⢿⣿⣿⣷⣄⠀⠀⠀⠀                                                  \n"
+                    "⢀⣾⣿⣿⣿⣿⣿⣿⣿⣅⢀⣽⣿⣿⡿⠃⠀⠀⠀                                                 \n"
+                    "⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠛⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀                                            \n"
+                    "⣿⣿⣿⣿⣿⣿⣿⣿⣿⠛⠁⠀⠀⣴⣶⡄⠀⣶⣶⡄⠀⣴⣶⡄ ⣴⣶⡄⠀⣶⣶⡄⠀⣴⣶⡄ ⣴⣶⡄⠀⣶⣶⡄⠀⣴⣶⡄ ⣴⣶⡄⠀⣶⣶⡄⠀⣴⣶⡄\n"
+                    "⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣦⣀⠀⠙⠋⠁⠀⠉⠋⠁⠀⠙⠋⠀ ⠙⠋⠁⠀⠉⠋⠁⠀⠙⠋  ⠙⠋⠁⠀⠉⠋⠁⠀⠙⠋  ⠙⠋⠁⠀⠉⠋⠁⠀⠙⠋  \n"
+                    "⠸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣦⣄⠀⠀⠀⠀⠀⠀⠀⠀                                             \n"
+                    "⠀⠙⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠃⠀⠀⠀⠀⠀⠀⠀                                             \n"
+                    "   ⠙⠿⣿⣿⣿⣿⣿⣿⣿⠿⠋⠀⠀⠀⠀⠀⠀                                                 \n"
+                    "⠀⠀⠀⠀⠀⠀⠉⠉⠉⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀                                                   ";
 
 int main(int argc, char *argv[])
 {
@@ -38,6 +48,13 @@ int main(int argc, char *argv[])
     handle.push_back(new Ghosts("GhostSprites.txt",14,15,GHOST_P, map));
     handle.push_back(new Character("CharacterSprites.txt",screen.getWidth(), screen.getHeight(), map, 2,2, CHARACTER));
     bool freightened = false;
+
+    menu obj;
+    int x;
+    obj.menu_head(Game);
+    obj.add("Play", 1, "Start a new game");
+    obj.add("High Scores", 2, "See previous high scores");
+    obj.add("Exit", 3, "Exit to the terminal CLI");
 
 
     //INITIALISING THE NCURESES TERMINAL
@@ -72,10 +89,25 @@ int main(int argc, char *argv[])
         //MENU LOOP
         if (gameState == MENU)
         {
-
-
-
-
+            x=obj.display();
+            switch(x)
+            {
+                case 1:
+                    playG();
+                    break;
+                case 2:
+                    hs();
+                    break;
+                case 3:
+                    system("clear");
+                    cout << "ThankYOU!!\nBrought to you by Ligma Ballz productions." << "\n";
+                    system("setterm -cursor on");
+                    exit(0);
+                default:
+                    cout << x << endl;
+                    break;
+            }
+            getch();
         }
         else if (gameState == INGAME) //GAME LOOP
         {
