@@ -27,8 +27,6 @@ Pill.o: Pill.cpp Pill.h GameObject.h GameObject.cpp
 
 Ghosts.o: Ghosts.cpp Ghosts.h GameObject.h 
 	$(CXX) $(FLAGS) -c $<
-intro:
-	g++ menu.cpp -o menu
 	
 .PHONY: run
 run:
