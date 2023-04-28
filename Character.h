@@ -17,19 +17,19 @@ class Character : public GameObject
         Character(std::string sprite_sheet, int screen_width, int screen_height, PlayableMap& map, int posX, int posY, int obj_type);
         ~Character();
         virtual void updateAnimationState();
-        virtual void handleCharacterMove(std::vector<GameObject*> & handle,int & character_index);
+        virtual void handleCharacterMove(std::vector<GameObject*> & handle,int & character_index,bool & freightened);
         int getPoints();
+        int points= 0;
     private:
         int anim_counter=0;
         int move_count=0;
         int current_direction=0;
         int screen_width, screen_height;
         PlayableMap map;
-        void moveCharacter(std::vector<GameObject*> & handle,int & character_index);
+        void moveCharacter(std::vector<GameObject*> & handle,int & character_index,bool & freightened);
 
         char last_input;
 
-        int points= 0;
 
         int selectGetch();
 };

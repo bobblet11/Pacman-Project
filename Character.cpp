@@ -18,7 +18,7 @@ Character::~Character()
 }
 
 
-void Character::handleCharacterMove(std::vector<GameObject*> & handle ,int & character_index)
+void Character::handleCharacterMove(std::vector<GameObject*> & handle , int & character_index,bool & freightened)
 {
     // std::cout << "CHARACTER MOVE" << std::endl;
     if (selectGetch()) //there is an actual key available in getch() queue
@@ -30,13 +30,13 @@ void Character::handleCharacterMove(std::vector<GameObject*> & handle ,int & cha
             move_count=0;
         }
     }
-    moveCharacter(handle,character_index);
+    moveCharacter(handle,character_index, freightened);
     move_count++;
     move_count%=MOVE_SPEED;
 }
 
 
-void Character::moveCharacter(std::vector<GameObject*> & handle, int & character_index) //actually moves the character 
+void Character::moveCharacter(std::vector<GameObject*> & handle, int & character_index, bool & freightened) //actually moves the character 
 {
     int moveY = (last_input == 'w') ? -1 : (last_input == 's') ? 1 : 0;
     int moveX = (last_input == 'd') ? 1 : (last_input == 'a') ? -1 : 0;
@@ -62,6 +62,10 @@ void Character::moveCharacter(std::vector<GameObject*> & handle, int & character
                 if (handle.at(i)->object_type == 3 && handle.at(i)->getX() == x  && handle.at(i)->getY() == y)
                 {
                     points += handle.at(i)->getPoints();
+                    if (handle.at(i)->getPoints() == 100)
+                    {
+                        freightened = true;
+                    }
                     //player has hit a pill
                     delete handle.at(i);
                     //removes the pointer

@@ -16,50 +16,107 @@ void Ghosts::move(int delta_x, int delta_y)
     y += delta_y;
 }
 
-void Ghosts:: handleState(GameObject* charac_obj_ptr, bool & running)
+void Ghosts:: handleState(GameObject* charac_obj_ptr, bool & running,bool & freigtened)
 {
-    if (charac_obj_ptr->getPoints() < 1000) //easy difficulty
+    //Scatter for 7 seconds, then Chase for 20 seconds.
+    //Scatter for 7 seconds, then Chase for 20 seconds.
+    //Scatter for 5 seconds, then Chase for 20 seconds.
+    //Scatter for 5 seconds, then switch to Chase mode permanently.
+
+    if (freigtened == true)
     {
-        if (object_type == 4 || object_type == 5 || object_type == 6)
+        Freightened(freigtened);
+        return;
+    }
+    timer++;
+    if (charac_obj_ptr->getPoints() < 1500) //easy difficulty
+    {
+        if (object_type == 5 || object_type == 6)
         {
-            //add something so that the ghosts cannot overlap, ie modify ismoving so that it recognizes ghosts as walls?
             Resting();
         }
         else
         {
-            Scatter();
+            //scatter chase loop
+            if (chaseCounter>3) //permanent chase
+            {
+                ghost_chase_prob_Y = 80;
+                ghost_chase_prob_P = 45;
+                ghost_chase_prob_C = 30;
+                Chase(charac_obj_ptr);
+            }
+            else if(timer /60 <=7) //if timer < 7
+            {
+                Scatter();
+            }
+            else if (timer/60 > 7 && timer/60 <= 27) //if timer < 27 ie 20 seconds after 
+            {
+                Chase(charac_obj_ptr);
+            }
+            else //reset timer
+            {
+                timer =0;
+                chaseCounter++;
+            }
         }
-        ///make some loop for scatter chase cycle
-        //put all ifs for each ghost here 
         current_speed = FRAMES_PER_MOVE;
     }
-    else if (charac_obj_ptr->getPoints() < 2000 && charac_obj_ptr->getPoints() > 1000) //medium diff
+    else if (charac_obj_ptr->getPoints() < 2500 && charac_obj_ptr->getPoints() > 1500) //medium diff
     {
-        ///make some loop for scatter chase cycle
-         //put all ifs for each ghost here
-        if (object_type == 4 || object_type == 5)
+        if (switchState == 0)
+        {
+            chaseCounter =0;
+            timer=0;
+            switchState = 1;
+            ghost_chase_prob_Y = 55;
+            ghost_chase_prob_P = 75;
+            ghost_chase_prob_C = 55;
+        }
+
+
+        //scatter loop 
+        if (chaseCounter>3)
+        {
+            ghost_chase_prob_Y = 10;
+            ghost_chase_prob_P = 100;
+            ghost_chase_prob_C = 20;
+            Chase(charac_obj_ptr);
+        }
+        else if(timer /60 <=7)
+        {
+            Scatter();
+        }
+        else if (timer/60 > 7 && timer/60 <= 27)
         {
             Chase(charac_obj_ptr);
         }
         else
         {
-            Scatter();
+            timer =0;
+            chaseCounter++;
         }
-        
-        current_speed = FRAMES_PER_MOVE-1;
+        current_speed = FRAMES_PER_MOVE-2;
     }
     else //hardest difficulty
     {
-        ///make some loop for scatter chase cycle
-         //put all ifs for each ghost here
+        ghost_chase_prob_Y = 10;
+        ghost_chase_prob_P = 100;
+        ghost_chase_prob_C = 20;
+        //permanent chase
         Chase(charac_obj_ptr); 
-        current_speed = FRAMES_PER_MOVE-2;
+        current_speed = FRAMES_PER_MOVE-4;
     }
 
 
     if (this->x == charac_obj_ptr->getX() && this->y == charac_obj_ptr->getY())
     {
-        running = false;
+        if (freigtened == false)
+        {
+            running = false;
+        }else
+        {
+            std::cout << "ADQDW" << std::endl;
+        }
     }
 }
 
@@ -80,6 +137,28 @@ void Ghosts::Chase(GameObject* player)
     }
     move_counter ++;
     move_counter%=(current_speed);
+}
+
+void Ghosts::Freightened(bool & freigtened)
+{
+    //smthn like this?
+    if (freigtened == true)
+    {
+        //figure out how to reverse direction
+        //always move away from player
+        ghost_chase_prob_Y = 0;
+        ghost_chase_prob_P = 0;
+        ghost_chase_prob_C = 0;
+        ghost_chase_prob_R = 0;
+        current_speed=FRAMES_PER_MOVE+2;
+    }else
+    {
+        freigtened = false;
+        freigtened_timer = 10;
+        return;
+    }
+    freigtened_timer -= (1/60);
+
 }
 
 void Ghosts::Pathfind(int target_x,int target_y, int chase_prob)

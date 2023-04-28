@@ -57,20 +57,20 @@ int main(int argc, char *argv[])
     init_pair(GHOST_Y, COLOR_YELLOW, COLOR_BLACK);
     init_pair(GHOST_P, COLOR_MAGENTA, COLOR_BLACK);
     init_pair(GHOST_C, COLOR_CYAN, COLOR_BLACK);
-
+    bool freightened = false;
     int character_index = handle.size() -1;
     while(running)
     {
         auto start = std::chrono::steady_clock::now();
 
-        handle.at(character_index)->handleCharacterMove(handle, character_index);
+        handle.at(character_index)->handleCharacterMove(handle, character_index, freightened);
         handle.at(character_index)->updateAnimationState();
 
         for (int i = 0; i < handle.size(); i++)
         {
             if (handle.at(i)->object_type == GHOST_R || handle.at(i)->object_type == GHOST_Y || handle.at(i)->object_type == GHOST_P || handle.at(i)->object_type == GHOST_C )
             {
-                handle.at(i)->handleState(handle.at(character_index), running);
+                handle.at(i)->handleState(handle.at(character_index), running, freightened);
             }
         }
         

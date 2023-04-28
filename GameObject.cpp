@@ -101,12 +101,12 @@ void GameObject :: updateAnimationState()
 {
     // std::cout<<"GO UPDATE ANIM" << std::endl;
 }
-void GameObject :: handleCharacterMove(std::vector<GameObject*> & handle,int& character_index)
+void GameObject :: handleCharacterMove(std::vector<GameObject*> & handle,int & character_index,bool & freightened)
 {
     //  std::cout<<"GO  HANDLE CHARACTER MOVE" << std::endl;
 }
 
-void GameObject ::  handleState(GameObject* charac_obj_ptr, bool & running)
+void GameObject ::  handleState(GameObject* charac_obj_ptr, bool & running, bool&freightened)
 {
     
 }

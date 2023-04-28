@@ -35,8 +35,8 @@ class GameObject
         void printCharacterAtPosition();
         //virtuals
         virtual void updateAnimationState();
-        virtual void handleCharacterMove(std::vector<GameObject*> & handle, int& character_index);
-        virtual void handleState(GameObject* charac_obj_ptr, bool & running);
+        virtual void handleCharacterMove(std::vector<GameObject*> & handle,int & character_index,bool & freightened);
+        virtual void handleState(GameObject* charac_obj_ptr, bool & running, bool&freightened);
         virtual int getPoints();
         
         
