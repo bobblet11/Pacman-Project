@@ -24,10 +24,8 @@ int main()
                     "⠀⠀⠀⠀⠀⠀⠉⠉⠉⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀                                                   ";
     obj.menu_head(Game);
     obj.add("Play", 1, "Start a new game");
-    obj.add("Skins", 2, "Choose your favourite skin");
-    obj.add("Colors", 3, "Choose your favourite color");
-    obj.add("High Scores", 4, "See previous high scores");
-    obj.add("Exit", 5, "Exit to the terminal CLI");
+    obj.add("High Scores", 2, "See previous high scores");
+    obj.add("Exit", 3, "Exit to the terminal CLI");
     while(true)
     {
         x=obj.display();
