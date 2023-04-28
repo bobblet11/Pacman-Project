@@ -1,5 +1,5 @@
 CXX = g++
-FLAGS = -pedantic -std=c++23
+FLAGS = -pedantic -std=c++11
 EXECUTABLE = pacman
 LDFLAGS = -lncursesw
 OBJECTS = Character.o main.o Screen.o GameObject.o PlayableMap.o Pill.o Ghosts.o
@@ -29,6 +29,7 @@ Ghosts.o: Ghosts.cpp Ghosts.h GameObject.h
 	$(CXX) $(FLAGS) -c $<
 intro:
 	g++ menu.cpp -o menu
+	
 .PHONY: run
 run:
 	./$(EXECUTABLE)

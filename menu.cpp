@@ -39,15 +39,9 @@ int main()
                 playG();
                 break;
             case 2:
-                skins();
-                break;
-            case 3:
-                colors();
-                break;
-            case 4:
                 hs();
                 break;
-            case 5:
+            case 3:
                 system("clear");
                 cout << "ThankYOU!!\nBrought to you by Ligma Ballz productions." << "\n";
                 system("setterm -cursor on");
@@ -92,45 +86,7 @@ void playG()
     system("setterm -cursor on");
     exit(0);
 }
-void skins()
-{
-    cout <<"We are still working on it.\nThanks for being with us." << endl;
-    return;
-}
-void colors()
-{
-    menu obj;
-    int x;
-    obj.menu_head("Colors");
-    obj.add("Red", 1);
-    obj.add("Green", 2);
-    obj.add("Blue", 3);
-    obj.add("Yellow", 4);
-    obj.add("Exit", 5, "Return to the main menu");
-    x=obj.display();
-    switch(x)
-    {
-        case 1:
-            hs();
-            break;
-        case 2:
-            hs();
-            break;
-        case 3:
-            hs();
-            break;
-        case 4:
-            hs();
-            break;
-        case 5:
-            return;
-            break;
-        default:
-            cout << x << endl;
-            break;
-    }
-    return;
-}
+
 void hs()
 {
     cout <<"We are still working on it.\nThanks for being with us." << endl;
