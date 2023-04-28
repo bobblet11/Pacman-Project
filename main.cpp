@@ -5,7 +5,10 @@
 #include <chrono>
 #include "Character.h"
 #include "Ghosts.h"
-
+#include "middle.h"
+#include "functions.h"
+#include "Item.h"
+#include "Menu.h"
 
 //DEFINES THE OBJECT TYPES AND THEIR ASSOCIATED COLOURS
 #define  CHARACTER 1
@@ -21,6 +24,10 @@
 const int FRAMERATE = 60;
 const int MENU = 0, INGAME = 1, WIN = 2, LOSE = 3;
 
+//PROTOTYPES
+std::string Name();
+void playGame();
+void highscores();
 
 int main(int argc, char *argv[])
 {
@@ -144,4 +151,58 @@ int main(int argc, char *argv[])
     }
     endwin();
 
+}
+
+
+
+
+
+std::string Name()
+{
+    std::string name;
+    preprocess("Namebox.txt");
+    gotoxy(max_x / 2, (max_y / 2) - 10);
+    system("setterm -cursor on");
+    cin >> name;
+    system("setterm -cursor off");
+    system("clear");
+    return name;
+}
+
+void playGame()
+{
+    system("clear");
+    std::string name = Name();
+    std::string statement = "Hello " + name + "\nWelcome to Ligma Ballz\n<<<Game Loading>>>\n";
+    directdistheplay(statement);
+    system("setterm -cursor off");
+    cout << "\n\n";
+    for (int i = 0; i <= 100; ++i)
+    {
+        if (i == 100) 
+        {
+            system("clear");
+        }
+        gotoxy((max_x / 2) + 3, (max_y / 2) - 52);
+        std::string progress = "[" + std::string(i, '|') + std::string(100 - i, ' ') + "]";
+        cout << progress << flush << " " << i << "%" << endl;
+        usleep(50000);
+    }
+    cout << "\n";
+    statement = "Game Locked and Loaded Bitch\n<<Press Enter to Start>>";
+    directdistheplay(statement);
+    cin.ignore();
+    cin.ignore();
+    system("clear");
+    preprocess("PlayableMap.txt");
+    cin.ignore();
+    system("clear");
+    system("setterm -cursor on");
+    exit(0);
+}
+
+void highscores()
+{
+    cout <<"We are still working on it.\nThanks for being with us." << endl;
+    return;
 }
