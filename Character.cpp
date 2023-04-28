@@ -96,7 +96,7 @@ void Character::moveCharacter(std::vector<GameObject*> & handle, int & character
                     //IF THE PILL WAS A SUPER PILL, SET GHOST STATE TO FREIGHTENED
                     if (handle.at(i)->getPoints() == 100)
                     {
-                        freightened = true;
+                        
                     }
 
                     //DEALLOCATE THE PILL OBJECT MEMORY
