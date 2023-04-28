@@ -21,7 +21,7 @@
 const int FRAMERATE = 60;
 const int MENU = 0, INGAME = 1, WIN = 2, LOSE = 3;
 
-void playG(), skins(), colors(), hs();
+void PlayGame(), highscores(), difficulty();
 string Name();
 int gameState = MENU;
 
@@ -46,16 +46,16 @@ int main(int argc, char *argv[])
     menu obj;
     int x;
     std::string Game =   
-                    "⠀⠀⠀⠀⣀⣤⣴⣶⣶⣶⣦⣤⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀                                             \n"
-                    "⠀⠀⣠⣾⣿⣿⣿⣿⣿⣿⢿⣿⣿⣷⣄⠀⠀⠀⠀                                                  \n"
+                    "⠀⠀⠀⠀⣀⣤⣴⣶⣶⣶⣦⣤⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀                                           \n"
+                    "⠀⠀⣠⣾⣿⣿⣿⣿⣿⣿⢿⣿⣿⣷⣄⠀⠀⠀⠀                                                 \n"
                     "⢀⣾⣿⣿⣿⣿⣿⣿⣿⣅⢀⣽⣿⣿⡿⠃⠀⠀⠀                                                 \n"
-                    "⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠛⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀                                            \n"
+                    "⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠛⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀                                           \n"
                     "⣿⣿⣿⣿⣿⣿⣿⣿⣿⠛⠁⠀⠀⣴⣶⡄⠀⣶⣶⡄⠀⣴⣶⡄ ⣴⣶⡄⠀⣶⣶⡄⠀⣴⣶⡄ ⣴⣶⡄⠀⣶⣶⡄⠀⣴⣶⡄ ⣴⣶⡄⠀⣶⣶⡄⠀⣴⣶⡄\n"
                     "⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣦⣀⠀⠙⠋⠁⠀⠉⠋⠁⠀⠙⠋⠀ ⠙⠋⠁⠀⠉⠋⠁⠀⠙⠋  ⠙⠋⠁⠀⠉⠋⠁⠀⠙⠋  ⠙⠋⠁⠀⠉⠋⠁⠀⠙⠋  \n"
                     "⠸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣦⣄⠀⠀⠀⠀⠀⠀⠀⠀                                             \n"
                     "⠀⠙⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠃⠀⠀⠀⠀⠀⠀⠀                                             \n"
                     "   ⠙⠿⣿⣿⣿⣿⣿⣿⣿⠿⠋⠀⠀⠀⠀⠀⠀                                                 \n"
-                    "⠀⠀⠀⠀⠀⠀⠉⠉⠉⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀                                                   ";
+                    "⠀⠀⠀⠀⠀⠀⠉⠉⠉⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀                                                 ";
     obj.menu_head(Game);
     obj.add("Play", 1, "Start a new game");
     obj.add("High Scores", 2, "See previous high scores");
@@ -71,14 +71,16 @@ int main(int argc, char *argv[])
             switch(x)
             {
                 case 1:
-                    playG();
+                    PlayGame();
                     break;
                 case 2:
-                    hs();
+                    highscores();
                     break;
                 case 3:
                     system("clear");
-                    cout << "ThankYOU!!\nBrought to you by Ligma Ballz productions." << "\n";
+                    directdistheplay("ThankYOU!!\nBrought to you by Ligma Ballz productions.\n");
+                    usleep(3000000);
+                    system("clear");
                     system("setterm -cursor on");
                     exit(0);
                 default:
@@ -156,7 +158,7 @@ int main(int argc, char *argv[])
 }
 
 
-void playG()
+void PlayGame()
 {
     system("clear");
     string name = Name();
@@ -205,46 +207,13 @@ void playG()
 
     gameState = INGAME;
 }
-void skins()
+void difficulty()
 {
-    cout <<"We are still working on it.\nThanks for being with us." << endl;
+    //difficulty choosing option
     return;
 }
-void colors()
-{
-    menu obj;
-    int x;
-    obj.menu_head("Colors");
-    obj.add("Red", 1);
-    obj.add("Green", 2);
-    obj.add("Blue", 3);
-    obj.add("Yellow", 4);
-    obj.add("Exit", 5, "Return to the main menu");
-    x=obj.display();
-    switch(x)
-    {
-        case 1:
-            hs();
-            break;
-        case 2:
-            hs();
-            break;
-        case 3:
-            hs();
-            break;
-        case 4:
-            hs();
-            break;
-        case 5:
-            return;
-            break;
-        default:
-            cout << x << endl;
-            break;
-    }
-    return;
-}
-void hs()
+
+void highscores()
 {
     cout <<"We are still working on it.\nThanks for being with us." << endl;
     return;
