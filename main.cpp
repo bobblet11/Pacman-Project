@@ -6,6 +6,7 @@
 #include "Character.h"
 #include "Ghosts.h"
 #include "menu.h"
+#include "Highscores.h"
 
 //DEFINES THE OBJECT TYPES AND THEIR ASSOCIATED COLOURS
 #define  CHARACTER 1
@@ -21,10 +22,13 @@
 const int FRAMERATE = 60;
 const int MENU = 0, INGAME = 1, WIN = 2, LOSE = 3;
 
+//FUNCTION DECLARATION
 void PlayGame(), highscores(), difficulty();
 string Name();
-//Player name
+
+//PLAYER NAME
 string name;
+
 int gameState = MENU;
 
 int main(int argc, char *argv[])
@@ -69,6 +73,7 @@ int main(int argc, char *argv[])
         //MENU LOOP
         if (gameState == MENU)
         {
+            system("setterm -cursor off");
             x=obj.display();
             switch(x)
             {
@@ -144,14 +149,17 @@ int main(int argc, char *argv[])
         {
             if (gameState == WIN)
             {
+                add_highscores(name, score);
                 //win page
                 std::cout << "YOU WIN!" << std::endl;
-                
+                break;
             }
             else
             {
+                add_highscores(name, score);
                 //lose page
                 std::cout << "YOU LOSE!" << std::endl;
+                break;
             }
         }
 
@@ -167,7 +175,6 @@ void PlayGame()
     name = Name();
     string statement = "Hello " + name + "\nWelcome to Ligma Ballz\n<<<Game Loading>>>\n";
     directdistheplay(statement);
-    system("setterm -cursor off");
     cout << "\n\n";
     for (int i = 0; i <= 100; ++i)
     {
@@ -218,7 +225,9 @@ void difficulty()
 
 void highscores()
 {
-    cout <<"We are still working on it.\nThanks for being with us." << endl;
+    system("clear");
+    preprocess("highscores.txt");
+    cin.ignore();
     return;
 }
 
