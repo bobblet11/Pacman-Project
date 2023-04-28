@@ -46,7 +46,6 @@ int main()
                 cout << "ThankYOU!!\nBrought to you by Ligma Ballz productions." << "\n";
                 system("setterm -cursor on");
                 exit(0);
-
             default:
                 cout << x << endl;
                 break;
