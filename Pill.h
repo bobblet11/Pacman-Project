@@ -1,20 +1,24 @@
-
+//HEADER GUARD
 #pragma once
 #ifndef _PILL_
 #define _PILL_
 
+//INCLUDES
 #include "GameObject.h"
-#include "PlayableMap.h"
-#include <string>
 
 class Pill: public GameObject
 {
-private:
-    int pill_point;
-public:
-    int getPoints();
-    Pill(std::string sprite_sheet, int posX, int posY, int obj_type, int pill_type, int pill_point);
-    ~Pill();
+    private:
+        //PILL MEMBERS
+        int points;
+    public:
+        //EXTERNAL FUNCTIONS
+        int getPoints();
+
+        //CONSTRUCTOR
+        Pill(std::string sprite_sheet, int posX, int posY, int obj_type, int pill_type, int pill_point);
+        //DECONSTRUCTORS
+        ~Pill();
 
 };
 
