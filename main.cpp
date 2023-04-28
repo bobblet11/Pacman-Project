@@ -23,6 +23,8 @@ const int MENU = 0, INGAME = 1, WIN = 2, LOSE = 3;
 
 void PlayGame(), highscores(), difficulty();
 string Name();
+//Player name
+string name;
 int gameState = MENU;
 
 int main(int argc, char *argv[])
@@ -116,7 +118,8 @@ int main(int argc, char *argv[])
 
             //RENDERING
             screen.render(handle);
-            mvprintw(1,2,"SCORE: %i", score);
+            mvprintw(1,2,"PLAYER: %s", name.c_str());
+            mvprintw(1,45,"SCORE: %i", score);
             refresh();
 
 
@@ -161,7 +164,7 @@ int main(int argc, char *argv[])
 void PlayGame()
 {
     system("clear");
-    string name = Name();
+    name = Name();
     string statement = "Hello " + name + "\nWelcome to Ligma Ballz\n<<<Game Loading>>>\n";
     directdistheplay(statement);
     system("setterm -cursor off");
