@@ -7,7 +7,7 @@ OBJECTS = Character.o main.o Screen.o GameObject.o PlayableMap.o Pill.o Ghosts.o
 compile: $(OBJECTS)
 	$(CXX) $(FLAGS) -o $(EXECUTABLE) $(OBJECTS) $(LDFLAGS)
 
-main.o: main.cpp Screen.h Character.h 
+main.o: main.cpp Screen.h Character.h menu.h
 	$(CXX) $(FLAGS) -c $<
 
 Screen.o: Screen.cpp Screen.h Character.h PlayableMap.h

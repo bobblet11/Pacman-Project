@@ -51,7 +51,7 @@ char getch_(int echo)
     return ch;
 }
 
-char getch(void)
+char GETCH(void)
 {
     return getch_(0);
 }

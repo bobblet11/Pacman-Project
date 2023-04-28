@@ -5,6 +5,7 @@
 #include <chrono>
 #include "Character.h"
 #include "Ghosts.h"
+#include "menu.h"
 
 //DEFINES THE OBJECT TYPES AND THEIR ASSOCIATED COLOURS
 #define  CHARACTER 1
@@ -20,6 +21,9 @@
 const int FRAMERATE = 60;
 const int MENU = 0, INGAME = 1, WIN = 2, LOSE = 3;
 
+void playG(), skins(), colors(), hs();
+string Name();
+int gameState = MENU;
 
 int main(int argc, char *argv[])
 {
@@ -27,7 +31,6 @@ int main(int argc, char *argv[])
     //INITIALISING VARIABLES AND OBJECTS
     int score = 0;
     bool running = true;
-    int gameState = INGAME;
     std::vector<GameObject*> handle;
     PlayableMap map(handle);
     Screen screen(28,32,map);
@@ -38,31 +41,27 @@ int main(int argc, char *argv[])
     handle.push_back(new Character("CharacterSprites.txt",screen.getWidth(), screen.getHeight(), map, 2,2, CHARACTER));
     bool freightened = false;
 
-    //INITIALISING THE NCURESES TERMINAL
-    cbreak();
-    noecho();
-    setlocale(LC_ALL,"");
-    initscr();
-    nodelay(stdscr,TRUE);
-    if(has_colors() == FALSE)
-	{	endwin();
-		printf("Your terminal does not support color\n");
-		exit(1);
-	}
-	start_color();
-
-
-    //CREATING COLOUR PAIRS FOR EACH OBJECT TYPE
-    init_pair(CHARACTER, COLOR_YELLOW,COLOR_BLACK);
-    init_pair(WALL, COLOR_BLUE, COLOR_BLACK);
-    init_pair(PILL, COLOR_WHITE, COLOR_BLACK);
-    init_pair(GHOST_R, COLOR_RED, COLOR_BLACK);
-    init_pair(GHOST_Y, COLOR_YELLOW, COLOR_BLACK);
-    init_pair(GHOST_P, COLOR_MAGENTA, COLOR_BLACK);
-    init_pair(GHOST_C, COLOR_CYAN, COLOR_BLACK);
-
     int character_index = handle.size() -1;
     
+    menu obj;
+    int x;
+    std::string Game =   
+                    "⠀⠀⠀⠀⣀⣤⣴⣶⣶⣶⣦⣤⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀                                             \n"
+                    "⠀⠀⣠⣾⣿⣿⣿⣿⣿⣿⢿⣿⣿⣷⣄⠀⠀⠀⠀                                                  \n"
+                    "⢀⣾⣿⣿⣿⣿⣿⣿⣿⣅⢀⣽⣿⣿⡿⠃⠀⠀⠀                                                 \n"
+                    "⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠛⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀                                            \n"
+                    "⣿⣿⣿⣿⣿⣿⣿⣿⣿⠛⠁⠀⠀⣴⣶⡄⠀⣶⣶⡄⠀⣴⣶⡄ ⣴⣶⡄⠀⣶⣶⡄⠀⣴⣶⡄ ⣴⣶⡄⠀⣶⣶⡄⠀⣴⣶⡄ ⣴⣶⡄⠀⣶⣶⡄⠀⣴⣶⡄\n"
+                    "⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣦⣀⠀⠙⠋⠁⠀⠉⠋⠁⠀⠙⠋⠀ ⠙⠋⠁⠀⠉⠋⠁⠀⠙⠋  ⠙⠋⠁⠀⠉⠋⠁⠀⠙⠋  ⠙⠋⠁⠀⠉⠋⠁⠀⠙⠋  \n"
+                    "⠸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣦⣄⠀⠀⠀⠀⠀⠀⠀⠀                                             \n"
+                    "⠀⠙⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠃⠀⠀⠀⠀⠀⠀⠀                                             \n"
+                    "   ⠙⠿⣿⣿⣿⣿⣿⣿⣿⠿⠋⠀⠀⠀⠀⠀⠀                                                 \n"
+                    "⠀⠀⠀⠀⠀⠀⠉⠉⠉⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀                                                   ";
+    obj.menu_head(Game);
+    obj.add("Play", 1, "Start a new game");
+    obj.add("Skins", 2, "Choose your favourite skin");
+    obj.add("Colors", 3, "Choose your favourite color");
+    obj.add("High Scores", 4, "See previous high scores");
+    obj.add("Exit", 5, "Exit to the terminal CLI");
 
     //GAMELOOP
     while(running)
@@ -70,7 +69,31 @@ int main(int argc, char *argv[])
         //MENU LOOP
         if (gameState == MENU)
         {
-           
+            GETCH();
+            x=obj.display();
+            switch(x)
+            {
+                case 1:
+                    playG();
+                    break;
+                case 2:
+                    skins();
+                    break;
+                case 3:
+                    colors();
+                    break;
+                case 4:
+                    hs();
+                    break;
+                case 5:
+                    system("clear");
+                    cout << "ThankYOU!!\nBrought to you by Ligma Ballz productions." << "\n";
+                    system("setterm -cursor on");
+                    exit(0);
+                default:
+                    cout << x << endl;
+                    break;
+            }
         }
         else if (gameState == INGAME) //GAME LOOP
         {
@@ -141,3 +164,109 @@ int main(int argc, char *argv[])
 
 }
 
+
+void playG()
+{
+    system("clear");
+    string name = Name();
+    string statement = "Hello " + name + "\nWelcome to Ligma Ballz\n<<<Game Loading>>>\n";
+    directdistheplay(statement);
+    system("setterm -cursor off");
+    cout << "\n\n";
+    for (int i = 0; i <= 100; ++i)
+    {
+        if (i == 100) 
+        {
+            system("clear");
+        }
+        gotoxy((max_x / 2) + 3, (max_y / 2) - 52);
+        string progress = "[" + string(i, '|') + string(100 - i, ' ') + "]";
+        cout << progress << flush << " " << i << "%" << endl;
+        usleep(50000);
+    }
+    cout << "\n";
+    statement = "Game Locked and Loaded Bitch\n<<Press Enter to Start>>";
+    directdistheplay(statement);
+    cin.ignore();
+    cin.ignore();
+    system("clear");
+
+   //INITIALISING THE NCURESES TERMINAL
+    cbreak();
+    noecho();
+    setlocale(LC_ALL,"");
+    initscr();
+    nodelay(stdscr,TRUE);
+    if(has_colors() == FALSE)
+	{	endwin();
+		printf("Your terminal does not support color\n");
+		exit(1);
+	}
+	start_color();
+        //CREATING COLOUR PAIRS FOR EACH OBJECT TYPE
+    init_pair(CHARACTER, COLOR_YELLOW,COLOR_BLACK);
+    init_pair(WALL, COLOR_BLUE, COLOR_BLACK);
+    init_pair(PILL, COLOR_WHITE, COLOR_BLACK);
+    init_pair(GHOST_R, COLOR_RED, COLOR_BLACK);
+    init_pair(GHOST_Y, COLOR_YELLOW, COLOR_BLACK);
+    init_pair(GHOST_P, COLOR_MAGENTA, COLOR_BLACK);
+    init_pair(GHOST_C, COLOR_CYAN, COLOR_BLACK);
+    
+    gameState = INGAME;
+}
+void skins()
+{
+    cout <<"We are still working on it.\nThanks for being with us." << endl;
+    return;
+}
+void colors()
+{
+    menu obj;
+    int x;
+    obj.menu_head("Colors");
+    obj.add("Red", 1);
+    obj.add("Green", 2);
+    obj.add("Blue", 3);
+    obj.add("Yellow", 4);
+    obj.add("Exit", 5, "Return to the main menu");
+    x=obj.display();
+    switch(x)
+    {
+        case 1:
+            hs();
+            break;
+        case 2:
+            hs();
+            break;
+        case 3:
+            hs();
+            break;
+        case 4:
+            hs();
+            break;
+        case 5:
+            return;
+            break;
+        default:
+            cout << x << endl;
+            break;
+    }
+    return;
+}
+void hs()
+{
+    cout <<"We are still working on it.\nThanks for being with us." << endl;
+    return;
+}
+
+string Name()
+{
+    string name;
+    preprocess("Namebox.txt");
+    gotoxy(max_x / 2, (max_y / 2) - 10);
+    system("setterm -cursor on");
+    cin >> name;
+    system("setterm -cursor off");
+    system("clear");
+    return name;
+}

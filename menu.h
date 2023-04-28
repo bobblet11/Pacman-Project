@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include "functions.h"
+#include "middle.h"
 
 using namespace std;
 
@@ -115,7 +116,7 @@ int menu::display()
         for(int i=0;i<temp;i++)
             cout << " ";
         cout<<'\n';
-        opt = getch();
+        opt = GETCH();
         if (opt == 10)
             return entries[selected].ret;
         switch(opt)
