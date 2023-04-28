@@ -45,12 +45,7 @@ int main()
                 system("clear");
                 cout << "ThankYOU!!\nBrought to you by Ligma Ballz productions." << "\n";
                 system("setterm -cursor on");
-                exit(0);hint: not have locally. This is usually caused by another repository pushing
-hint: to the same ref. You may want to first integrate the remote changes
-hint: (e.g., 'git pull ...') before pushing again.
-hint: See the 'Note about fast-forwards' in 'git push --help' for details.
-benglover@benGlover:~/Documents/Pacman$ 
-
+                exit(0);
             default:
                 cout << x << endl;
                 break;
