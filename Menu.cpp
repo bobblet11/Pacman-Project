@@ -1,78 +1,34 @@
-#pragma once
+//INCLUDES
 #include <iostream>
-#include <cstdio>
-#include <string>
-#include <vector>
 #include "functions.h"
+#include "middle.h"
 
-using namespace std;
+#include "Menu.h"
 
-class item
-{
-public:
-    string name, desc;
-    int ret;
-    int y;
-    item()
-    {
-        name = " ";
-        desc = " ";
-        y = 0;
-        ret = 0;
-    }
-    item(string s1, int a, string s2)
-    {
-        name = s1;
-        desc = s2;
-        ret = a;
-    }
-    void display();
-    void disp_selected();
-};
-void item::display()
-{
-    cout.width(y + (name.size()));
-    cout << name << "  \n";
-}
 
-void item::disp_selected()
+
+Menu::Menu()
 {
-    cout.width(y+10);
-    cout<<"\033[30;1;47m" << name <<"\033[0m\n";
 
 }
 
-class menu
-{
-    item head;
-    vector<item> entries;
-    int num;
-public:
-    menu()
-    {
-        num=0;
-    };
-    void add(string,int,string);
-    void menu_head(string);
-    int display();
-};
-
-
-void menu::add(string s, int r = 0, string d = " ")
+void Menu::add(std::string s, int r = 0, std::string d = " ")
 {
     num++;
     if(r == 0)
         r = num;
-    entries.push_back(item(s, r, d));
+    entries.push_back(Item(s, r, d));
 }
 
-void menu::menu_head(string s)
+
+void Menu::menu_head(std::string s)
 {
     head.name = s;
     return;
 }
 
-int menu::display()
+
+int Menu::display()
 {
     system("clear");
     int selected = 0, opt=66, last_x = getmax_x(), last_y = getmax_y();
@@ -80,7 +36,7 @@ int menu::display()
     {
         int max_y = getmax_y(), i;
         head.y = (max_y - head.name.size())/2;
-        for(item &a : entries)
+        for(Item &a : entries)
         {
             a.y = (max_y - a.name.size())/2;
         }
@@ -105,13 +61,13 @@ int menu::display()
                 entries[i].display();
         }
         cout << "\n\n\n\n\n\n\n";
-        cout << ">>> " << entries[selected].desc;
+        cout << ">>> " << entries[selected].description;
         int previous = (opt==66)?(selected-1):(selected+1);
         if (previous < 0)
             previous = num-1;
         if(previous == num)
             previous = 0;
-        int temp = (entries[previous].desc.length() - entries[selected].desc.length());
+        int temp = (entries[previous].description.length() - entries[selected].description.length());
         for(int i=0;i<temp;i++)
             cout << " ";
         cout<<'\n';
@@ -133,3 +89,4 @@ int menu::display()
             selected = num -1;
     }
 }
+
