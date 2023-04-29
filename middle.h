@@ -1,4 +1,6 @@
 #pragma once
+#ifndef _MIDDLE_
+#define _MIDDLE_
 #include <iostream>
 #include <fstream>
 #include <unistd.h>
@@ -75,3 +77,5 @@ int directdistheplay(string my_string)
     } 
     return 0;
 }
+
+#endif

@@ -6,6 +6,7 @@
 #include "Character.h"
 #include "Ghosts.h"
 #include "menu.h"
+#include "middle.h"
 #include "Highscores.h"
 
 //DEFINES THE OBJECT TYPES AND THEIR ASSOCIATED COLOURS
