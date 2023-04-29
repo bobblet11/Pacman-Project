@@ -2,7 +2,7 @@
 
 Screen :: Screen (int width, int height, PlayableMap & map)
 {
-    this->width = width+2;
+    this->width = width+2; //2 for the side walls, 20 for the gap
     this->height = height+2;
     this->map_ptr = map;
 
@@ -88,7 +88,7 @@ void Screen::printCurrentFrame(std::vector<GameObject*> &handle)
     //draw map
     for(int i=0;i<getHeight();i++)
     {
-        move(i,0);
+        move(i+10,68);
         for(int j=0;j<getWidth();j++)
         {
             if (i > 0 && i < getHeight()-1 && j >0 && j < getWidth()-1)

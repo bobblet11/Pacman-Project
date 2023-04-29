@@ -124,8 +124,8 @@ int main(int argc, char *argv[])
 
             //RENDERING
             screen.render(handle);
-            mvprintw(1,2,"PLAYER: %s", name.c_str());
-            mvprintw(1,45,"SCORE: %i", score);
+            mvprintw(1 + 10,2 + 68,"PLAYER: %s", name.c_str());
+            mvprintw(1 + 10,45 + 68,"SCORE: %i", score);
             refresh();
 
 
