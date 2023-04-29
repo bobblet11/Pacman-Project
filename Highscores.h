@@ -11,6 +11,6 @@
 
 using namespace std;
 
-int add_highscores(string name, int score);
+void add_highscores(string name, int score);
 
 #endif // _HIGHSCORES_

@@ -168,7 +168,6 @@ void Ghosts::Freightened(bool & freigtened, GameObject* player)
     if (freigtened_timer <= 0)
     {
         freigtened_timer = 10*60;
-        mvprintw(30,50, "%s", "NOT FREIGTENED");
         ghost_chase_prob_R = 100;
         ghost_chase_prob_Y = 55;
         ghost_chase_prob_P = 20;
@@ -188,7 +187,6 @@ void Ghosts::Freightened(bool & freigtened, GameObject* player)
         current_speed=FRAMES_PER_MOVE+2;
         freigtened_timer -= 1;
     }
-    mvprintw(50,50,"%i",freigtened_timer);
 
     
    
@@ -279,8 +277,6 @@ void Ghosts::Scatter()
     //check if at the scatter start pos
     int scatter_start_x = (object_type == 4) ? ghost_scatter_start_Rx : (object_type == 5) ? ghost_scatter_start_Yx : (object_type == 6) ? ghost_scatter_start_Px : ghost_scatter_start_Cx;
     int scatter_start_y = (object_type == 4) ? ghost_scatter_start_Ry : (object_type == 5) ? ghost_scatter_start_Yy : (object_type == 6) ? ghost_scatter_start_Py : ghost_scatter_start_Cy;
-    mvprintw(40 + object_type, 40, "%i", reached_scatter_start);
-    mvprintw(40 + object_type, 38, "%i", object_type);
     if (this->x == scatter_start_x + 1 && this->y == scatter_start_y + 1)
     {
         reached_scatter_start = true;

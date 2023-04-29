@@ -35,7 +35,6 @@ void Character::handleCharacterMove(std::vector<GameObject*> & handle , int & ch
 }
 void Character :: updateAnimationState()
 {
-    // std::cout << "UPDATE ANIM CHARACTER " << std::endl;
     if (anim_counter < ANIMATION_DURATION)
         {
             setState(DEFAULT); //default state
@@ -96,7 +95,6 @@ void Character::moveCharacter(std::vector<GameObject*> & handle, int & character
                     //IF THE PILL WAS A SUPER PILL, SET GHOST STATE TO FREIGHTENED
                     if (handle.at(i)->getPoints() == 100)
                     {
-                        std::cout << "FUCK" << std::endl;
                         freightened = true;
                     }
 

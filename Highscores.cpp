@@ -1,22 +1,55 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <map>
 
 using namespace std;
 
-int add_highscores(string name, int score)
+void add_highscores(string name, int score)
 {
-    ofstream file("highscores.txt", ios::app);
-    if (file.is_open()) 
+    int temp;
+    string line;
+
+    map<int, string> scores; 
+
+    scores[score] = name + ':' + to_string(score);
+
+    ifstream infile;
+    infile.open("highscores.txt");
+
+    if (infile.is_open()) 
     {
-        file << name + ": " << score << endl;
-        file.close();
+        while (getline(infile, line))
+        {
+            temp = stoi(line.substr(line.find_last_of(':')));
+            scores[temp] = line;
+        }
     } 
     else 
     {
         cout << "Unable to open file" << endl;
     }
-    return 0;
+    infile.close();
+
+    map<int,string>::iterator ptr = scores.begin();
+
+    ofstream outfile;
+    outfile.open("highscores.txt");
+    if (outfile.is_open()) 
+    {
+        for (int i =0; i < scores.size(); i++)
+        {
+            outfile << (*ptr).second;
+            ptr++;
+        }
+    } 
+    else 
+    {
+        cout << "Unable to open file" << endl;
+    }
+    outfile.close();
 }
+
+
 
 //Need to add sorting
