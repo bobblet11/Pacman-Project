@@ -37,7 +37,7 @@ int main(int argc, char *argv[])
     //INITIALISING VARIABLES AND OBJECTS
     int score = 0;
     bool running = true;
-    std::vector<GameObject*> handle;
+    vector<GameObject*> handle;
     PlayableMap map(handle);
     Screen screen(28,32,map);
     handle.push_back(new Ghosts("GhostSprites.txt",14,15,GHOST_R, map));
@@ -51,7 +51,7 @@ int main(int argc, char *argv[])
     
     menu obj;
     int x;
-    std::string Game =   
+    string Game =   
                     "⠀⠀⠀⠀⣀⣤⣴⣶⣶⣶⣦⣤⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀                                           \n"
                     "⠀⠀⣠⣾⣿⣿⣿⣿⣿⣿⢿⣿⣿⣷⣄⠀⠀⠀⠀                                                 \n"
                     "⢀⣾⣿⣿⣿⣿⣿⣿⣿⣅⢀⣽⣿⣿⡿⠃⠀⠀⠀                                                 \n"
@@ -98,7 +98,7 @@ int main(int argc, char *argv[])
         else if (gameState == INGAME) //GAME LOOP
         {
 
-            auto start = std::chrono::steady_clock::now();
+            auto start = chrono::steady_clock::now();
 
 
             //CHARACTER MOVEMENT
@@ -129,13 +129,14 @@ int main(int argc, char *argv[])
 
 
             //FRAMERATE HANDLING
-            auto end = std::chrono::steady_clock::now();
-            std::this_thread::sleep_for(std::chrono::milliseconds((1000/FRAMERATE) - std::chrono::duration_cast<std::chrono::milliseconds>(end-start).count()));
+            auto end = chrono::steady_clock::now();
+            this_thread::sleep_for(chrono::milliseconds((1000/FRAMERATE) - chrono::duration_cast<chrono::milliseconds>(end-start).count()));
             
 
             //checks for win scenario
             if (handle.size() == 5)
             {
+                score = handle.at(character_index)->getPoints();
                 for (int i = 0; i<handle.size(); i++)
                 {
                     delete handle[i];
@@ -147,21 +148,22 @@ int main(int argc, char *argv[])
         }
         else
         {
+            clear();
+            refresh();
             endwin();
-            add_highscores(name, score);
+            system("clear");
             if (gameState == WIN)
             {
                //win page
-                std::cout << "YOU WIN!" << std::endl;
-                break;
-                
+                cout << "YOU WIN!" << endl;
             }
             else
             {
                 //lose page
-                std::cout << "YOU LOSE!" << std::endl;
-                break;
+                cout << "YOU LOSE!" << endl;
             }
+            add_highscores(name, score);
+            break;
         }
 
     }
