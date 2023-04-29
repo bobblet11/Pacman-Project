@@ -148,17 +148,16 @@ int main(int argc, char *argv[])
         else
         {
             endwin();
+            add_highscores(name, score);
             if (gameState == WIN)
             {
-                add_highscores(name, score);
-                //win page
+               //win page
                 std::cout << "YOU WIN!" << std::endl;
                 break;
                 
             }
             else
             {
-                add_highscores(name, score);
                 //lose page
                 std::cout << "YOU LOSE!" << std::endl;
                 break;
