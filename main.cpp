@@ -189,7 +189,7 @@ void PlayGame()
         gotoxy((getmax_x() / 2) + 3, (getmax_y() / 2) - 52);
         string progress = "[" + string(i, '|') + string(100 - i, ' ') + "]";
         cout << progress << flush << " " << i << "%" << endl;
-        usleep(25000);
+        usleep(30000);
     }
     cout << "\n";
     statement = "READY TO START\n<<Press Enter to Start>>";
