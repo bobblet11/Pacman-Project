@@ -86,8 +86,13 @@ int main(int argc, char *argv[])
                     break;
                 case 3:
                     system("clear");
-                    directdistheplay("Thank You!\nBrought you by\nNabid Ahmed Shaan 3036087145\nBenjamin Jun-jie Glover 3035962764\nWONG Shom\n");
-                    usleep(3000000);
+                    for (int i = 5; i > 0; i--) 
+                    {
+                        gotoxy(0,0);
+                        cout << i << endl;
+                        directdistheplay("Thank You!\nBrought you by\nNabid Ahmed Shaan 3036087145\nBenjamin Jun-jie Glover 3035962764\nWONG Shom\n");
+                        usleep(1000000);
+                    }
                     system("clear");
                     system("setterm -cursor on");
                     exit(0);
