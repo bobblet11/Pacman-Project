@@ -186,7 +186,7 @@ void PlayGame()
         {
             system("clear");
         }
-        gotoxy((max_x / 2) + 3, (max_y / 2) - 52);
+        gotoxy((getmax_x() / 2) + 3, (getmax_y() / 2) - 52);
         string progress = "[" + string(i, '|') + string(100 - i, ' ') + "]";
         cout << progress << flush << " " << i << "%" << endl;
         usleep(50000);
@@ -239,7 +239,7 @@ string Name()
 {
     string name;
     preprocess("Namebox.txt");
-    gotoxy(max_x / 2, (max_y / 2) - 10);
+    gotoxy(getmax_x() / 2, (getmax_y() / 2) - 10);
     system("setterm -cursor on");
     cin >> name;
     system("setterm -cursor off");

@@ -2,12 +2,12 @@ CXX = g++
 FLAGS = -pedantic -std=c++11
 EXECUTABLE = pacman
 LDFLAGS = -lncursesw
-OBJECTS = Character.o main.o Screen.o GameObject.o PlayableMap.o Pill.o Ghosts.o functions.o menu.o Highscores.o
+OBJECTS = Character.o main.o Screen.o GameObject.o PlayableMap.o Pill.o Ghosts.o functions.o menu.o middle.o Highscores.o
 
 compile: $(OBJECTS)
 	$(CXX) $(FLAGS) -o $(EXECUTABLE) $(OBJECTS) $(LDFLAGS)
 
-main.o: main.cpp Screen.h Character.h functions.h menu.h Highscores.h middle.h
+main.o: main.cpp Screen.h Character.h functions.h menu.h middle.h Highscores.h
 	$(CXX) $(FLAGS) -c $<
 
 Screen.o: Screen.cpp Screen.h Character.h PlayableMap.h
@@ -31,7 +31,10 @@ Ghosts.o: Ghosts.cpp Ghosts.h GameObject.h
 functions.o: functions.cpp functions.h
 	$(CXX) $(FLAGS) -c $<
 
-menu.o: menu.cpp menu.h
+menu.o: menu.cpp menu.h functions.h
+	$(CXX) $(FLAGS) -c $<
+
+middle.o: middle.cpp middle.h functions.h
 	$(CXX) $(FLAGS) -c $<
 
 Highscores.o: Highscores.cpp Highscores.h
