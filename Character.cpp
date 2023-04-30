@@ -22,9 +22,12 @@ void Character::handleCharacterMove(std::vector<GameObject*> & handle , int & ch
 {
     if (selectGetch()) //CHECK IF THERE IS A KEY IN QUEUE
     {
-        char input = getch();
-        if (input != last_input) //CHECK IF THE DIRECTION OF CHARACTER HAS CHANGED
+        int input = getch();
+        bool isvalid = ((char)input ==  'w'|| input == KEY_UP)||((char)input == 's' || input == KEY_DOWN)||((char)input == 'd'|| input == KEY_RIGHT)||((char)input == 'a'|| input == KEY_LEFT);
+        
+        if (input != last_input && isvalid) //CHECK IF THE DIRECTION OF CHARACTER HAS CHANGED
         {
+
             last_input = input;
             move_count=0;
         }
@@ -64,8 +67,9 @@ int Character :: selectGetch()
 }
 void Character::moveCharacter(std::vector<GameObject*> & handle, int & character_index, bool & freightened) //actually moves the character 
 {
-    int moveY = (last_input == 'w') ? -1 : (last_input == 's') ? 1 : 0;
-    int moveX = (last_input == 'd') ? 1 : (last_input == 'a') ? -1 : 0;
+    int moveY = ((char)last_input == 'w' || last_input == KEY_UP) ? -1 : ((char)last_input == 's' || last_input == KEY_DOWN) ? 1 : 0;
+    int moveX = ((char)last_input == 'd' || last_input == KEY_RIGHT) ? 1 : ((char)last_input == 'a'|| last_input == KEY_LEFT) ? -1 : 0;
+
 
     int new_pos_X = moveX + x; 
     int new_pos_Y = moveY + y; 

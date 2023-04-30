@@ -51,6 +51,7 @@ class PlayableMap
         std::string getCharAtPos(int x, int y);
         bool IsMoveable(int x, int y, int object_type);
         std::string mapToString();
+        void initPill(std::vector<GameObject*>& handle);
     private:
         //INTERNAL MEMBERS
         std::string map_layout[MAP_HEIGHT][MAP_WIDTH];

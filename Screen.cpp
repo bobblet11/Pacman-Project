@@ -1,6 +1,11 @@
 #include "Screen.h"
 #include "functions.h"
 
+Screen::Screen()
+{
+    
+}
+
 Screen :: Screen (int width, int height, PlayableMap & map)
 {
     this->width = width+2; //2 for the side walls, 20 for the gap

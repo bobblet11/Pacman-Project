@@ -167,7 +167,7 @@ void Ghosts::Freightened(bool & freigtened, GameObject* player)
 {
     if (freigtened_timer <= 0)
     {
-        freigtened_timer = 10*60;
+        freigtened_timer = 10*60; // make it a variable in main pass it to character, when charcter hits super pill , += 10*60 to it and make freightened.
         ghost_chase_prob_R = 100;
         ghost_chase_prob_Y = 55;
         ghost_chase_prob_P = 20;

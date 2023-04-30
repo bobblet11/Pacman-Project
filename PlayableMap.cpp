@@ -6,6 +6,19 @@ PlayableMap :: PlayableMap()
 }
 PlayableMap :: PlayableMap(std::vector<GameObject*> &handle)
 {
+    initPill(handle);
+}
+
+
+//DECONSTRUCTORS
+PlayableMap :: ~PlayableMap()
+{
+}
+
+
+//EXTERNAL MEMBER FUNCTIONS
+void PlayableMap :: initPill(std::vector<GameObject*>& handle)
+{
     std::string line;
     std::fstream file;
     file.open(LAYOUT_SPRITE_SHEET);
@@ -62,15 +75,6 @@ PlayableMap :: PlayableMap(std::vector<GameObject*> &handle)
     }
     file.close();
 }
-
-
-//DECONSTRUCTORS
-PlayableMap :: ~PlayableMap()
-{
-}
-
-
-//EXTERNAL MEMBER FUNCTIONS
 std::string PlayableMap :: getCharAtPos(int x, int y)
 {
     return map_layout[y][x];
