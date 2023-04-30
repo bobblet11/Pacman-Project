@@ -139,7 +139,7 @@ files:
 
 class hierarchy: upper = parent, lower = child
 
-                    <CLASSES>
+                    CLASSES
                     
 Screen    Menu    Item    PlayableMap      GameObject
                                                |
