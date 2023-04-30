@@ -45,7 +45,7 @@ int main(int argc, char *argv[])
     handle.push_back(new Ghosts("GhostSprites.txt",14,15,GHOST_Y, map));
     handle.push_back(new Ghosts("GhostSprites.txt",14,15,GHOST_C, map));
     handle.push_back(new Ghosts("GhostSprites.txt",14,15,GHOST_P, map));
-    handle.push_back(new Character("CharacterSprites.txt",screen.getWidth(), screen.getHeight(), map, 2,2, CHARACTER));
+    handle.push_back(new Character("CharacterSprites.txt",screen.getWidth(), screen.getHeight(), map, 14,24, CHARACTER));
     bool freightened = false;
 
     int character_index = handle.size() -1;
@@ -86,7 +86,7 @@ int main(int argc, char *argv[])
                     break;
                 case 3:
                     system("clear");
-                    directdistheplay("ThankYOU!!\nBrought to you by Ligma Ballz productions.\n");
+                    directdistheplay("Thank You!\nBrought you by\nBenjamin Jun-jie Glover 3035962764\nNabid Shaan Ahmed\nWONG Shom\n");
                     usleep(3000000);
                     system("clear");
                     system("setterm -cursor on");
@@ -144,7 +144,7 @@ int main(int argc, char *argv[])
                 }
                 handle.clear();
                 gameState = WIN;
-                break;
+                
             }
         }
         else
@@ -177,7 +177,7 @@ void PlayGame()
 {
     system("clear");
     name = Name();
-    string statement = "Hello " + name + "\nWelcome to Ligma Ballz\n<<<Game Loading>>>\n";
+    string statement = "Hello " + name + "\nWelcome to our version of PACMAN\n<<<Game Loading>>>\n";
     directdistheplay(statement);
     cout << "\n\n";
     for (int i = 0; i <= 100; ++i)
@@ -186,13 +186,13 @@ void PlayGame()
         {
             system("clear");
         }
-        gotoxy((getmax_x() / 2) + 3, (getmax_y() / 2) - 52);
+        gotoxy((max_x / 2) + 3, (max_y / 2) - 52);
         string progress = "[" + string(i, '|') + string(100 - i, ' ') + "]";
         cout << progress << flush << " " << i << "%" << endl;
-        usleep(50000);
+        usleep(25000);
     }
     cout << "\n";
-    statement = "Game Locked and Loaded Bitch\n<<Press Enter to Start>>";
+    statement = "READY TO START\n<<Press Enter to Start>>";
     directdistheplay(statement);
     cin.ignore();
     cin.ignore();

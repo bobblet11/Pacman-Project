@@ -1,13 +1,12 @@
 #include "Screen.h"
 
+
 Screen :: Screen (int width, int height, PlayableMap & map)
 {
     this->width = width+2; //2 for the side walls, 20 for the gap
     this->height = height+2;
     this->map_ptr = map;
 
-
-    
     //parameter width and height is internal area, the class member width, height include borders
     //initialisation
 
