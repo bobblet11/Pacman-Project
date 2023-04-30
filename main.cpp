@@ -32,6 +32,7 @@ void init(vector<GameObject*> & handle, PlayableMap & map, Screen & screen, int 
 string name;
 
 int gameState = MENU;
+bool replay = false;
 
 int main(int argc, char *argv[])
 {
@@ -39,7 +40,6 @@ int main(int argc, char *argv[])
     //INITIALISING VARIABLES AND OBJECTS
     int score = 0;
     bool running = true;
-    bool replay = false;
     vector<GameObject*> handle;
     PlayableMap map(handle);
     Screen screen(28,32,map);
@@ -65,7 +65,7 @@ int main(int argc, char *argv[])
                     "   ⠙⠿⣿⣿⣿⣿⣿⣿⣿⠿⠋⠀⠀⠀⠀⠀⠀                                                 \n"
                     "⠀⠀⠀⠀⠀⠀⠉⠉⠉⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀                                                 ";
     obj.menu_head(Game);
-    obj.add("Play", 1, "Start a new game");
+    obj.add("New Game", 1, "Start a new game");
     obj.add("High Scores", 2, "See previous high scores");
     obj.add("Exit", 3, "Exit to the terminal CLI");
 
@@ -80,6 +80,8 @@ int main(int argc, char *argv[])
             switch(x)
             {
                 case 1:
+                    system("clear");
+                    name = Name();
                     PlayGame();
                     break;
                 case 2:
@@ -97,6 +99,9 @@ int main(int argc, char *argv[])
                     system("clear");
                     system("setterm -cursor on");
                     exit(0);
+                case 4:
+                    PlayGame();
+                    break;
                 default:
                     cout << x << endl;
                     break;
@@ -183,13 +188,15 @@ int main(int argc, char *argv[])
                         usleep(500000);
                     }
             }
-
             processHighscore("HighScoreFinal.txt", "highscores.txt");
             usleep(800000*5);
             system("clear");
-            usleep(500000*5);
             gameState = MENU;
             init(handle, map, screen, score, freightened, character_index);
+            if (replay == false) {
+                obj.add("Play Again", 4, "Play Again");
+                replay = true;
+            }
         }
 
     }
@@ -201,7 +208,6 @@ int main(int argc, char *argv[])
 void PlayGame()
 {
     system("clear");
-    name = Name();
     string statement = "Hello " + name + "\nWelcome to our version of PACMAN\n<<<Game Loading>>>\n";
     directdistheplay(statement);
     cout << "\n\n";
@@ -255,7 +261,7 @@ void difficulty()
 void highscores()
 {
     system("clear");
-    preprocess("highscores.txt");
+    processHighscore("HighScoreFinal.txt", "highscores.txt");
     cin.ignore();
     return;
 }
