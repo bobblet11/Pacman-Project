@@ -6,6 +6,7 @@
 #include <sstream>
 #include "functions.h"
 #include "middle.h"
+#include <sstream>
 
 using namespace std;
 
@@ -75,4 +76,40 @@ int directdistheplay(string my_string)
         smthn--;
     } 
     return 0;
+}
+
+void processHighscore(string highscore_title, string highscores)
+{
+    string final_string, line;
+    int count = 0;
+    ifstream title;
+    title.open(highscore_title);
+    if (!title.fail())
+    {
+        while (getline(title,line))
+        {
+            final_string += line + "\n";
+            count++;
+        }
+    }
+    title.close();
+    
+    ifstream scores;
+    scores.open(highscores);
+
+    if (!scores.fail())
+    {
+        for (int i=0; i < 10; i++)
+        {
+            getline(scores,line);
+            final_string += line + "\n";
+            count++;
+        }
+    }
+    scores.close();
+
+    distheplay(final_string, count/2);
+
+
+
 }

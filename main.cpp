@@ -30,7 +30,7 @@ string Name();
 //PLAYER NAME
 string name;
 
-int gameState = MENU;
+int gameState = WIN;
 
 int main(int argc, char *argv[])
 {
@@ -158,6 +158,7 @@ int main(int argc, char *argv[])
             refresh();
             endwin();
             system("clear");
+            add_highscores(name, score);
             if (gameState == WIN)
             {
                //win page
@@ -165,6 +166,7 @@ int main(int argc, char *argv[])
                     {
                         preprocess("Win.txt");
                         usleep(800000);
+                        system("clear");
                         system("clear");
                         usleep(500000);
                     }
@@ -180,7 +182,12 @@ int main(int argc, char *argv[])
                         usleep(500000);
                     }
             }
-            add_highscores(name, score);
+
+            processHighscore("HighScoreFinal.txt", "highscores.txt");
+            usleep(800000*5);
+            system("clear");
+            usleep(500000*5);
+           
             break;
         }
 
