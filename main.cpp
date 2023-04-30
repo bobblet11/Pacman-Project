@@ -188,6 +188,7 @@ int main(int argc, char *argv[])
             usleep(800000*5);
             system("clear");
             usleep(500000*5);
+            gameState = MENU;
         }
 
     }
