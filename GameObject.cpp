@@ -1,4 +1,5 @@
 #include "GameObject.h"
+#include "functions.h"
 
 
 //CONSTRUCTORS
@@ -112,7 +113,7 @@ void GameObject::setY(const int y)
 void GameObject :: printCharacterAtPosition()
 {
 	attron(COLOR_PAIR(colour));
-    mvprintw(y+1 + 10,x*2 + 68, "%s", getCurrentSprite().c_str());
+    mvprintw(y+(getmax_x()/2-16)+1, x*2+(getmax_y()/2-30), "%s", getCurrentSprite().c_str());
     attroff(COLOR_PAIR(colour));
 }
 
