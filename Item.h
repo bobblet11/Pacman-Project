@@ -13,24 +13,24 @@ using namespace std;
 class item
 {
 public:
-    string name, desc;
-    int ret;
+    string name, description;
+    int returnval;
     int y;
     item()
     {
         name = " ";
-        desc = " ";
+        description = " ";
         y = 0;
-        ret = 0;
+        returnval = 0;
     }
     item(string s1, int a, string s2)
     {
         name = s1;
-        desc = s2;
-        ret = a;
+        description = s2;
+        returnval = a;
     }
     void display_();
-    void disp_selected();
+    void display_selected();
 };
 
 #endif

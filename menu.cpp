@@ -12,8 +12,10 @@ void menu::add(string s, int r = 0, string d = " ")
 {
     num++;
     if(r == 0)
+    {
         r = num;
-    entries.push_back(item(s, r, d));
+    }
+    elements.push_back(item(s, r, d));
 }
 
 void menu::menu_head(string s)
@@ -30,7 +32,7 @@ int menu::display()
     {
         int MAX_Y = getmax_y(), i;
         head.y = (MAX_Y - head.name.size())/2;
-        for(item &a : entries)
+        for(item &a : elements)
         {
             a.y = (MAX_Y - a.name.size())/2;
         }
@@ -44,30 +46,44 @@ int menu::display()
         int x = (MAX_X - num)/2 - 2;
         gotoxy(0, 0);
         for(i = 2; i < x; i++)
+        {
             cout << endl;
+        }
         head.display_();
         cout<<"\n\n";
-        for(i=0;i<(int)entries.size();i++)
+        for(i=0;i<(int)elements.size();i++)
         {
             if ( i == selected)
-                entries[i].disp_selected();
+            {
+                elements[i].display_selected();
+            }
             else
-                entries[i].display_();
+            {
+                elements[i].display_();
+            }
         }
         cout << "\n\n\n\n\n\n\n";
-        cout << ">>> " << entries[selected].desc;
+        cout << ">>> " << elements[selected].description;
         int previous = (opt==66)?(selected-1):(selected+1);
         if (previous < 0)
+        {
             previous = num-1;
+        }
         if(previous == num)
+        {
             previous = 0;
-        int temp = (entries[previous].desc.length() - entries[selected].desc.length());
-        for(int i=0;i<temp;i++)
+        }
+        int temp = (elements[previous].description.length() - elements[selected].description.length());
+        for(int i=0; i < temp; i++)
+        {
             cout << " ";
+        }
         cout<<'\n';
         opt = GETCH();
         if (opt == 10)
-            return entries[selected].ret;
+        {
+            return elements[selected].returnval;
+        }
         switch(opt)
         {
             case 66:
@@ -78,16 +94,12 @@ int menu::display()
                 break;
         }
         if(selected == num)
+        {
             selected = 0;
+        }
         if(selected == -1)
+        {
             selected = num -1;
-    }
-}
-
-void menu::resetEntries(bool Replay)
-{
-    if (Replay) 
-    {
-        entries.clear();
+        }
     }
 }
