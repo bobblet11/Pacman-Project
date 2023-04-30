@@ -161,12 +161,24 @@ int main(int argc, char *argv[])
             if (gameState == WIN)
             {
                //win page
-                cout << "YOU WIN!" << endl;
+               for (int i = 5; i > 0; i--) 
+                    {
+                        preprocess("Win.txt");
+                        usleep(800000);
+                        system("clear");
+                        usleep(500000);
+                    }
             }
             else
             {
                 //lose page
-                cout << "YOU LOSE!" << endl;
+                for (int i = 5; i > 0; i--) 
+                    {
+                        preprocess("Loose.txt");
+                        usleep(800000);
+                        system("clear");
+                        usleep(500000);
+                    }
             }
             add_highscores(name, score);
             break;
