@@ -186,7 +186,7 @@ void PlayGame()
         {
             system("clear");
         }
-        gotoxy((max_x / 2) + 3, (max_y / 2) - 52);
+        gotoxy((getmax_x() / 2) + 3, (getmax_y() / 2) - 52);
         string progress = "[" + string(i, '|') + string(100 - i, ' ') + "]";
         cout << progress << flush << " " << i << "%" << endl;
         usleep(25000);
