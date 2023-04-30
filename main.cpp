@@ -30,7 +30,7 @@ string Name();
 //PLAYER NAME
 string name;
 
-int gameState = WIN;
+int gameState = MENU;
 
 int main(int argc, char *argv[])
 {
@@ -40,6 +40,7 @@ int main(int argc, char *argv[])
     bool running = true;
     vector<GameObject*> handle;
     PlayableMap map(handle);
+
     Screen screen(28,32,map);
     handle.push_back(new Ghosts("GhostSprites.txt",14,15,GHOST_R, map));
     handle.push_back(new Ghosts("GhostSprites.txt",14,15,GHOST_Y, map));
@@ -187,8 +188,6 @@ int main(int argc, char *argv[])
             usleep(800000*5);
             system("clear");
             usleep(500000*5);
-           
-            break;
         }
 
     }
@@ -242,7 +241,7 @@ void PlayGame()
     init_pair(GHOST_Y, COLOR_YELLOW, COLOR_BLACK);
     init_pair(GHOST_P, COLOR_MAGENTA, COLOR_BLACK);
     init_pair(GHOST_C, COLOR_CYAN, COLOR_BLACK);
-
+    keypad(stdscr, TRUE); 
     gameState = INGAME;
 }
 void difficulty()

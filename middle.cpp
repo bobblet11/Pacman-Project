@@ -108,7 +108,7 @@ void processHighscore(string highscore_title, string highscores)
     }
     scores.close();
 
-    distheplay(final_string, count/2);
+    directdistheplay(final_string);
 
 
 

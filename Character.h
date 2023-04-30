@@ -40,7 +40,7 @@ class Character : public GameObject
         int screen_width, screen_height;
         PlayableMap map;
 
-        char last_input;
+        int last_input;
         int selectGetch();
 
         //CHARACTER MEMBER FUNCTIONS
