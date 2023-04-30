@@ -24,6 +24,7 @@ public:
     void add(string,int,string);
     void menu_head(string);
     int display();
+    void resetEntries(bool Replay);
 };
 
 #endif

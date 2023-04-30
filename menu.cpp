@@ -83,3 +83,11 @@ int menu::display()
             selected = num -1;
     }
 }
+
+void menu::resetEntries(bool Replay)
+{
+    if (Replay) 
+    {
+        entries.clear();
+    }
+}

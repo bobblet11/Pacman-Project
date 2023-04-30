@@ -207,6 +207,7 @@ int GameLoop(string play_)
 
     }
     Replay = true;
+    obj.resetEntries(Replay);
     return 0;
 }
 
