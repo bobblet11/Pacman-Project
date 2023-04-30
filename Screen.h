@@ -26,6 +26,7 @@ class Screen
     public:
         //constructors and deconstructors
         Screen (int width, int height, PlayableMap & map);
+        Screen();
         ~Screen();
 
         //getters

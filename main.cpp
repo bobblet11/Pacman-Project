@@ -26,35 +26,22 @@ const int MENU = 0, INGAME = 1, WIN = 2, LOSE = 3;
 //FUNCTION DECLARATION
 void PlayGame(), highscores(), difficulty();
 string Name();
-int GameLoop(string play_);
+void init(vector<GameObject*> & handle, PlayableMap & map, Screen & screen, int & score, bool & freightened, int & character_index);
 
 //PLAYER NAME
 string name;
 
 int gameState = MENU;
-bool Replay = false;
 
-int main()
+int main(int argc, char *argv[])
 {
-    string play_ = "Play";
-    GameLoop(play_);
-    while (Replay)
-    {
-        play_ = "Play Again";
-        gameState = MENU;
-        GameLoop(play_);
-    }
-    return 0;
-}
 
-int GameLoop(string play_)
-{
     //INITIALISING VARIABLES AND OBJECTS
     int score = 0;
     bool running = true;
+    bool replay = false;
     vector<GameObject*> handle;
     PlayableMap map(handle);
-
     Screen screen(28,32,map);
     handle.push_back(new Ghosts("GhostSprites.txt",14,15,GHOST_R, map));
     handle.push_back(new Ghosts("GhostSprites.txt",14,15,GHOST_Y, map));
@@ -62,12 +49,11 @@ int GameLoop(string play_)
     handle.push_back(new Ghosts("GhostSprites.txt",14,15,GHOST_P, map));
     handle.push_back(new Character("CharacterSprites.txt",screen.getWidth(), screen.getHeight(), map, 14,24, CHARACTER));
     bool freightened = false;
-
     int character_index = handle.size() -1;
     
     menu obj;
     int x;
-    string Pacman =   
+    string Game =   
                     "⠀⠀⠀⠀⣀⣤⣴⣶⣶⣶⣦⣤⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀                                           \n"
                     "⠀⠀⣠⣾⣿⣿⣿⣿⣿⣿⢿⣿⣿⣷⣄⠀⠀⠀⠀                                                 \n"
                     "⢀⣾⣿⣿⣿⣿⣿⣿⣿⣅⢀⣽⣿⣿⡿⠃⠀⠀⠀                                                 \n"
@@ -78,8 +64,8 @@ int GameLoop(string play_)
                     "⠀⠙⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠃⠀⠀⠀⠀⠀⠀⠀                                             \n"
                     "   ⠙⠿⣿⣿⣿⣿⣿⣿⣿⠿⠋⠀⠀⠀⠀⠀⠀                                                 \n"
                     "⠀⠀⠀⠀⠀⠀⠉⠉⠉⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀                                                 ";
-    obj.menu_head(Pacman);
-    obj.add(play_, 1, "Start a new game");
+    obj.menu_head(Game);
+    obj.add("Play", 1, "Start a new game");
     obj.add("High Scores", 2, "See previous high scores");
     obj.add("Exit", 3, "Exit to the terminal CLI");
 
@@ -90,7 +76,7 @@ int GameLoop(string play_)
         if (gameState == MENU)
         {
             system("setterm -cursor off");
-            x = obj.display();
+            x=obj.display();
             switch(x)
             {
                 case 1:
@@ -203,20 +189,19 @@ int GameLoop(string play_)
             system("clear");
             usleep(500000*5);
             gameState = MENU;
+            init(handle, map, screen, score, freightened, character_index);
         }
 
     }
-    Replay = true;
-    return 0;
+
+
 }
+
 
 void PlayGame()
 {
     system("clear");
-    if (!Replay) 
-    {
-        name = Name();
-    }
+    name = Name();
     string statement = "Hello " + name + "\nWelcome to our version of PACMAN\n<<<Game Loading>>>\n";
     directdistheplay(statement);
     cout << "\n\n";
@@ -261,7 +246,6 @@ void PlayGame()
     keypad(stdscr, TRUE); 
     gameState = INGAME;
 }
-
 void difficulty()
 {
     //difficulty choosing option
@@ -286,4 +270,18 @@ string Name()
     system("setterm -cursor off");
     system("clear");
     return name;
+}
+
+void init(vector<GameObject*> & handle, PlayableMap & map, Screen & screen, int & score, bool & freightened, int & character_index)
+{
+    handle.clear();
+    map.initPill(handle);
+    handle.push_back(new Ghosts("GhostSprites.txt",14,15,GHOST_R, map));
+    handle.push_back(new Ghosts("GhostSprites.txt",14,15,GHOST_Y, map));
+    handle.push_back(new Ghosts("GhostSprites.txt",14,15,GHOST_C, map));
+    handle.push_back(new Ghosts("GhostSprites.txt",14,15,GHOST_P, map));
+    handle.push_back(new Character("CharacterSprites.txt",screen.getWidth(), screen.getHeight(), map, 14,24, CHARACTER));
+    score = 0;
+    freightened = false;
+    character_index = handle.size() -1;
 }
