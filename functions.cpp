@@ -66,7 +66,7 @@ char getche(void)
     return getch_(1);
 }
 
-//Get the maximum number of columns that can be displayed on the terminal
+//Get the maximum number of rows that can be displayed on the terminal
 int getmax_x()
 {
     int lines = 24;
@@ -84,7 +84,7 @@ int getmax_x()
     return lines;
 }
 
-//Get the maximum number of rows that can be displayed on the terminal
+//Get the maximum number of columns that can be displayed on the terminal
 int getmax_y()
 {
     int cols = 80;
