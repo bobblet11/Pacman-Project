@@ -172,6 +172,7 @@ int GameLoop(string play_)
             refresh();
             endwin();
             system("clear");
+            add_highscores(name, score);
             if (gameState == WIN)
             {
                //win page
@@ -179,6 +180,7 @@ int GameLoop(string play_)
                     {
                         preprocess("Win.txt");
                         usleep(800000);
+                        system("clear");
                         system("clear");
                         usleep(500000);
                     }
@@ -194,7 +196,12 @@ int GameLoop(string play_)
                         usleep(500000);
                     }
             }
-            add_highscores(name, score);
+
+            processHighscore("HighScoreFinal.txt", "highscores.txt");
+            usleep(800000*5);
+            system("clear");
+            usleep(500000*5);
+           
             break;
         }
 
