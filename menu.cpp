@@ -44,7 +44,7 @@ int menu::display()
         int x = (MAX_X - num)/2 - 2;
         gotoxy(0, 0);
         for(i = 2; i < x; i++)
-            cout<<endl;
+            cout << endl;
         head.display_();
         cout<<"\n\n";
         for(i=0;i<(int)entries.size();i++)
