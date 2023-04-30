@@ -2,8 +2,8 @@ README
 
 GROUP MEMBERS:
 Benjamin Jun-jie Glover 3035962764
-Wong Shom 3036066555
 Ahmed Shaan Nabid 3036087145
+Wong Shom 3036066555
 
 GROUP NUMBER:
 group 106
