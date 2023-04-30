@@ -96,8 +96,8 @@ int main(int argc, char *argv[])
                     for (int i = 5; i > 0; i--) 
                     {
                         gotoxy(0,0);
-                        cout << i << endl;
-                        directdistheplay("Thank You!\nBrought you by\nNabid Ahmed Shaan 3036087145\nBenjamin Jun-jie Glover 3035962764\nWONG Shom 3036066555\n");
+                        cout << "Back to Terminal CLI in: " << i << endl;
+                        directdistheplay("Thank You\nBrought you by\nNabid Ahmed Shaan 3036087145\nBenjamin Jun-jie Glover 3035962764\nWONG Shom 3036066555\n");
                         usleep(1000000);
                     }
                     system("clear");
@@ -181,7 +181,6 @@ int main(int argc, char *argv[])
                         preprocess("Win.txt");
                         usleep(800000);
                         system("clear");
-                        system("clear");
                         usleep(500000);
                     }
             }
@@ -198,8 +197,13 @@ int main(int argc, char *argv[])
             }
 
             add_highscores(name, score, timer);
-            processHighscore("HighScoreFinal.txt", "highscores.txt");
-            usleep(800000*5);
+            for (int i = 5; i > 0; i--) 
+            {
+                gotoxy(0,0);
+                cout << "Next Screen in: " << i << endl;
+                processHighscore("HighScoreFinal.txt", "highscores.txt");
+                usleep(800000);
+            }
             system("clear");
             gameState = MENU;
             init(handle, map, screen, score, freightened, character_index);
@@ -237,11 +241,6 @@ void PlayGame()
     statement = "READY TO START\n<<Press Enter to Start>>";
     directdistheplay(statement);
     cin.ignore();
-}
-void difficulty()
-{
-    //difficulty choosing option
-    return;
 }
 
 void highscores()

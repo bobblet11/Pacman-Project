@@ -138,7 +138,7 @@ void Ghosts:: handleState(GameObject* charac_obj_ptr, int & gameState,bool & fre
         ghost_chase_prob_R = 100;
         //permanent chase
         Chase(charac_obj_ptr); 
-        current_speed = FRAMES_PER_MOVE-8; 
+        current_speed = FRAMES_PER_MOVE-6; 
         reached_scatter_start = false;
     }
 }
