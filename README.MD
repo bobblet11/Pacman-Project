@@ -34,27 +34,28 @@ PROJECT DESCRIPTION:
           2.2) Press enter on "HighScores" to see all highscores of your attempts
           2.3) Press enter on Quit to close the game and clear screen
 
-      3) Once you press "Play Game", enter in a name to save your highscore under. If you use a name you already used before, the highscore will be overridden under that name -> given that you beat the previous score under that name.
+      3) Once you press "Play Game", enter in a name to save your highscore under. If you use a name you already used before, 
+         the highscore will be overridden under    that name -> given that you beat the previous score under that name.
          Press enter once you typed your name to begin playing
 
       4) Playing the Game:
-           - Use arrow keys or WASD to move the playable character. The character will move in the direction you set it forever until you change direction.
-           - Eat all of the white pills on the map to win the game
-           - Ghosts will chase you and try to touch you
-           - If you touch a ghost, you lose the game
-           - Ghosts AI will increase in difficulty as your points increase.
-           - Eating white pills causes Ghosts to enter freightened state for 10 seconds -> ghosts turn white -> you can eat the ghosts and gain extra points.
-           - The faster you finish the game, the larger the score bonus you receive at the end.
-           - You can enter the tunnel located at the left and right sides of the map to quickly cross over to the other side.
+       - Use arrow keys or WASD to move the playable character. The character will move in the direction you set it forever until you change direction.
+       - Eat all of the white pills on the map to win the game
+       - Ghosts will chase you and try to touch you
+       - If you touch a ghost, you lose the game
+       - Ghosts AI will increase in difficulty as your points increase.
+       - Eating white pills causes Ghosts to enter freightened state for 10 seconds -> ghosts turn white -> you can eat the ghosts and gain extra points.
+       - The faster you finish the game, the larger the score bonus you receive at the end.
+       - You can enter the tunnel located at the left and right sides of the map to quickly cross over to the other side.
 
       5) Winning/losing:
-          - when you win or lose, your score is saved.
-          - winning happens when you eat all pills
-              - enter a winning page
-          - losing happens when a ghost touches you
-              - enter a losing page
-          - conclude winning/losing page
-          - Once you conclude the losing/winning page, you will be redirected to the main menu to view your highscores, play again, or quit.
+        - when you win or lose, your score is saved.
+        - winning happens when you eat all pills
+         - enter a winning page
+        - losing happens when a ghost touches you
+         - enter a losing page
+        - conclude winning/losing page
+        - Once you conclude the losing/winning page, you will be redirected to the main menu to view your highscores, play again, or quit.
 
 
 IMPLEMENTATION NOTES:
@@ -77,8 +78,7 @@ Generation of random game sets or events:
     Red Ghost will always chase player with high accuracy, purple will also chase with lower probalities, 
     Cyan and Pink will chase but move very ineffectively -> scatters more often and makes random movement decisions.
     
-    Scores are also somewhat different every playthrough. Player performance and randomised Ghost behaviour largely dictates the highscore a player can achieve.
-    different players have different playstyles and video game skills, so their scores will vary largely between each player.
+   Scores are also somewhat different every playthrough. Player performance and randomised Ghost behaviour largely dictates the highscore a player can achieve.     different players have different playstyles and video game skills, so their scores will vary largely between each player.
 
 Data structures for storing game status:
     Use many different types of data structurres including vectors, dyanmically allocated arrays, strings, unicode strings, ints
@@ -139,7 +139,7 @@ files:
 
 class hierarchy: upper = parent, lower = child
 
-                    CLASSES
+CLASSES
                     
 Screen    Menu    Item    PlayableMap      GameObject
                                                |
