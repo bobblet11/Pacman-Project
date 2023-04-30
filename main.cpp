@@ -28,8 +28,10 @@ void PlayGame(), highscores(), difficulty();
 string Name();
 void init(vector<GameObject*> & handle, PlayableMap & map, Screen & screen, int & score, bool & freightened, int & character_index);
 void initSCR();
+
 //PLAYER NAME
 string name;
+string display_name;
 
 int gameState = MENU;
 bool replay = false;
@@ -83,8 +85,12 @@ int main(int argc, char *argv[])
                 case 1:
                     system("clear");
                     name = Name();
+                    if (name.find(' ') != string::npos)
+                    {
+                        int pos = name.find(' ');
+                        display_name = name.substr(0, pos);
+                    }
                     PlayGame();
-                    cin.ignore();
                     system("clear");
                     initSCR();
                     break;
@@ -141,7 +147,7 @@ int main(int argc, char *argv[])
 
             //RENDERING
             screen.render(handle);
-            mvprintw(1 + (getmax_x()/2-16),2 + (getmax_y()/2-30),"PLAYER: %s", name.c_str());
+            mvprintw(1 + (getmax_x()/2-16),2 + (getmax_y()/2-30),"PLAYER: %s", display_name.c_str());
             mvprintw(1 + (getmax_x()/2-16),45 + (getmax_y()/2-30),"SCORE: %i", score);
             mvprintw(1 + (getmax_x()/2-16),(getmax_y()/2-30 + 26),"TIMER: %d", timer/60);
             refresh();
@@ -259,7 +265,11 @@ string Name()
     preprocess("Namebox.txt");
     gotoxy(getmax_x() / 2, (getmax_y() / 2) - 10);
     system("setterm -cursor on");
-    cin >> name;
+    getline(cin, name);
+    if (name.empty())
+    {
+        name = "Unknown Player";
+    }
     system("setterm -cursor off");
     system("clear");
     return name;
