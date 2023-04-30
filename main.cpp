@@ -97,7 +97,7 @@ int main(int argc, char *argv[])
                     {
                         gotoxy(0,0);
                         cout << i << endl;
-                        directdistheplay("Thank You!\nBrought you by\nNabid Ahmed Shaan 3036087145\nBenjamin Jun-jie Glover 3035962764\nWONG Shom\n");
+                        directdistheplay("Thank You!\nBrought you by\nNabid Ahmed Shaan 3036087145\nBenjamin Jun-jie Glover 3035962764\nWONG Shom 3036066555\n");
                         usleep(1000000);
                     }
                     system("clear");
