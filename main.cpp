@@ -39,6 +39,7 @@ int main(int argc, char *argv[])
 
     //INITIALISING VARIABLES AND OBJECTS
     int score = 0;
+    int timer = 0;
     bool running = true;
     vector<GameObject*> handle;
     PlayableMap map(handle);
@@ -109,7 +110,7 @@ int main(int argc, char *argv[])
         }
         else if (gameState == INGAME) //GAME LOOP
         {
-
+            timer++;
             auto start = chrono::steady_clock::now();
 
 
@@ -137,6 +138,7 @@ int main(int argc, char *argv[])
             screen.render(handle);
             mvprintw(1 + (getmax_x()/2-16),2 + (getmax_y()/2-30),"PLAYER: %s", name.c_str());
             mvprintw(1 + (getmax_x()/2-16),45 + (getmax_y()/2-30),"SCORE: %i", score);
+            mvprintw(1 + (getmax_x()/2-16),(getmax_y()/2-30 + 26),"TIMER: %d", timer/60);
             refresh();
 
 
@@ -164,9 +166,10 @@ int main(int argc, char *argv[])
             refresh();
             endwin();
             system("clear");
-            add_highscores(name, score);
             if (gameState == WIN)
             {
+                
+
                //win page
                for (int i = 5; i > 0; i--) 
                     {
@@ -188,6 +191,8 @@ int main(int argc, char *argv[])
                         usleep(500000);
                     }
             }
+
+            add_highscores(name, score, timer);
             processHighscore("HighScoreFinal.txt", "highscores.txt");
             usleep(800000*5);
             system("clear");
@@ -197,6 +202,7 @@ int main(int argc, char *argv[])
                 obj.add("Play Again", 4, "Play Again");
                 replay = true;
             }
+            timer = 0;
         }
 
     }
