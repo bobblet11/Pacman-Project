@@ -247,6 +247,8 @@ void highscores()
 {
     system("clear");
     processHighscore("HighScoreFinal.txt", "highscores.txt");
+    cout << "\n\n\n\n\n\n\n";
+    cout << ">>> Press Enter to go back to Main Menu";
     cin.ignore();
     return;
 }
