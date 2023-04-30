@@ -10,13 +10,13 @@ compile: $(OBJECTS)
 main.o: main.cpp Screen.h Character.h functions.h menu.h middle.h Highscores.h
 	$(CXX) $(FLAGS) -c $<
 
-Screen.o: Screen.cpp Screen.h Character.h PlayableMap.h
+Screen.o: Screen.cpp Screen.h Character.h PlayableMap.h functions.h
 	$(CXX) $(FLAGS) -c $<
 
 Character.o: Character.cpp Character.h GameObject.h GameObject.cpp
 	$(CXX) $(FLAGS) -c $<
 
-GameObject.o: GameObject.cpp GameObject.h
+GameObject.o: GameObject.cpp GameObject.h functions.h
 	$(CXX) $(FLAGS) -c $<
 
 PlayableMap.o: PlayableMap.cpp PlayableMap.h
