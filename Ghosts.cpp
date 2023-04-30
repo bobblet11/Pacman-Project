@@ -11,7 +11,7 @@ Ghosts::~Ghosts()
 }
 
 
-void Ghosts:: handleState(GameObject* charac_obj_ptr, int & gameState,bool & freigtened)
+void Ghosts:: handleState(GameObject* charac_obj_ptr, int & gameState,bool & freigtened, int & freightened_timer)
 {
     //Scatter for 7 seconds, then Chase for 20 seconds.
     //Scatter for 7 seconds, then Chase for 20 seconds.
@@ -33,13 +33,12 @@ void Ghosts:: handleState(GameObject* charac_obj_ptr, int & gameState,bool & fre
 
     if (freigtened == true)
     {
-        Freightened(freigtened, charac_obj_ptr);
+        Freightened(freigtened, charac_obj_ptr, freightened_timer);
         timer =0;
         colour = 3;
         return;
     }else
     {
-        freigtened_timer = 10*60;
         colour = object_type;
     }
 
@@ -163,11 +162,11 @@ void Ghosts::Chase(GameObject* player)
     move_counter%=(current_speed);
 }
 
-void Ghosts::Freightened(bool & freigtened, GameObject* player)
+void Ghosts::Freightened(bool & freigtened, GameObject* player, int & freightened_timer)
 {
-    if (freigtened_timer <= 0)
+    if (freightened_timer <= 0)
     {
-        freigtened_timer = 10*60; // make it a variable in main pass it to character, when charcter hits super pill , += 10*60 to it and make freightened.
+// make it a variable in main pass it to character, when charcter hits super pill , += 10*60 to it and make freightened.
         ghost_chase_prob_R = 100;
         ghost_chase_prob_Y = 55;
         ghost_chase_prob_P = 20;
@@ -185,7 +184,7 @@ void Ghosts::Freightened(bool & freigtened, GameObject* player)
         ghost_chase_prob_R = 0;
         Chase(player);
         current_speed=FRAMES_PER_MOVE+2;
-        freigtened_timer -= 1;
+        freightened_timer -= 1;
     }
 
     

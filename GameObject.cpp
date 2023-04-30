@@ -122,10 +122,10 @@ void GameObject :: printCharacterAtPosition()
 void GameObject :: updateAnimationState()
 {
 }
-void GameObject :: handleCharacterMove(std::vector<GameObject*> & handle,int & character_index,bool & freightened)
+void GameObject :: handleCharacterMove(std::vector<GameObject*> & handle,int & character_index,bool & freightened, int & freightened_timer)
 {
 }
-void GameObject ::  handleState(GameObject* charac_obj_ptr, int & gameState, bool&freightened)
+void GameObject ::  handleState(GameObject* charac_obj_ptr, int & gameState, bool&freightened, int & freightened_timer)
 {
 }
 void GameObject :: setPoints(int x)

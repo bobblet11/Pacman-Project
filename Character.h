@@ -24,7 +24,7 @@ class Character : public GameObject
         
         //EXTERNAL MEMBER FUNCTIONS
         virtual void updateAnimationState();
-        virtual void handleCharacterMove(std::vector<GameObject*> & handle,int & character_index,bool & freightened);
+        virtual void handleCharacterMove(std::vector<GameObject*> & handle,int & character_index,bool & freightened, int & freightened_timer);
     
         virtual int getPoints();
         virtual void setPoints(int x);
@@ -44,7 +44,7 @@ class Character : public GameObject
         int selectGetch();
 
         //CHARACTER MEMBER FUNCTIONS
-        void moveCharacter(std::vector<GameObject*> & handle,int & character_index,bool & freightened);
+        void moveCharacter(std::vector<GameObject*> & handle,int & character_index,bool & freightened,int & freightened_timer);
 
       
 };
