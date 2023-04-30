@@ -52,7 +52,7 @@ int main(int argc, char *argv[])
     
     menu obj;
     int x;
-    string Game =   
+    string Pacman =   
                     "⠀⠀⠀⠀⣀⣤⣴⣶⣶⣶⣦⣤⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀                                           \n"
                     "⠀⠀⣠⣾⣿⣿⣿⣿⣿⣿⢿⣿⣿⣷⣄⠀⠀⠀⠀                                                 \n"
                     "⢀⣾⣿⣿⣿⣿⣿⣿⣿⣅⢀⣽⣿⣿⡿⠃⠀⠀⠀                                                 \n"
@@ -63,7 +63,7 @@ int main(int argc, char *argv[])
                     "⠀⠙⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠃⠀⠀⠀⠀⠀⠀⠀                                             \n"
                     "   ⠙⠿⣿⣿⣿⣿⣿⣿⣿⠿⠋⠀⠀⠀⠀⠀⠀                                                 \n"
                     "⠀⠀⠀⠀⠀⠀⠉⠉⠉⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀                                                 ";
-    obj.menu_head(Game);
+    obj.menu_head(Pacman);
     obj.add("Play", 1, "Start a new game");
     obj.add("High Scores", 2, "See previous high scores");
     obj.add("Exit", 3, "Exit to the terminal CLI");
