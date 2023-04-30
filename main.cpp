@@ -27,13 +27,13 @@ const int MENU = 0, INGAME = 1, WIN = 2, LOSE = 3;
 void PlayGame(), highscores(), difficulty();
 string Name();
 void init(vector<GameObject*> & handle, PlayableMap & map, Screen & screen, int & score, bool & freightened, int & character_index);
-
+void initSCR();
 //PLAYER NAME
 string name;
 
 int gameState = MENU;
 bool replay = false;
-
+int freightened_timer=0;
 int main(int argc, char *argv[])
 {
 
@@ -84,6 +84,9 @@ int main(int argc, char *argv[])
                     system("clear");
                     name = Name();
                     PlayGame();
+                    cin.ignore();
+                    system("clear");
+                    initSCR();
                     break;
                 case 2:
                     highscores();
@@ -102,6 +105,8 @@ int main(int argc, char *argv[])
                     exit(0);
                 case 4:
                     PlayGame();
+                    system("clear");
+                    initSCR();
                     break;
                 default:
                     cout << x << endl;
@@ -115,7 +120,7 @@ int main(int argc, char *argv[])
 
 
             //CHARACTER MOVEMENT
-            handle.at(character_index)->handleCharacterMove(handle, character_index, freightened);
+            handle.at(character_index)->handleCharacterMove(handle, character_index, freightened, freightened_timer);
             handle.at(character_index)->updateAnimationState();
 
 
@@ -125,7 +130,7 @@ int main(int argc, char *argv[])
                 if (handle.at(i)->object_type == GHOST_R || handle.at(i)->object_type == GHOST_Y || handle.at(i)->object_type == GHOST_P || handle.at(i)->object_type == GHOST_C )
                 {
                     //checks for lose scenario
-                    handle.at(i)->handleState(handle.at(character_index), gameState, freightened);
+                    handle.at(i)->handleState(handle.at(character_index), gameState, freightened, freightened_timer);
                 }
             }
             
@@ -232,31 +237,6 @@ void PlayGame()
     statement = "READY TO START\n<<Press Enter to Start>>";
     directdistheplay(statement);
     cin.ignore();
-    cin.ignore();
-    system("clear");
-
-   //INITIALISING THE NCURESES TERMINAL
-    cbreak();
-    noecho();
-    setlocale(LC_ALL,"");
-    initscr();
-    nodelay(stdscr,TRUE);
-    if(has_colors() == FALSE)
-	{	endwin();
-		printf("Your terminal does not support color\n");
-		exit(1);
-	}
-	start_color();
-        //CREATING COLOUR PAIRS FOR EACH OBJECT TYPE
-    init_pair(CHARACTER, COLOR_YELLOW,COLOR_BLACK);
-    init_pair(WALL, COLOR_BLUE, COLOR_BLACK);
-    init_pair(PILL, COLOR_WHITE, COLOR_BLACK);
-    init_pair(GHOST_R, COLOR_RED, COLOR_BLACK);
-    init_pair(GHOST_Y, COLOR_YELLOW, COLOR_BLACK);
-    init_pair(GHOST_P, COLOR_MAGENTA, COLOR_BLACK);
-    init_pair(GHOST_C, COLOR_CYAN, COLOR_BLACK);
-    keypad(stdscr, TRUE); 
-    gameState = INGAME;
 }
 void difficulty()
 {
@@ -296,4 +276,30 @@ void init(vector<GameObject*> & handle, PlayableMap & map, Screen & screen, int 
     score = 0;
     freightened = false;
     character_index = handle.size() -1;
+}
+
+void initSCR()
+{
+     //INITIALISING THE NCURESES TERMINAL
+    cbreak();
+    noecho();
+    setlocale(LC_ALL,"");
+    initscr();
+    nodelay(stdscr,TRUE);
+    if(has_colors() == FALSE)
+	{	endwin();
+		printf("Your terminal does not support color\n");
+		exit(1);
+	}
+	start_color();
+        //CREATING COLOUR PAIRS FOR EACH OBJECT TYPE
+    init_pair(CHARACTER, COLOR_YELLOW,COLOR_BLACK);
+    init_pair(WALL, COLOR_BLUE, COLOR_BLACK);
+    init_pair(PILL, COLOR_WHITE, COLOR_BLACK);
+    init_pair(GHOST_R, COLOR_RED, COLOR_BLACK);
+    init_pair(GHOST_Y, COLOR_YELLOW, COLOR_BLACK);
+    init_pair(GHOST_P, COLOR_MAGENTA, COLOR_BLACK);
+    init_pair(GHOST_C, COLOR_CYAN, COLOR_BLACK);
+    keypad(stdscr, TRUE); 
+    gameState = INGAME;
 }

@@ -52,11 +52,11 @@ class Ghosts: public GameObject
     public:
         Ghosts(std::string,int,int,int obj_type, PlayableMap map);
         ~Ghosts();
-        void handleState(GameObject* charac_obj_ptr, int & gameState, bool & freightened);
+        void handleState(GameObject* charac_obj_ptr, int & gameState, bool & freightened, int & freightened_timer);
     private:
         void Chase(GameObject* charac_obj_ptr);
         void Scatter() ;
-        void Freightened(bool & freigtened, GameObject* player);
+        void Freightened(bool & freigtened, GameObject* player, int&freightened_timer);
 
         int current_speed=FRAMES_PER_MOVE;
 
@@ -78,7 +78,7 @@ class Ghosts: public GameObject
         bool checkIfInBox();
 
         int chaseCounter = 0;
-        int timer=0, freigtened_timer = 10*60;
+        int timer=0;
         int switchState=0;
 };
 

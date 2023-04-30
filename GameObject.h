@@ -49,8 +49,8 @@ class GameObject
 
         //VIRTUALS
         virtual void updateAnimationState();
-        virtual void handleCharacterMove(std::vector<GameObject*> & handle,int & character_index,bool & freightened);
-        virtual void handleState(GameObject* charac_obj_ptr, int & gameState, bool&freightened);
+        virtual void handleCharacterMove(std::vector<GameObject*> & handle,int & character_index,bool & freightened, int & freightened_timer);
+        virtual void handleState(GameObject* charac_obj_ptr, int & gameState, bool&freightened, int & freightened_timer);
         virtual int getPoints();
         virtual void setPoints(int x);
         

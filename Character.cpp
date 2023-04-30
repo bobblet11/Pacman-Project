@@ -18,7 +18,7 @@ Character::~Character()
 }
 
 //EXTERNAL MEMBER FUNCTIONS
-void Character::handleCharacterMove(std::vector<GameObject*> & handle , int & character_index, bool & freightened)
+void Character::handleCharacterMove(std::vector<GameObject*> & handle , int & character_index, bool & freightened, int & freightened_timer)
 {
     if (selectGetch()) //CHECK IF THERE IS A KEY IN QUEUE
     {
@@ -32,7 +32,7 @@ void Character::handleCharacterMove(std::vector<GameObject*> & handle , int & ch
             move_count=0;
         }
     }
-    moveCharacter(handle,character_index, freightened);
+    moveCharacter(handle,character_index, freightened, freightened_timer);
     move_count++;
     move_count%=MOVE_SPEED;
 }
@@ -65,7 +65,7 @@ int Character :: selectGetch()
         return 0;
     }
 }
-void Character::moveCharacter(std::vector<GameObject*> & handle, int & character_index, bool & freightened) //actually moves the character 
+void Character::moveCharacter(std::vector<GameObject*> & handle, int & character_index, bool & freightened,int & freightened_timer) //actually moves the character 
 {
     int moveY = ((char)last_input == 'w' || last_input == KEY_UP) ? -1 : ((char)last_input == 's' || last_input == KEY_DOWN) ? 1 : 0;
     int moveX = ((char)last_input == 'd' || last_input == KEY_RIGHT) ? 1 : ((char)last_input == 'a'|| last_input == KEY_LEFT) ? -1 : 0;
@@ -99,6 +99,7 @@ void Character::moveCharacter(std::vector<GameObject*> & handle, int & character
                     //IF THE PILL WAS A SUPER PILL, SET GHOST STATE TO FREIGHTENED
                     if (handle.at(i)->getPoints() == 100)
                     {
+                        freightened_timer += 6*60*4;
                         freightened = true;
                     }
 

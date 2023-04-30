@@ -25,7 +25,7 @@ bool operator<(const person &a, const person &b)
 
 void add_highscores(string name, int score, int timer)
 {
-    const int time_multiplier = 1001; // anything past 70secs causes negative points to be added
+    const int time_multiplier = 11; // anything past 70secs causes negative points to be added
     int final_score = score + (1000 - time_multiplier * (timer / 60));
     if (final_score < 0) // if player takes 10 minutes or something, they get 0, not negative score
     {
@@ -35,7 +35,7 @@ void add_highscores(string name, int score, int timer)
     directdistheplay("POINT SCORE: " + to_string(score) + "\nTIME " + (((1000 - time_multiplier * (timer / 60)) < 0) ? "PENALTY: " : "BONUS: ") + to_string((1000 - time_multiplier * (timer / 60))) + "\n TOTAL SCORE: " + to_string(final_score));
     usleep(800000 * 5);
     system("clear");
-    
+
     int temp_score;
     string temp_name;
     string line;
