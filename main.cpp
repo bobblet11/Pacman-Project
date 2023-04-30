@@ -26,15 +26,29 @@ const int MENU = 0, INGAME = 1, WIN = 2, LOSE = 3;
 //FUNCTION DECLARATION
 void PlayGame(), highscores(), difficulty();
 string Name();
+int GameLoop(string play_);
 
 //PLAYER NAME
 string name;
 
 int gameState = MENU;
+bool Replay = false;
 
-int main(int argc, char *argv[])
+int main()
 {
+    string play_ = "Play";
+    GameLoop(play_);
+    while (Replay)
+    {
+        play_ = "Play Again";
+        gameState = MENU;
+        GameLoop(play_);
+    }
+    return 0;
+}
 
+int GameLoop(string play_)
+{
     //INITIALISING VARIABLES AND OBJECTS
     int score = 0;
     bool running = true;
@@ -53,7 +67,7 @@ int main(int argc, char *argv[])
     
     menu obj;
     int x;
-    string Game =   
+    string Pacman =   
                     "⠀⠀⠀⠀⣀⣤⣴⣶⣶⣶⣦⣤⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀                                           \n"
                     "⠀⠀⣠⣾⣿⣿⣿⣿⣿⣿⢿⣿⣿⣷⣄⠀⠀⠀⠀                                                 \n"
                     "⢀⣾⣿⣿⣿⣿⣿⣿⣿⣅⢀⣽⣿⣿⡿⠃⠀⠀⠀                                                 \n"
@@ -64,8 +78,8 @@ int main(int argc, char *argv[])
                     "⠀⠙⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠃⠀⠀⠀⠀⠀⠀⠀                                             \n"
                     "   ⠙⠿⣿⣿⣿⣿⣿⣿⣿⠿⠋⠀⠀⠀⠀⠀⠀                                                 \n"
                     "⠀⠀⠀⠀⠀⠀⠉⠉⠉⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀                                                 ";
-    obj.menu_head(Game);
-    obj.add("Play", 1, "Start a new game");
+    obj.menu_head(Pacman);
+    obj.add(play_, 1, "Start a new game");
     obj.add("High Scores", 2, "See previous high scores");
     obj.add("Exit", 3, "Exit to the terminal CLI");
 
@@ -76,7 +90,7 @@ int main(int argc, char *argv[])
         if (gameState == MENU)
         {
             system("setterm -cursor off");
-            x=obj.display();
+            x = obj.display();
             switch(x)
             {
                 case 1:
@@ -192,15 +206,17 @@ int main(int argc, char *argv[])
         }
 
     }
-
-
+    Replay = true;
+    return 0;
 }
-
 
 void PlayGame()
 {
     system("clear");
-    name = Name();
+    if (!Replay) 
+    {
+        name = Name();
+    }
     string statement = "Hello " + name + "\nWelcome to our version of PACMAN\n<<<Game Loading>>>\n";
     directdistheplay(statement);
     cout << "\n\n";
@@ -245,6 +261,7 @@ void PlayGame()
     keypad(stdscr, TRUE); 
     gameState = INGAME;
 }
+
 void difficulty()
 {
     //difficulty choosing option
