@@ -28,7 +28,8 @@ const int SMALL_PILL = 0;
 const int LARGE_PILL_PTS = 100;
 const int SMALL_PILL_PTS = 50;
 //terminal string values
-const std::string LAYOUT_SPRITE_SHEET = "PlayableMap.txt";
+const std::string LAYOUT_SPRITE_SHEET = "PlayableMapSprites.txt";
+const std::string PILL_SPRITE_SHEET = "PillSprites.txt";
 const std::string DEFAULT_WALL_CHAR = "▩ ";
 const std::string DEFAULT_EMPTY_CHAR = "  ";
 const std::string DEFAULT_HORIZ_DOOR = "══";
