@@ -97,9 +97,9 @@ void Ghosts:: handleState(GameObject* charac_obj_ptr, int & gameState,bool & fre
         //scatter loop 
         if (chaseCounter>3)
         {//PERMANENT CHASE
-            ghost_chase_prob_Y = 10;
+            ghost_chase_prob_Y = 60;
             ghost_chase_prob_P = 100;
-            ghost_chase_prob_C = 20;
+            ghost_chase_prob_C = 60;
             ghost_chase_prob_R = 100;
             Chase(charac_obj_ptr);
         }//SCATTER PERIOD
@@ -121,9 +121,9 @@ void Ghosts:: handleState(GameObject* charac_obj_ptr, int & gameState,bool & fre
     }
     else if (charac_obj_ptr->getPoints() > 5000 && charac_obj_ptr->getPoints() < 8000) //harder
     {
-        ghost_chase_prob_Y = 10;
+        ghost_chase_prob_Y = 55;
         ghost_chase_prob_P = 100;
-        ghost_chase_prob_C = 20;
+        ghost_chase_prob_C = 55;
         ghost_chase_prob_R = 100;
         //permanent chase
         Chase(charac_obj_ptr); 
@@ -132,13 +132,13 @@ void Ghosts:: handleState(GameObject* charac_obj_ptr, int & gameState,bool & fre
     }
     else // hardest
     {
-        ghost_chase_prob_Y = 10;
+        ghost_chase_prob_Y = 65;
         ghost_chase_prob_P = 100;
-        ghost_chase_prob_C = 10;
+        ghost_chase_prob_C = 65;
         ghost_chase_prob_R = 100;
         //permanent chase
         Chase(charac_obj_ptr); 
-        current_speed = FRAMES_PER_MOVE-8; 
+        current_speed = FRAMES_PER_MOVE-7; 
         reached_scatter_start = false;
     }
 }
