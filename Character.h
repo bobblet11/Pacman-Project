@@ -23,27 +23,29 @@ class Character : public GameObject
         ~Character();
         
         //EXTERNAL MEMBER FUNCTIONS
-        virtual void updateAnimationState();
-        virtual void handleCharacterMove(std::vector<GameObject*> & handle,int & character_index,bool & freightened, int & freightened_timer);
+        void updateAnimationState(); //sets the current sprite to the current index
+        //calls all interal functions to move the character
+        void handleCharacterMove(std::vector<GameObject*> & handle,int & character_index,bool & freightened, int & freightened_timer);
     
-        virtual int getPoints();
-        virtual void setPoints(int x);
+        int getPoints(); //retreives the points of this Character
+        void setPoints(int new_points); //sets the points value of this Character
 
     private:
         //CHARACTER MEMBERS
-        int points= 0;
+        int points= 0; //stores all points aqquired by character
 
-        int anim_counter=0;
-        int move_count=0;
-        int current_direction=0;
+        int anim_counter=0; //count of frames used to determine animation cycle of character
+        int move_count=0; //count of frames used to determine speed of character
+        int current_direction=0; //direction the character is facing.
 
-        int screen_width, screen_height;
-        PlayableMap map;
+        int screen_width, screen_height; //width and height of screen.
+        PlayableMap map; //the map for checking if position is passable
 
-        int last_input;
-        int selectGetch();
+        int last_input; //the last valid input 
+        int selectGetch(); //function that will only allow keypresses to add to the getch buffer
 
         //CHARACTER MEMBER FUNCTIONS
+        //will move the character and check for any GameObjects encountered.
         void moveCharacter(std::vector<GameObject*> & handle,int & character_index,bool & freightened,int & freightened_timer);
 
       

@@ -22,9 +22,10 @@
 //CONSTANTS
 const int FRAMERATE = 60;
 const int MENU = 0, INGAME = 1, WIN = 2, LOSE = 3;
+const string HIGHSCORES = "Highscores.txt", HIGHSCORES_TITLE = "HighscoreTitle.txt";
 
 //FUNCTION DECLARATION
-void PlayGame(), highscores(), difficulty();
+void PlayGame(), highscores();
 string Name();
 void init(vector<GameObject*> & handle, PlayableMap & map, Screen & screen, int & score, bool & freightened, int & character_index);
 void initSCR();
@@ -36,6 +37,7 @@ string display_name;
 int gameState = MENU;
 bool replay = false;
 int freightened_timer=0;
+
 int main(int argc, char *argv[])
 {
 
@@ -196,7 +198,7 @@ int main(int argc, char *argv[])
                 //lose page
                 for (int i = 5; i > 0; i--) 
                     {
-                        preprocess("Loose.txt");
+                        preprocess("Lose.txt");
                         usleep(800000);
                         system("clear");
                         usleep(500000);
@@ -208,7 +210,7 @@ int main(int argc, char *argv[])
             {
                 gotoxy(0,0);
                 cout << "Next Screen in: " << i << endl;
-                processHighscore("HighScoreFinal.txt", "highscores.txt");
+                processHighscore(HIGHSCORES_TITLE, HIGHSCORES);
                 usleep(800000);
             }
             system("clear");
@@ -253,7 +255,7 @@ void PlayGame()
 void highscores()
 {
     system("clear");
-    processHighscore("HighScoreFinal.txt", "highscores.txt");
+    processHighscore(HIGHSCORES_TITLE, HIGHSCORES);
     cout << "\n\n\n\n\n\n\n";
     cout << ">>> Press Enter to go back to Main Menu";
     cin.ignore();

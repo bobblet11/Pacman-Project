@@ -3,7 +3,10 @@
 
 
 //CONSTRUCTORS
-GameObject::GameObject(std::string sprite_sheet, int posX,  int posY, int obj_type)
+// sprite_sheet is a file name for the txt where all the sprites are stored
+// posX, posY are the starting coordinates
+// obj type is the object that this GameObject represents
+GameObject::GameObject(std::string sprite_sheet, int posX,  int posY, int obj_type) //sprite_sheet is a file name for the txt where all the sprites are stored
 :x(posX), y(posY)
 {   
     object_type = obj_type;
@@ -41,14 +44,6 @@ int GameObject :: getY()
 {
     return y;
 }
-int GameObject :: getWidth()
-{
-    return width;
-}
-int GameObject :: getHeight()
-{
-    return height;
-}
 std::string& GameObject :: getCurrentSprite()
 {
     return animation_sprites.at(current_state_index);
@@ -56,43 +51,6 @@ std::string& GameObject :: getCurrentSprite()
 int GameObject :: getCurrentStateIndex()
 {
     return current_state_index;
-}
-
-
-//INTERNAL FUNCTIONS
-void GameObject :: readSpriteSheet(std::string sprite_sheet)
-{
-    std::string line;
-    std::fstream file;
-    file.open(sprite_sheet);
-    if (!file)
-    {
-        std::cout << "[ERROR] Failed to open sprite sheet." << std::endl;
-        exit(1);
-    }
-    while(getline(file,line))
-    {
-        animation_sprites.push_back(line);
-    }
-    file.close();
-}
-void GameObject :: moveToNewPos(int x,int y)
-{
-    if (x == 29 && y == 15 )
-    {
-        this-> x = 1;
-        this -> y = 15;
-    }
-    else if (x == 0 && y == 15)
-    {
-        this-> x = 28;
-        this -> y = 15;
-    }
-    else
-    {
-        this->x = x;
-        this->y = y;
-    }
 }
 
 //SETTERS
@@ -109,12 +67,55 @@ void GameObject::setY(const int y)
     this->y = y;
 }
 
+//INTERNAL FUNCTIONS
+// sprite sheet is the filename for the txt where all the sprites states are stored
+void GameObject :: readSpriteSheet(std::string sprite_sheet)
+{
+    //opens the txt where sprites are stored and loads them into a vector
+    std::string line;
+    std::fstream file;
+    file.open(sprite_sheet);
+    if (!file)
+    {
+        std::cout << "[ERROR] Failed to open sprite sheet." << std::endl;
+        exit(1);
+    }
+    while(getline(file,line)) //since each sprite is only 1 character large, ie one line, each line in a txt is pushed into the vector
+    {
+        animation_sprites.push_back(line);
+    }
+    file.close();
+}
+
+// x and y are the positions that the GameObject is trying to move to
+void GameObject :: moveToNewPos(int x,int y)
+{
+    if (x == 29 && y == 15 ) //checks if the GameObject is moving into the rightside tunnel
+    {
+        //teleports GameObject to other end of then tunnel
+        this-> x = 1;
+        this -> y = 15;
+    }
+    else if (x == 0 && y == 15) //checks if the GameObject is moving into the leftside tunnel
+    {
+        //teleports GameObject to other end of then tunnel
+        this-> x = 28;
+        this -> y = 15;
+    }
+    else
+    {
+        this->x = x;
+        this->y = y;
+    }
+}
+
 //EXTERNAL FUNCTIONS
 void GameObject :: printCharacterAtPosition()
 {
-	attron(COLOR_PAIR(colour));
+	attron(COLOR_PAIR(colour)); //changes the prinitng colour to the colour of the GameObject
+    //prints at the current position + the x and y offset of positioning the game in middle of screen
     mvprintw(y+(getmax_x()/2-16)+1, x*2+(getmax_y()/2-30), "%s", getCurrentSprite().c_str());
-    attroff(COLOR_PAIR(colour));
+    attroff(COLOR_PAIR(colour)); //changes the prinitng colour back to default
 }
 
 

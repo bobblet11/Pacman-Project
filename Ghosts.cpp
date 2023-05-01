@@ -1,16 +1,21 @@
 #include "Ghosts.h"
-Ghosts::Ghosts(std::string sprite_sheet,int posX,int posY,int obj_type, PlayableMap map)
+//CONSTRUCTOR
+//sprite_sheet is the file name for the txt where ghost sprites are stored.
+// posX,posY are the starting coordinates
+// object type is the type this object represents, ie which colour ghost
+// map is a reference to the map.
+Ghosts::Ghosts(std::string sprite_sheet,int posX,int posY,int obj_type, PlayableMap & map)
 :GameObject(sprite_sheet, posX, posY, obj_type)
 {
     this->map = map;
 }
-
+//DECONSTRUCTOR
 Ghosts::~Ghosts()
 {
 
 }
 
-
+//EXTERNAL FUNCTIONS
 void Ghosts:: handleState(GameObject* charac_obj_ptr, int & gameState,bool & freigtened, int & freightened_timer)
 {
     //Scatter for 7 seconds, then Chase for 20 seconds.
@@ -143,152 +148,80 @@ void Ghosts:: handleState(GameObject* charac_obj_ptr, int & gameState,bool & fre
     }
 }
 
-void Ghosts::Chase(GameObject* player)
+
+//GHOST BEHAVIOURS
+//player is a pointer towards the player object
+void Ghosts::Chase(GameObject* player) // will move towards the player position
 { 
+    //determines whihc probability to use corresponding to ghost colour
     int chase_prob = (object_type == 4) ? ghost_chase_prob_R : (object_type == 5) ? ghost_chase_prob_Y : (object_type == 6) ? ghost_chase_prob_P : ghost_chase_prob_C;
+    //if timing to move is correct move
     if (move_counter == 0)
-    {
+    {   
+        //if the ghost is still in the box, move towards the exit
         if (checkIfInBox())
         {
             Pathfind(LEAVE_BOX_X, LEAVE_BOX_Y,75);
         }
-        else
+        else //otherwise, move towards the player.
         {
             Pathfind(player->getX(), player->getY(), chase_prob);
         }
        
     }
+    //increments the move counter every frame.
     move_counter ++;
     move_counter%=(current_speed);
 }
-
+//freightened is a bool for whether the ghosts are in freightened state
+//player is pointer to player gameobject
+//freightened_timer is the duration for ghosts to be in freightened state
+//handles ghosts behaviour when freightened
 void Ghosts::Freightened(bool & freigtened, GameObject* player, int & freightened_timer)
 {
+    //if the ghost is currently in freightened state and timer has hit 0
     if (freightened_timer <= 0)
-    {
-// make it a variable in main pass it to character, when charcter hits super pill , += 10*60 to it and make freightened.
+    {   
+        //reset probabilities of ghosts
         ghost_chase_prob_R = 100;
         ghost_chase_prob_Y = 55;
         ghost_chase_prob_P = 20;
         ghost_chase_prob_C = 20;
+        //set freightened to false so that chase is used instead
         freigtened = false;
         return;
     }
     else
     {
-        //figure out how to reverse direction
-        //always move away from player
+        //set chase probabilities so that ghosts always move away from player
         ghost_chase_prob_Y = 0;
         ghost_chase_prob_P = 0;
         ghost_chase_prob_C = 0;
         ghost_chase_prob_R = 0;
+        //chase player -> but will actually run away from player
         Chase(player);
+        //increase speed
         current_speed=FRAMES_PER_MOVE+2;
+        //decrement the timer so that freightended only lasts the amount of time in the freightened_timer variable
         freightened_timer -= 1;
     }
-
-    
-   
-
 }
-
-void Ghosts::Pathfind(int target_x,int target_y, int chase_prob)
-{
-    srand((int) time(0));
-    int pos, length = 1000;
-    int move_Directions[4][3] = {-1,-1,-1};
-    int Directions[4][2] = {{0,1},{1,0},{0,-1},{-1,0}}; 
-    int counter = 0, reverse_direc = (current_direction == LEFT_G) ? RIGHT_G : (current_direction == RIGHT_G) ? LEFT_G : (current_direction == UP_G) ? DOWN_G : UP_G;
-    
-    //calculate the shortest direction to move
-    for (int i =0; i<4;i++)
-    {
-        if (map.IsMoveable(Directions[i][0] + x - 1, Directions[i][1] + y - 1, object_type) && i != reverse_direc)
-        {
-            move_Directions[counter][0] = Directions[i][0] + x;
-            move_Directions[counter][1] = Directions[i][1] + y;
-            move_Directions[counter][2] = i;
-
-            //make a seperate length calcualtion for tunneling coordinates?
-            if (abs(Directions[i][0] + x - target_x) + abs(Directions[i][1] + y - target_y) < length)
-            {
-                length = abs(Directions[i][0] + x - target_x) + abs(Directions[i][1] + y - target_y);
-                pos = counter;
-            }
-            counter++;
-        }
-        
-    }
-
-    if (counter == 1)
-    {
-        moveToNewPos(move_Directions[0][0],move_Directions[0][1]);
-        current_direction = move_Directions[0][2];
-        return;
-    }
-
-    int other_directions[4][3] = {-1,-1,-1}, count = 0;
-    for (int i=0;i<counter;i++)
-    {
-        if (i!=pos)
-        {
-            other_directions[count][0] = move_Directions[i][0];
-            other_directions[count][1] = move_Directions[i][1];
-            other_directions[count][2] = move_Directions[i][2];
-            count++;
-        }
-        
-    }
-
-    //do a probability check
-    bool choose_shortest_path = rand()%100<=chase_prob;
-    //move towards which ever selected path
-    if (choose_shortest_path)
-    {
-        moveToNewPos(move_Directions[pos][0],move_Directions[pos][1]);
-        current_direction = move_Directions[pos][2];
-    }
-    else
-    {
-        int random_choice = rand()%(count);
-        moveToNewPos(other_directions[random_choice][0],other_directions[random_choice][1]);
-        current_direction = other_directions[random_choice][2];
-    }
-}
-
-void Ghosts::Resting()
-{
-    x = 14;
-    y = 15;
-}
-
-bool Ghosts::checkIfInBox()
-{
-    if (x > 11 && x < 18 && y > 13 && y < 17)
-    {
-        return true;
-    }
-    return false;
-}
-
+//handles the scatter behaviour
 void Ghosts::Scatter()
 {
-    //check if at the scatter start pos
+    //first sees which scatter position to use coresponding to ghost colour
     int scatter_start_x = (object_type == 4) ? ghost_scatter_start_Rx : (object_type == 5) ? ghost_scatter_start_Yx : (object_type == 6) ? ghost_scatter_start_Px : ghost_scatter_start_Cx;
     int scatter_start_y = (object_type == 4) ? ghost_scatter_start_Ry : (object_type == 5) ? ghost_scatter_start_Yy : (object_type == 6) ? ghost_scatter_start_Py : ghost_scatter_start_Cy;
+    //if the ghost is currently at the scatter position, or has reached it, then set to true
     if (this->x == scatter_start_x + 1 && this->y == scatter_start_y + 1)
     {
         reached_scatter_start = true;
     }
 
-    //add a check if moved to starting psotion
-        //move to starting position
-        //return every frame
-            //set bool to false
-
+    //if the ghost has not yet reached the scatter start position
     if (reached_scatter_start == false)
     {
-        //move to starting position
+        //move towards starting position using Pathfind
         if (move_counter == 0)
         {
             if (checkIfInBox())
@@ -301,11 +234,10 @@ void Ghosts::Scatter()
             }
         }
     }
-    else
+    else //otherwise if the ghost has already reached the starting scatter position before
     {
-
-        int divisor=0;
-        int new_X = 0, new_Y = 0;
+        //choose the next position the scatter path corresponding to ghost colour
+        int divisor=0, new_X = 0, new_Y = 0;
         if (object_type == 4)
         {
             //red
@@ -335,11 +267,9 @@ void Ghosts::Scatter()
             divisor = 34;
         }
 
+        //if timed to move, move to next scatter position
         if (move_counter == 0)
         {
-            //chase to the 0th scatter position
-            //if the ghost is in scatter and has not visted scatter 0th yet, move to it
-            //otherwise, if it has been at scatter 0, iterate through scatter pattern.
             moveToNewPos(new_X + 1,new_Y + 1);
             scatter_counter++;
             scatter_counter%=divisor;
@@ -348,4 +278,102 @@ void Ghosts::Scatter()
     move_counter++;
     move_counter%=current_speed;
 
+}
+//sets the position of ghosts to the spawn area box
+void Ghosts::Resting()
+{
+    x = 14;
+    y = 15;
+}
+
+
+//AUXILLARY FUNCTIONS
+//target_x,target_y is the coordinates that the Ghost is chasing
+//chase_prob is the probability that the ghost will move towards the targert
+//chase_prob of 0 means it will never move towards
+//chase_prob of 100 means it will always move towards
+//Pathfind calculates direction to move towards target
+void Ghosts::Pathfind(int target_x,int target_y, int chase_prob)
+{
+    //sets random seed to the current time
+    srand((int) time(0));
+    //initialises ints to a abritary large value
+    int pos, length = 1000;
+
+    //array of ints containing all possible coordinates to move in
+    int move_Directions[4][3] = {};
+    //array containing the possible directions to move in
+    int Directions[4][2] = {{0,1},{1,0},{0,-1},{-1,0}}; 
+    int counter = 0, reverse_direc = (current_direction == LEFT_G) ? RIGHT_G : (current_direction == RIGHT_G) ? LEFT_G : (current_direction == UP_G) ? DOWN_G : UP_G;
+    
+    //calculate the shortest direction to move
+    for (int i =0; i<4;i++)
+    {
+        //if the direction is a valid one ie not in reverse direction and is not a wall.
+        if (map.IsMoveable(Directions[i][0] + x - 1, Directions[i][1] + y - 1, object_type) && i != reverse_direc)
+        {
+            //add the coordinate to list of possible directions
+            move_Directions[counter][0] = Directions[i][0] + x;
+            move_Directions[counter][1] = Directions[i][1] + y;
+            move_Directions[counter][2] = i;
+            
+            //if the new coordinate brings the ghost closer to target, save the position of this direction
+            if (abs(Directions[i][0] + x - target_x) + abs(Directions[i][1] + y - target_y) < length)
+            {
+                length = abs(Directions[i][0] + x - target_x) + abs(Directions[i][1] + y - target_y);
+                pos = counter;
+            }
+            counter++;
+        }
+        
+    }
+
+    //if there is only one direction, ie not at a junction, move towards it.
+    if (counter == 1)
+    {
+        moveToNewPos(move_Directions[0][0],move_Directions[0][1]);
+        current_direction = move_Directions[0][2];
+        return;
+    }
+
+    //otherwise, if there is list of directions to move in,
+
+    //make a array of directions that arent the shortest path towards target
+    int other_directions[4][3] = {-1,-1,-1}, count = 0;
+    for (int i=0;i<counter;i++)
+    {
+        if (i!=pos)
+        {
+            other_directions[count][0] = move_Directions[i][0];
+            other_directions[count][1] = move_Directions[i][1];
+            other_directions[count][2] = move_Directions[i][2];
+            count++;
+        }
+        
+    }
+
+    //if the probability check passes, then the ghost will move towards the target
+    bool choose_shortest_path = rand()%100<=chase_prob;
+    //move towards which ever selected path
+    if (choose_shortest_path)
+    {
+        moveToNewPos(move_Directions[pos][0],move_Directions[pos][1]);
+        current_direction = move_Directions[pos][2];
+    }
+    else //otherwise choose one of the other coordinates in other_directions randomly to move in
+    {
+        int random_choice = rand()%(count);
+        moveToNewPos(other_directions[random_choice][0],other_directions[random_choice][1]);
+        current_direction = other_directions[random_choice][2];
+    }
+}
+
+//checks if the ghost is in the bounds of the spawn box
+bool Ghosts::checkIfInBox()
+{
+    if (x > 11 && x < 18 && y > 13 && y < 17)
+    {
+        return true;
+    }
+    return false;
 }
