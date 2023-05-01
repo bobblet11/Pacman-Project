@@ -111,11 +111,11 @@ void processHighscore(string highscore_title, string highscores)
     directdistheplay(final_string);
 }
 
-void processAnimation() 
+void processAnimation(string filename, int time) 
 {
     system("clear");
     string final_line = "";
-    ifstream file("PACMAN-1.txt");
+    ifstream file(filename);
     if (file.is_open()) 
     {
         string line;
@@ -124,7 +124,7 @@ void processAnimation()
             if (line.find("END") != string::npos) 
             {
                 directdistheplay(final_line);
-                usleep(500000);
+                usleep(time);
                 final_line = "";
             }
             else
@@ -138,11 +138,21 @@ void processAnimation()
     {
         cout << "Unable to open file" << endl;
     }
-    for (int i = 3; i > 0; i--)
-    {
-        preprocess("PACMAN.txt");
-        usleep(800000);
-        system("clear");
-        usleep(500000);
+}
+
+void intro()
+{
+    processAnimation("PACMAN-1.txt", 500000);
+    for (int i = 2; i > 0; i--) 
+    { 
+        preprocess("PACMAN.txt"); 
+        usleep(800000); 
+        system("clear"); 
+        usleep(500000); 
     }
+    for (int i = 3; i > 0; i--) 
+    { 
+        processAnimation("PACMAN-2.txt", 120000); 
+    }
+    processAnimation("PACMAN-3.txt", 40000);
 }
