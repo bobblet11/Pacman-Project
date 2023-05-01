@@ -14,7 +14,7 @@ using namespace std;
 class menu
 {
     item head;
-    vector<item> entries;
+    vector<item> elements;
     int num;
 public:
     menu()
@@ -24,7 +24,6 @@ public:
     void add(string,int,string);
     void menu_head(string);
     int display();
-    void resetEntries(bool Replay);
 };
 
 #endif

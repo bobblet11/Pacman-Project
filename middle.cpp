@@ -109,7 +109,40 @@ void processHighscore(string highscore_title, string highscores)
     scores.close();
 
     directdistheplay(final_string);
+}
 
-
-
+void processAnimation() 
+{
+    system("clear");
+    string final_line = "";
+    ifstream file("PACMAN-1.txt");
+    if (file.is_open()) 
+    {
+        string line;
+        while (getline(file, line)) 
+        {
+            if (line.find("END") != string::npos) 
+            {
+                directdistheplay(final_line);
+                usleep(500000);
+                final_line = "";
+            }
+            else
+            {
+                final_line += line + '\n';
+            }
+        }
+        file.close();
+    } 
+    else 
+    {
+        cout << "Unable to open file" << endl;
+    }
+    for (int i = 3; i > 0; i--)
+    {
+        preprocess("PACMAN.txt");
+        usleep(800000);
+        system("clear");
+        usleep(500000);
+    }
 }

@@ -28,8 +28,10 @@ void PlayGame(), highscores(), difficulty();
 string Name();
 void init(vector<GameObject*> & handle, PlayableMap & map, Screen & screen, int & score, bool & freightened, int & character_index);
 void initSCR();
+
 //PLAYER NAME
 string name;
+string display_name;
 
 int gameState = MENU;
 bool replay = false;
@@ -70,6 +72,7 @@ int main(int argc, char *argv[])
     obj.add("High Scores", 2, "See previous high scores");
     obj.add("Exit", 3, "Exit to the terminal CLI");
 
+    processAnimation();
     //GAMELOOP
     while(running)
     {
@@ -83,8 +86,12 @@ int main(int argc, char *argv[])
                 case 1:
                     system("clear");
                     name = Name();
+                    if (name.find(' ') != string::npos)
+                    {
+                        int pos = name.find(' ');
+                        display_name = name.substr(0, pos);
+                    }
                     PlayGame();
-                    cin.ignore();
                     system("clear");
                     initSCR();
                     break;
@@ -96,8 +103,8 @@ int main(int argc, char *argv[])
                     for (int i = 5; i > 0; i--) 
                     {
                         gotoxy(0,0);
-                        cout << i << endl;
-                        directdistheplay("Thank You!\nBrought you by\nNabid Ahmed Shaan 3036087145\nBenjamin Jun-jie Glover 3035962764\nWONG Shom 3036066555\n");
+                        cout << "Back to Terminal CLI in: " << i << endl;
+                        directdistheplay("Thank You\nBrought you by\nNabid Ahmed Shaan 3036087145\nBenjamin Jun-jie Glover 3035962764\nWONG Shom 3036066555\n");
                         usleep(1000000);
                     }
                     system("clear");
@@ -141,7 +148,7 @@ int main(int argc, char *argv[])
 
             //RENDERING
             screen.render(handle);
-            mvprintw(1 + (getmax_x()/2-16),2 + (getmax_y()/2-30),"PLAYER: %s", name.c_str());
+            mvprintw(1 + (getmax_x()/2-16),2 + (getmax_y()/2-30),"PLAYER: %s", display_name.c_str());
             mvprintw(1 + (getmax_x()/2-16),45 + (getmax_y()/2-30),"SCORE: %i", score);
             mvprintw(1 + (getmax_x()/2-16),(getmax_y()/2-30 + 26),"TIMER: %d", timer/60);
             refresh();
@@ -181,7 +188,6 @@ int main(int argc, char *argv[])
                         preprocess("Win.txt");
                         usleep(800000);
                         system("clear");
-                        system("clear");
                         usleep(500000);
                     }
             }
@@ -198,13 +204,18 @@ int main(int argc, char *argv[])
             }
 
             add_highscores(name, score, timer);
-            processHighscore("HighScoreFinal.txt", "highscores.txt");
-            usleep(800000*5);
+            for (int i = 5; i > 0; i--) 
+            {
+                gotoxy(0,0);
+                cout << "Next Screen in: " << i << endl;
+                processHighscore("HighScoreFinal.txt", "highscores.txt");
+                usleep(800000);
+            }
             system("clear");
             gameState = MENU;
             init(handle, map, screen, score, freightened, character_index);
             if (replay == false) {
-                obj.add("Play Again", 4, "Play Again");
+                obj.add("Play Again", 4, "Play again under the same");
                 replay = true;
             }
             timer = 0;
@@ -238,16 +249,13 @@ void PlayGame()
     directdistheplay(statement);
     cin.ignore();
 }
-void difficulty()
-{
-    //difficulty choosing option
-    return;
-}
 
 void highscores()
 {
     system("clear");
     processHighscore("HighScoreFinal.txt", "highscores.txt");
+    cout << "\n\n\n\n\n\n\n";
+    cout << ">>> Press Enter to go back to Main Menu";
     cin.ignore();
     return;
 }
@@ -258,7 +266,11 @@ string Name()
     preprocess("Namebox.txt");
     gotoxy(getmax_x() / 2, (getmax_y() / 2) - 10);
     system("setterm -cursor on");
-    cin >> name;
+    getline(cin, name);
+    if (name.empty())
+    {
+        name = "Unknown Player";
+    }
     system("setterm -cursor off");
     system("clear");
     return name;

@@ -31,11 +31,14 @@ void add_highscores(string name, int score, int timer)
     {
         final_score = 0;
     }
-
-    directdistheplay("POINT SCORE: " + to_string(score) + "\nTIME " + (((1000 - time_multiplier * (timer / 60)) < 0) ? "PENALTY: " : "BONUS: ") + to_string((1000 - time_multiplier * (timer / 60))) + "\n TOTAL SCORE: " + to_string(final_score));
-    usleep(800000 * 5);
+    for (int i = 5; i > 0; i--) 
+    {
+        gotoxy(0,0);
+        cout << "Main Menu in: " << i << endl;
+        directdistheplay("POINT SCORE: " + to_string(score) + "\nTIME " + (((1000 - time_multiplier * (timer / 60)) < 0) ? "PENALTY: " : "BONUS: ") + to_string((1000 - time_multiplier * (timer / 60))) + "\nTOTAL SCORE: " + to_string(final_score));
+        usleep(800000);
+    }
     system("clear");
-
     int temp_score;
     string temp_name;
     string line;

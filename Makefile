@@ -48,4 +48,4 @@ run:
 	./$(EXECUTABLE)
 .PHONY: clean
 clean:
-	rm -f $(OBJECTS) menu
+	rm -f $(OBJECTS) pacman
