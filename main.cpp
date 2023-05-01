@@ -72,6 +72,7 @@ int main(int argc, char *argv[])
     obj.add("High Scores", 2, "See previous high scores");
     obj.add("Exit", 3, "Exit to the terminal CLI");
 
+    processAnimation();
     //GAMELOOP
     while(running)
     {
@@ -79,7 +80,6 @@ int main(int argc, char *argv[])
         if (gameState == MENU)
         {
             system("setterm -cursor off");
-            processAnimation();
             x=obj.display();
             switch(x)
             {
