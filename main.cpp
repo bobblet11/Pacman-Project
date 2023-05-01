@@ -79,6 +79,7 @@ int main(int argc, char *argv[])
         if (gameState == MENU)
         {
             system("setterm -cursor off");
+            processAnimation();
             x=obj.display();
             switch(x)
             {
@@ -214,7 +215,7 @@ int main(int argc, char *argv[])
             gameState = MENU;
             init(handle, map, screen, score, freightened, character_index);
             if (replay == false) {
-                obj.add("Play Again", 4, "Play Again");
+                obj.add("Play Again", 4, "Play again under the same");
                 replay = true;
             }
             timer = 0;
