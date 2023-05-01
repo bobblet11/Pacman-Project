@@ -207,7 +207,7 @@ int main(int argc, char *argv[])
             for (int i = 5; i > 0; i--) 
             {
                 gotoxy(0,0);
-                cout << "Next Screen in: " << i << endl;
+                cout << "Main Menu in: " << i << endl;
                 processHighscore("HighScoreFinal.txt", "highscores.txt");
                 usleep(800000);
             }
@@ -215,7 +215,7 @@ int main(int argc, char *argv[])
             gameState = MENU;
             init(handle, map, screen, score, freightened, character_index);
             if (replay == false) {
-                obj.add("Play Again", 4, "Play again under the same");
+                obj.add("Play Again", 4, "Play again under the same name");
                 replay = true;
             }
             timer = 0;

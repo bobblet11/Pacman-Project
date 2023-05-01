@@ -34,7 +34,7 @@ void add_highscores(string name, int score, int timer)
     for (int i = 5; i > 0; i--) 
     {
         gotoxy(0,0);
-        cout << "Main Menu in: " << i << endl;
+        cout << "Highscores in: " << i << endl;
         directdistheplay("POINT SCORE: " + to_string(score) + "\nTIME " + (((1000 - time_multiplier * (timer / 60)) < 0) ? "PENALTY: " : "BONUS: ") + to_string((1000 - time_multiplier * (timer / 60))) + "\nTOTAL SCORE: " + to_string(final_score));
         usleep(800000);
     }
