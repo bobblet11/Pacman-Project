@@ -16,5 +16,6 @@ int distheplay(string s, int pp);
 int preprocess(string filename); 
 int directdistheplay(string my_string);
 void processHighscore(string highscore_title, string highscores);
-void processAnimation();
+void processAnimation(string filename, int time);
+void intro();
 #endif
