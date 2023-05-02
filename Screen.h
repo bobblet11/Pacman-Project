@@ -1,16 +1,15 @@
-#pragma once
 #ifndef _SCREEN_
 #define _SCREEN_
 
+//includes
 #include <string>
 #include <iostream>
 #include <vector>
-#include "ncurses.h"
-#include "Character.h"
-#include "PlayableMap.h"
 #include <unistd.h>
 #include <thread>
 #include <chrono>
+#include "ncurses.h"
+#include "PlayableMap.h"
 
 
 const std::string  BORDER_VERT = "║║";
@@ -38,12 +37,12 @@ class Screen
 
     private:
         //member variables
-        int width,height;
-        std::string** frame;
-        PlayableMap map_ptr;
+        int width,height; //height and width of the rendered screen
+        std::string** frame; //pointer to a pointer for a 2D dynamic array of strings containing each rendered char at a x.y coordinate 
+        PlayableMap map_ptr; //pointer to the map object
 
         //render functions
-        void resetFrame();
-        void printCurrentFrame(std::vector<GameObject*> &handle);
+        void resetFrame(); //resets the frame array to default values
+        void printCurrentFrame(std::vector<GameObject*> &handle); //prints the frame, and all gameObjects
 };
 #endif // _SCREEN_

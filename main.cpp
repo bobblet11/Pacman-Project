@@ -3,6 +3,7 @@
 #include <unistd.h>
 #include <thread>
 #include <chrono>
+
 #include "Character.h"
 #include "Ghosts.h"
 #include "menu.h"
@@ -20,11 +21,11 @@
 
 
 //CONSTANTS
-const int FRAMERATE = 60;
-const int MENU = 0, INGAME = 1, WIN = 2, LOSE = 3;
-const string HIGHSCORES = "highscores.txt", HIGHSCORES_TITLE = "HighscoreTitle.txt";
+const int FRAMERATE = 60; //framerate
+const int MENU = 0, INGAME = 1, WIN = 2, LOSE = 3; //game states
+const string HIGHSCORES = "highscores.txt", HIGHSCORES_TITLE = "HighscoreTitle.txt"; //filenames for txts
 
-//FUNCTION DECLARATION
+//FUNCTION PROTOTYPES
 void PlayGame(), highscores();
 string Name();
 void init(vector<GameObject*> & handle, PlayableMap & map, Screen & screen, int & score, bool & freightened, int & character_index);
@@ -34,6 +35,7 @@ void initSCR();
 string name;
 string display_name;
 
+//GLOBAL VARIABLES
 int gameState = MENU;
 bool replay = false;
 int freightened_timer=0;
@@ -45,17 +47,21 @@ int main(int argc, char *argv[])
     int score = 0;
     int timer = 0;
     bool running = true;
+    bool freightened = false;
+    //initialise all the gameObjects 
     vector<GameObject*> handle;
     PlayableMap map(handle);
     Screen screen(28,32,map);
+    //allocate gameobjects
     handle.push_back(new Ghosts("GhostSprites.txt",14,15,GHOST_R, map));
     handle.push_back(new Ghosts("GhostSprites.txt",14,15,GHOST_Y, map));
     handle.push_back(new Ghosts("GhostSprites.txt",14,15,GHOST_C, map));
     handle.push_back(new Ghosts("GhostSprites.txt",14,15,GHOST_P, map));
     handle.push_back(new Character("CharacterSprites.txt",screen.getWidth(), screen.getHeight(), map, 14,24, CHARACTER));
-    bool freightened = false;
+
     int character_index = handle.size() -1;
     
+    //initialise menu
     menu obj;
     int x;
     string Game =   
@@ -74,8 +80,12 @@ int main(int argc, char *argv[])
     obj.add("High Scores", 2, "See previous high scores");
     obj.add("Exit", 3, "Exit to the terminal CLI");
 
+    //initialise terminal
     system("setterm -cursor off");
+
+    //start intro sequence
     intro();
+
     //GAMELOOP
     while(running)
     {
@@ -124,66 +134,81 @@ int main(int argc, char *argv[])
         }
         else if (gameState == INGAME) //GAME LOOP
         {
-            timer++;
+            //start a timer for counting how long the processes take
             auto start = chrono::steady_clock::now();
-
+            //add a frame to timer for each frame. ie timer += 60 ever second
+            timer++;
 
             //CHARACTER MOVEMENT
+            //moves character and updates its animations -> increments its movecounts, animation_counts, inputs and directions
             handle.at(character_index)->handleCharacterMove(handle, character_index, freightened, freightened_timer);
             handle.at(character_index)->updateAnimationState();
 
 
             //GHOST MOVEMENT
+            //for each ghost
             for (int i = 0; i < handle.size(); i++)
             {
                 if (handle.at(i)->object_type == GHOST_R || handle.at(i)->object_type == GHOST_Y || handle.at(i)->object_type == GHOST_P || handle.at(i)->object_type == GHOST_C )
                 {
-                    //checks for lose scenario
+                    //handle state does the ghosts behaviour, moves it, 
                     handle.at(i)->handleState(handle.at(character_index), gameState, freightened, freightened_timer);
                 }
             }
             
-
             //SCORE UPDATING
             score = handle.at(character_index)->getPoints();
         
-
             //RENDERING
+            //render the frame and all gameobjects
             screen.render(handle);
+
+            //print the timer, score, and name
             mvprintw(1 + (getmax_x()/2-16),2 + (getmax_y()/2-30),"PLAYER: %s", display_name.c_str());
             mvprintw(1 + (getmax_x()/2-16),45 + (getmax_y()/2-30),"SCORE: %i", score);
             mvprintw(1 + (getmax_x()/2-16),(getmax_y()/2-30 + 26),"TIMER: %d", timer/60);
+
+            //refresh to load all prints to screen
             refresh();
 
 
             //FRAMERATE HANDLING
+            //end timer that counts time taken for processes
             auto end = chrono::steady_clock::now();
+            //sleep for 1/60 of a second. subtracts the time taken to do calculations to maintain accurate 60fps.
             this_thread::sleep_for(chrono::milliseconds((1000/FRAMERATE) - chrono::duration_cast<chrono::milliseconds>(end-start).count()));
             
 
             //checks for win scenario
+            //if there is only the 4 ghosts and 1 player
             if (handle.size() == 5)
             {
+                //update the score one final time
                 score = handle.at(character_index)->getPoints();
+                //deallocate all gameObjects
                 for (int i = 0; i<handle.size(); i++)
                 {
                     delete handle[i];
                 }
+                //remove all pointers
                 handle.clear();
+                //change state so that this part of loop is not accessed anymore
                 gameState = WIN;
                 
             }
         }
-        else
+        else //if in a win or lose situation
         {
+            //clear and close the ncurses terminal
             clear();
             refresh();
             endwin();
+            //clear normal terminal
             system("clear");
+
             if (gameState == WIN)
             {
-                
-
+                //animation the win title
                //win page
                for (int i = 5; i > 0; i--) 
                     {
@@ -195,6 +220,7 @@ int main(int argc, char *argv[])
             }
             else
             {
+                //animate the lose title
                 //lose page
                 for (int i = 5; i > 0; i--) 
                     {
@@ -205,7 +231,9 @@ int main(int argc, char *argv[])
                     }
             }
 
+            //update the highscore records
             add_highscores(name, score, timer);
+            //render the highscores screen for 5*0.8 seconds
             for (int i = 5; i > 0; i--) 
             {
                 gotoxy(0,0);
@@ -213,14 +241,21 @@ int main(int argc, char *argv[])
                 processHighscore("HighscoreTitle.txt", "highscores.txt");
                 usleep(800000);
             }
+            //clear screen
             system("clear");
+            //reset to menu
             gameState = MENU;
+            //reallocate all gameobjects and push to handle
             init(handle, map, screen, score, freightened, character_index);
+            //if this is the first playthrough in this session, replay is false
             if (replay == false) {
+                //adds the play again button to allow you to continue playing under same name
                 obj.add("Play Again", 4, "Play again under the same name");
                 replay = true;
             }
+            //reset timer
             timer = 0;
+            //now the menu part of loop will be run.
         }
 
     }
@@ -292,21 +327,25 @@ void init(vector<GameObject*> & handle, PlayableMap & map, Screen & screen, int 
     character_index = handle.size() -1;
 }
 
+//initialises the n curses screen. 
 void initSCR()
 {
      //INITIALISING THE NCURESES TERMINAL
+     //set all ncurses terminal parameters
     cbreak();
     noecho();
     setlocale(LC_ALL,"");
     initscr();
     nodelay(stdscr,TRUE);
+
+    //checks if tereminal supports colour
     if(has_colors() == FALSE)
 	{	endwin();
 		printf("Your terminal does not support color\n");
 		exit(1);
 	}
 	start_color();
-        //CREATING COLOUR PAIRS FOR EACH OBJECT TYPE
+    //CREATING COLOUR PAIRS FOR EACH OBJECT TYPE
     init_pair(CHARACTER, COLOR_YELLOW,COLOR_BLACK);
     init_pair(WALL, COLOR_BLUE, COLOR_BLACK);
     init_pair(PILL, COLOR_WHITE, COLOR_BLACK);
@@ -315,5 +354,7 @@ void initSCR()
     init_pair(GHOST_P, COLOR_MAGENTA, COLOR_BLACK);
     init_pair(GHOST_C, COLOR_CYAN, COLOR_BLACK);
     keypad(stdscr, TRUE); 
+    
+    //switch the the game loop.
     gameState = INGAME;
 }
