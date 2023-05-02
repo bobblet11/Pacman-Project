@@ -11,7 +11,7 @@
 
 using namespace std;
 
-//PRINTING EVERYTHING IN THE MIDDLE
+//PRINTS EVERYTHING IN THE MIDDLE OF THE TERMINAL WINDOW AND INTRO ANIMATION
 int distheplay(string s, int pp);
 int preprocess(string filename); 
 int directdistheplay(string my_string);

@@ -14,6 +14,7 @@ using namespace std;
 int max_x = getmax_x();
 int max_y = getmax_y();
 
+//Displays everything in the middle of the terminal window
 int distheplay(string s, int pp) 
 {
     int s_width = s.length();
@@ -24,10 +25,13 @@ int distheplay(string s, int pp)
     return 0;
 }
 
+//Processes texts from text files for printing contents of the file in the middle of the terminal window 
 int preprocess(string filename) 
 {
     int line_count = 0;
     int smthn;
+
+    //Opens a file and counts the lines inside a file
     ifstream file(filename);
     if (file.is_open()) 
     {
@@ -43,6 +47,8 @@ int preprocess(string filename)
     {
         cout << "Unable to open file" << endl;
     }
+
+    //Opens the file to print the contents in the middle of the terminal line by line
     ifstream samefile(filename);
     if (samefile.is_open())
     {
@@ -57,12 +63,14 @@ int preprocess(string filename)
     return 0;
 }
 
+//Prints passed strings directly in the middle of the terminal window
 int directdistheplay(string my_string) 
 {
     stringstream ss(my_string);
     string line;
     int line_count = 0;
     int smthn;
+    //Loop to count how many lines are in the string
     while (getline(ss, line, '\n')) 
     {
         line_count++;
@@ -70,6 +78,7 @@ int directdistheplay(string my_string)
     smthn = floor(static_cast<double>(line_count) / 2);
     ss.clear();
     ss.seekg(0);
+    //Loop to print the strings in the middle of the terminal line by line
     while (getline(ss, line, '\n')) 
     {
         distheplay(line, smthn);
@@ -78,6 +87,8 @@ int directdistheplay(string my_string)
     return 0;
 }
 
+//Processes and shows highscores in the middle of the terminal window after win or lose from highscores file
+//Process conducts: Adding the contents of two files to display together
 void processHighscore(string highscore_title, string highscores)
 {
     string final_string, line;
@@ -111,6 +122,7 @@ void processHighscore(string highscore_title, string highscores)
     directdistheplay(final_string);
 }
 
+//Processes intro animation and shows when the programme has started
 void processAnimation(string filename, int time) 
 {
     system("clear");
@@ -140,6 +152,7 @@ void processAnimation(string filename, int time)
     }
 }
 
+//Conducts the intro animation in the terminal window using multiple text files
 void intro()
 {
     processAnimation("PACMAN-1.txt", 500000);

@@ -10,6 +10,7 @@
 
 using namespace std;
 
+//item class for menu options and description
 class item
 {
 public:

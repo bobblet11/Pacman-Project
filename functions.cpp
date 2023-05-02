@@ -13,10 +13,14 @@ void gotoxy(int x, int y)
 //Initialize the terminal input and output settings.
 void initializeTermios(int echo)
 {
+    //Gets the current terminal attributes from the file descriptor 0 (standard input) and stores them in struct old.
     tcgetattr(0, &old);
     newer = old;
+    //Sets the ICANON flag in the c_lflag field of newer to 0 (false) by performing a bitwise AND operation with the bitwise NOT of ICANON.
     newer.c_lflag &= ~ICANON;
     newer.c_lflag &= echo ? ECHO : ~ECHO;
+    //calls the tcsetattr function to set the terminal attributes for file descriptor 0 to the values in newer.
+    //The TCSANOW flag specifies that the changes should take effect immediately.
     tcsetattr(0, TCSANOW, &newer);
 }
 
@@ -30,6 +34,7 @@ void resetTermios(void)
 bool keyboardhit()
 {
     termios term;
+    //tcgetattr is called to get the current terminal attributes for file descriptor 0
     tcgetattr(0, &term);
 
     termios term2 = term;
@@ -37,6 +42,7 @@ bool keyboardhit()
     tcsetattr(0, TCSANOW, &term2);
 
     int byteswaiting;
+    //called the ioctl function to determine how many bytes are waiting in the input buffer.
     ioctl(0, FIONREAD, &byteswaiting);
 
     tcsetattr(0, TCSANOW, &term);
@@ -70,6 +76,8 @@ char getche(void)
 int getmax_x()
 {
     int lines = 24;
+    
+    //a variable called "ts" of type "struct ttysize", which is used to store the terminal size.
 #ifdef TIOCGSIZE
     struct ttysize ts;
         ioctl(STDIN_FILENO, TIOCGSIZE, &ts);
@@ -89,6 +97,7 @@ int getmax_y()
 {
     int cols = 80;
 
+    //a variable called "ts" of type "struct ttysize", which is used to store the terminal size.
 #ifdef TIOCGSIZE
     struct ttysize ts;
         ioctl(STDIN_FILENO, TIOCGSIZE, &ts);

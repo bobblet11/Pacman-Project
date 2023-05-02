@@ -10,9 +10,9 @@ static struct termios old, newer;
 
 //TERMINAL SCREEN FUNCTIONS
 void gotoxy(int x, int y);
-void initTermios(int echo);
+void initializeTermios(int echo);
 void resetTermios(void);
-bool kbhit();
+bool keyboardhit();
 
 //GETTING KEYBOARD INPUTS
 char getch_(int echo);

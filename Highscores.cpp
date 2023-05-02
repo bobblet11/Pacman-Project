@@ -23,6 +23,7 @@ bool operator<(const person &a, const person &b)
     return a.score < b.score;
 }
 
+//sorts and stores highscore in highscores.txt file
 void add_highscores(string name, int score, int timer)
 {
     const int time_multiplier = 11; // anything past 70secs causes negative points to be added
@@ -108,5 +109,3 @@ void add_highscores(string name, int score, int timer)
     }
     outfile.close();
 }
-
-// Need to add sorting

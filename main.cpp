@@ -75,7 +75,9 @@ int main(int argc, char *argv[])
                     "⠀⠙⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠃⠀⠀⠀⠀⠀⠀⠀                                             \n"
                     "   ⠙⠿⣿⣿⣿⣿⣿⣿⣿⠿⠋⠀⠀⠀⠀⠀⠀                                                 \n"
                     "⠀⠀⠀⠀⠀⠀⠉⠉⠉⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀                                                 ";
+    //Prints the Pacman head in the main menu
     obj.menu_head(Game);
+    //Options in main menu
     obj.add("New Game", 1, "Start a new game");
     obj.add("High Scores", 2, "See previous high scores");
     obj.add("Exit", 3, "Exit to the terminal CLI");
@@ -92,19 +94,27 @@ int main(int argc, char *argv[])
         //MENU LOOP
         if (gameState == MENU)
         {
-            x=obj.display();
+            x = obj.display();
             switch(x)
             {
                 case 1:
                     system("clear");
+                    //asks for name
                     name = Name();
+                    //Only takes the first name for display if anyone inputs full name or a name with space
                     if (name.find(' ') != string::npos)
                     {
                         int pos = name.find(' ');
                         display_name = name.substr(0, pos);
                     }
+                    else
+                    {
+                        display_name = name;
+                    }
+                    //Calls function to initialize game
                     PlayGame();
                     system("clear");
+                    //Calls function to start game screen
                     initSCR();
                     break;
                 case 2:
@@ -112,6 +122,8 @@ int main(int argc, char *argv[])
                     break;
                 case 3:
                     system("clear");
+                    //Credit screen when exiting from game
+                    //Also displayes a countdown for the user to wait
                     for (int i = 5; i > 0; i--) 
                     {
                         gotoxy(0,0);
@@ -122,6 +134,7 @@ int main(int argc, char *argv[])
                     system("clear");
                     system("setterm -cursor on");
                     exit(0);
+                //Case 4 adds after game has been played once to give the option of playing game under the same name
                 case 4:
                     PlayGame();
                     system("clear");
@@ -237,6 +250,7 @@ int main(int argc, char *argv[])
             for (int i = 5; i > 0; i--) 
             {
                 gotoxy(0,0);
+                //Displayes a countdown for the user to wait
                 cout << "Main Menu in: " << i << endl;
                 processHighscore("HighscoreTitle.txt", "highscores.txt");
                 usleep(800000);
@@ -263,19 +277,22 @@ int main(int argc, char *argv[])
 
 }
 
-
+//Initializes game start
 void PlayGame()
 {
     system("clear");
     string statement = "Hello " + name + "\nWelcome to our version of PACMAN\n<<<Game Loading>>>\n";
+    //Prints Welcome message
     directdistheplay(statement);
     cout << "\n\n";
+    //loading bar animation
     for (int i = 0; i <= 100; ++i)
     {
         if (i == 100) 
         {
             system("clear");
         }
+        //Loading bar position in the terminal screen
         gotoxy((getmax_x() / 2) + 3, (getmax_y() / 2) - 52);
         string progress = "[" + string(i, '|') + string(100 - i, ' ') + "]";
         cout << progress << flush << " " << i << "%" << endl;
@@ -283,32 +300,43 @@ void PlayGame()
     }
     cout << "\n";
     statement = "READY TO START\n<<Press Enter to Start>>";
+    //Prints that the game has loaded and ready to start
     directdistheplay(statement);
     cin.ignore();
 }
 
+//Shows highscores to the player
 void highscores()
 {
     system("clear");
-    processHighscore(HIGHSCORES_TITLE, HIGHSCORES);
+    //Prints highscores in the terminal screen
+    processHighscore(HIGHSCORES_TITLE, HIGHSCORES); 
     cout << "\n\n\n\n\n\n\n";
+    //Info for user on how to get back to main menu
     cout << ">>> Press Enter to go back to Main Menu";
     cin.ignore();
     return;
 }
 
+//Requests user to input name
 string Name()
 {
     string name;
-    preprocess("Namebox.txt");
+    //Prints a box to type name inside
+    preprocess("Namebox.txt"); 
+    //Puts cursor inside the box
     gotoxy(getmax_x() / 2, (getmax_y() / 2) - 10);
+    //Turns on blinking cursor for visualization
     system("setterm -cursor on");
     getline(cin, name);
+    //If no input was detected from user programme will assign player as Unknown Player
     if (name.empty())
     {
         name = "Unknown Player";
     }
+    //Turns off blinking cursor again to avoid distractions
     system("setterm -cursor off");
+    //Clears the terminal screen
     system("clear");
     return name;
 }

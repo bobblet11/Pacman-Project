@@ -11,6 +11,7 @@
 
 using namespace std;
 
+//menu class to store menu items and initializes menu functionalities
 class menu
 {
     item head;
