@@ -210,7 +210,7 @@ int main(int argc, char *argv[])
             {
                 gotoxy(0,0);
                 cout << "Main Menu in: " << i << endl;
-                processHighscore("HighScoreFinal.txt", "highscores.txt");
+                processHighscore("HighscoreTitle.txt", "highscores.txt");
                 usleep(800000);
             }
             system("clear");
