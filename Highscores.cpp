@@ -57,7 +57,7 @@ void add_highscores(string name, int score, int timer)
 
     //opens and loads all the highscores into the vector as Persons objects
     ifstream infile;
-    infile.open("highscores.txt");
+    infile.open("Highscores.txt");
 
     if (infile.is_open())
     {
@@ -104,7 +104,7 @@ void add_highscores(string name, int score, int timer)
     infile.close();
 
     ofstream outfile;
-    outfile.open("highscores.txt");
+    outfile.open("Highscores.txt");
 
     //sorts the scores by numerical order
     sort(scores.begin(), scores.end());
