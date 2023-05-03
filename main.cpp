@@ -260,7 +260,7 @@ int main(int argc, char *argv[])
                 gotoxy(0,0);
                 //Displayes a countdown for the user to wait
                 cout << "Main Menu in: " << i << endl;
-                processHighscore("HighscoreTitle.txt", "highscores.txt");
+                processHighscore("HighscoreTitle.txt", "Highscores.txt");
                 usleep(800000);
             }
             //clear screen
