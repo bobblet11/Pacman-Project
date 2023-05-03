@@ -29,6 +29,7 @@ PROJECT DESCRIPTION:
        - try to beat your highscore by eating more ghosts and completing the level quickly.
 
   4. How to play
+      0) MUST SET THE TERMINAL TO FULL SCREEN FIRST!
       1) start the game with ./pacman after compiling and linking using "make compile"
 
       2) use arrow keys to navigate the main menu, press enter to click selected button
