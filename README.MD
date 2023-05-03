@@ -12,6 +12,7 @@ PROJECT DESCRIPTION:
 
   Pacman type game that utilises ncurses, unicode and termios. 
   1. Main menu
+      - use arrow keys to navigate the main menu.
       - view your previous highscores -> tied to the name you input
       - quit the game
       - play the game
@@ -21,7 +22,7 @@ PROJECT DESCRIPTION:
       - Loading animation
 
   3. Game
-       - use the WASD to control the PACMAN character
+       - use the WASD or arrow keys to control the PACMAN character
        - eat all the pills to win
        - avoid all ghosts
        - eat super pills to put ghosts in freightened state -> ghosts are now edible and provide extra points
