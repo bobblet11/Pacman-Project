@@ -34,23 +34,23 @@ GameObject::~GameObject()
 //GETTERS
 std::vector<std::string> GameObject :: getAnimationSprites()
 {
-    return animation_sprites;
+    return animation_sprites; //returns the vector containing all animation sprites.
 }
 int GameObject :: getX()
 {
-    return x;
+    return x; //returns x coordinate of GameObject
 }
 int GameObject :: getY()
 {
-    return y;
+    return y; //returns y coordinate of GameObject
 }
 std::string& GameObject :: getCurrentSprite()
 {
-    return animation_sprites.at(current_state_index);
+    return animation_sprites.at(current_state_index); //returns the current sprite displayed
 }
 int GameObject :: getCurrentStateIndex()
 {
-    return current_state_index;
+    return current_state_index; //returns the current index in the vector of animation states.
 }
 
 //SETTERS
@@ -135,5 +135,5 @@ void GameObject :: setPoints(int x)
 }
 int GameObject :: getPoints()
 {
-    return  0;
+    return  0; //returns 0 if the Gameobject is not one that uses points systems.
 }

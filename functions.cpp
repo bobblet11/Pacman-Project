@@ -60,13 +60,13 @@ char getch_(int echo)
     return ch;
 }
 
-//Wrapper function for getch_()
+//Wrapper function for getch_() -> no echo to screen
 char GETCH(void)
 {
     return getch_(0);
 }
 
-//Wrapper function for getch_()
+//Wrapper function for getch_() -> echoes to screen
 char getche(void)
 {
     return getch_(1);

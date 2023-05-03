@@ -373,7 +373,7 @@ bool Ghosts::checkIfInBox()
 {
     if (x > 11 && x < 18 && y > 13 && y < 17)
     {
-        return true;
+        return true; //returns true if withing the spawn box
     }
-    return false;
+    return false; //returns false if outside of the spawn box
 }

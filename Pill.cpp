@@ -26,5 +26,5 @@ Pill:: ~Pill()
 //returns the points this pill is worth
 int Pill:: getPoints()
 {
-    return points;
+    return points; //returns the point value of the pill
 }

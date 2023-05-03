@@ -68,19 +68,21 @@ void Character :: updateAnimationState()
 //INTERNAL MEMBER FUNCTIONS
 
 //will ignore non inputs ie pressing nothing and only accept inputs that are pressed in keyboard
-int Character :: selectGetch()
+bool Character :: selectGetch()
 {
     int input = getch(); //gets the current input detected
 
     if (input != ERR) //checks something has been pressed
     {
         ungetch(input); //PLACES THE INPUT BACK INTO THE buffer
-        return 1;
+        return true;
     }
     else //otherwise if nothing has been pressed, return false.
     {
-        return 0;
+        return false;
     }
+//returns true when a character has been typed
+//returns false when non keyboard characters are passing through getch.
 }
 
 //will check the inputs pressed, update the position, and check for any encountered pills

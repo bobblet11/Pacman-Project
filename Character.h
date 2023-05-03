@@ -42,7 +42,7 @@ class Character : public GameObject
         PlayableMap map; //the map for checking if position is passable
 
         int last_input; //the last valid input 
-        int selectGetch(); //function that will only allow keypresses to add to the getch buffer
+        bool selectGetch(); //function that will only allow keypresses to add to the getch buffer
 
         //CHARACTER MEMBER FUNCTIONS
         //will move the character and check for any GameObjects encountered.

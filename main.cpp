@@ -37,8 +37,6 @@ string display_name;
 
 //GLOBAL VARIABLES
 int gameState = MENU;
-bool replay = false;
-int freightened_timer=0;
 
 int main(int argc, char *argv[])
 {
@@ -48,6 +46,8 @@ int main(int argc, char *argv[])
     int timer = 0;
     bool running = true;
     bool freightened = false;
+    bool replay = false;
+    int freightened_timer=0;
     //initialise all the gameObjects 
     vector<GameObject*> handle;
     PlayableMap map(handle);
@@ -87,6 +87,14 @@ int main(int argc, char *argv[])
 
     //start intro sequence
     intro();
+
+    //clears input buffer
+    int copy_of_input = dup(STDIN_FILENO);
+    /* remove garbage from stdin */
+    tcdrain(copy_of_input);
+    tcflush(copy_of_input, TCIFLUSH);
+    close(copy_of_input);
+
 
     //GAMELOOP
     while(running)
@@ -360,11 +368,10 @@ void initSCR()
 {
      //INITIALISING THE NCURESES TERMINAL
      //set all ncurses terminal parameters
-    cbreak();
+    setlocale(LC_ALL,"");//allows unicode
+    initscr();//opens ncurses terminal
     noecho();
-    setlocale(LC_ALL,"");
-    initscr();
-    nodelay(stdscr,TRUE);
+    cbreak();
 
     //checks if tereminal supports colour
     if(has_colors() == FALSE)

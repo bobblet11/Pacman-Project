@@ -97,13 +97,13 @@ bool PlayableMap :: IsMoveable(int x, int y, int object_type)
         //if the object type is a ghost ie not a character, then allow the movement
         if ( map_layout[y][x] == DEFAULT_HORIZ_DOOR && object_type != 1)
         {
-            //then accept movement
+            //then accept movement, returns true
             return true;
         }
-        //then reject the movement
+        //then reject the movement, returns false
         return false;
     }
-    //other wise, the position is an empty space. allow movement
+    //other wise, the position is an empty space. allow movement, return true
     return true;
 }
 
