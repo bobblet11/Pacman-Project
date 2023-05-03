@@ -7,6 +7,25 @@
 
 using namespace std;
 
+//CONSTRUCTOR
+item::item()
+{
+    name = " ";
+    description = " ";
+    y = 0;
+    returnval = 0;
+}
+item::item(string s1, int a, string s2)
+{
+    name = s1;
+    description = s2;
+    returnval = a;
+}
+item::~item()
+{
+    
+}
+
 //prints menu options
 void item::display_()
 {

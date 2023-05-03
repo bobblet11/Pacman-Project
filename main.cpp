@@ -23,7 +23,7 @@
 //CONSTANTS
 const int FRAMERATE = 60; //framerate
 const int MENU = 0, INGAME = 1, WIN = 2, LOSE = 3; //game states
-const string HIGHSCORES = "highscores.txt", HIGHSCORES_TITLE = "HighscoreTitle.txt"; //filenames for txts
+const string HIGHSCORES = "Highscores.txt", HIGHSCORES_TITLE = "HighscoreTitle.txt"; //filenames for txts
 
 //FUNCTION PROTOTYPES
 void PlayGame(), highscores();

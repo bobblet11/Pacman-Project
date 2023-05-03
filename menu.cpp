@@ -9,8 +9,12 @@
 using namespace std;
 
 //adds menu options to the vector
+//s is the string displayed inside of the button
+//r is the vertical position of the button
+//d is the description of the button
 void menu::add(string s, int r = 0, string d = " ")
 {
+    //num is the bottom of the menu.
     num++;
     if(r == 0)
     {
@@ -20,6 +24,7 @@ void menu::add(string s, int r = 0, string d = " ")
 }
 
 //Sets the name of the pacman head in main menu to the item class
+//s is the string value of the menu head -> the art dislpayed on menu.
 void menu::menu_head(string s)
 {
     head.name = s;

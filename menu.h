@@ -14,17 +14,18 @@ using namespace std;
 //menu class to store menu items and initializes menu functionalities
 class menu
 {
-    item head;
-    vector<item> elements;
-    int num;
-public:
-    menu()
-    {
-        num=0;
-    };
-    void add(string,int,string);
-    void menu_head(string);
-    int display();
+    private:
+        item head;
+        vector<item> elements;
+        int num;
+    public:
+        menu()
+        {
+            num=0;
+        };
+        void add(string,int,string);
+        void menu_head(string);
+        int display();
 };
 
 #endif

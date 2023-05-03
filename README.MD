@@ -118,7 +118,6 @@ In-code documentation
 
 
 QUICKSTART:
-
   download the github repo
   enter the directory of the repo
   open terminal in repo
@@ -149,7 +148,7 @@ files:
 - Pill.cpp Pillh Pills.txt                                                  
 //Child of GameObject, contains all specialised classes for Pill objects that player eats. Will read off the Pills.txt to load in all sprites for Pills.
 
-- NameBox.txt functions.cpp functions.h middle.cpp middle.h menu.cpp menu.h 
+- NameBox.txt functions.cpp functions.h middle.cpp middle.h menu.cpp menu.h item.cpp item.h
 //contains all functions, defintions and classes required for the main menu
 
 - main.cpp                                                                  

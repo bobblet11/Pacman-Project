@@ -14,22 +14,14 @@ using namespace std;
 class item
 {
 public:
+    //constructors
+    item();
+    item(string s1, int a, string s2);
+    //deconstructors
+    ~item();
     string name, description;
     int returnval;
     int y;
-    item()
-    {
-        name = " ";
-        description = " ";
-        y = 0;
-        returnval = 0;
-    }
-    item(string s1, int a, string s2)
-    {
-        name = s1;
-        description = s2;
-        returnval = a;
-    }
     void display_();
     void display_selected();
 };
