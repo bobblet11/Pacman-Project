@@ -372,6 +372,7 @@ void initSCR()
     initscr();//opens ncurses terminal
     noecho();
     cbreak();
+    nodelay(stdscr,true);
 
     //checks if tereminal supports colour
     if(has_colors() == FALSE)
