@@ -9,8 +9,10 @@ GROUP NUMBER:
 group 106
 
 PROJECT DESCRIPTION:
+
   -notes
     -> the counter on the top left of load screens is INTENTIONAL. it is a timer.
+    -> the name displayed will only show the first word, this is intentional to prevent long names. Also displayed names are shortened so they fit on the screen.
   Pacman type game that utilises ncurses, unicode and termios. 
   1. Main menu
       - use arrow keys to navigate the main menu.
