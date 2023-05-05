@@ -88,20 +88,18 @@ int main(int argc, char *argv[])
     //start intro sequence
     intro();
 
-    //clears input buffer
-    int copy_of_input = dup(STDIN_FILENO);
-    /* remove garbage from stdin */
-    tcdrain(copy_of_input);
-    tcflush(copy_of_input, TCIFLUSH);
-    close(copy_of_input);
-
-
     //GAMELOOP
     while(running)
     {
         //MENU LOOP
         if (gameState == MENU)
         {
+            //clears input buffer
+            int copy_of_input = dup(STDIN_FILENO);
+            /* remove garbage from stdin */
+            tcdrain(copy_of_input);
+            tcflush(copy_of_input, TCIFLUSH);
+            close(copy_of_input);
             x = obj.display();
             switch(x)
             {
@@ -278,10 +276,10 @@ int main(int argc, char *argv[])
             //reset timer
             timer = 0;
             //now the menu part of loop will be run.
+            
         }
 
     }
-
 
 }
 
