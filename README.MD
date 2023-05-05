@@ -9,7 +9,8 @@ GROUP NUMBER:
 group 106
 
 PROJECT DESCRIPTION:
-
+  -notes
+    -> the counter on the top left of load screens is INTENTIONAL. it is a timer.
   Pacman type game that utilises ncurses, unicode and termios. 
   1. Main menu
       - use arrow keys to navigate the main menu.
@@ -29,7 +30,9 @@ PROJECT DESCRIPTION:
        - try to beat your highscore by eating more ghosts and completing the level quickly.
 
   4. How to play
-      0) MUST SET THE TERMINAL TO FULL SCREEN FIRST!
+      0) SINGLE PLAYER GAME
+         ASSUME PLAYER WILL NOT TYPE CONTROL C MIDGAME -> this will exit game as it is a command to exit runtime
+         MUST SET THE TERMINAL TO FULL SCREEN FIRST!
       1) start the game with ./pacman after compiling and linking using "make compile"
 
       2) use arrow keys to navigate the main menu, press enter to click selected button
