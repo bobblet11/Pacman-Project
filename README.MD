@@ -1,5 +1,5 @@
 README
-![Model](https://raw.githubusercontent.com/bobblet11/Pacman-Project/master/showcase.gif)
+![Model](https://raw.githubusercontent.com/bobblet11/Pacman-Project/master/showcase.mp4)
 
 ![Model](https://raw.githubusercontent.com/bobblet11/Pacman-Project/master/pacmangit1.png)
 
