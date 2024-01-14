@@ -1,10 +1,6 @@
 README
 
-![Model](https://raw.githubusercontent.com/bobblet11/Pacman-Project/master/pacmangit2.png)
 
-![Model](https://raw.githubusercontent.com/bobblet11/Pacman-Project/master/pacmangit3.png)
-
-![Model](https://raw.githubusercontent.com/bobblet11/Pacman-Project/master/pacmangit4.png)
 
 ![Model](https://raw.githubusercontent.com/bobblet11/Pacman-Project/master/pacmangit5.png)
 
@@ -16,12 +12,18 @@ README
 PROJECT DESCRIPTION:
   A pacman game that utilises ncurses, Unicode and termios. 
   1. Main menu
+
+![Model](https://raw.githubusercontent.com/bobblet11/Pacman-Project/master/pacmangit2.png)
+
       - use arrow keys to navigate the main menu.
       - view your previous high scores -> tied to the name you input
       - quit the game
       - play the game
 
   2. Loading sequence
+
+![Model](https://raw.githubusercontent.com/bobblet11/Pacman-Project/master/pacmangit3.png)
+
       - Enter a name for your scores to be recorded under
       - Loading animation
 
@@ -31,6 +33,9 @@ PROJECT DESCRIPTION:
        - avoid all ghosts
        - eat super pills to put ghosts in a frightened state -> Ghosts are now edible and provide extra points
        - try to beat your high score by eating more ghosts and completing the level quickly.
+
+![Model](https://raw.githubusercontent.com/bobblet11/Pacman-Project/master/pacmangit4.png)
+
 
   4. How to play
       0) SINGLE PLAYER GAME
