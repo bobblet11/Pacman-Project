@@ -1,6 +1,6 @@
 README
 
-![ezcv logo](https://raw.githubusercontent.com/bobblet11/Pacman-Project/master/.github/pacmangit1.png)
+![Model](https://raw.githubusercontent.com/bobblet11/Pacman-Project/master/pacmangit1.png)
 
 
 
