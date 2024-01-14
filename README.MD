@@ -35,58 +35,17 @@ SHOWCASE:
 - Quit the game.
 - Play the game.
 
+![Model](https://raw.githubusercontent.com/bobblet11/Pacman-Project/master/pacmangit3.png)
+
+- view high scores through the main menu and at the end of playthroughs.
+
 ![Model](https://raw.githubusercontent.com/bobblet11/Pacman-Project/master/pacmangit4.png)
 
 - Enter a username which will be used to store your high score, previous scores under the same name will be overwritten if beaten.
 
 ![Model](https://raw.githubusercontent.com/bobblet11/Pacman-Project/master/pacmangit5.png)
 
-      - Enter a name for your scores to be recorded under
-      - Loading animation
-
 ![Model](https://raw.githubusercontent.com/bobblet11/Pacman-Project/master/pacmangit6.png)
-
-![Model](https://raw.githubusercontent.com/bobblet11/Pacman-Project/master/pacmangit3.png)
-
-- use the WASD or arrow keys to control the PACMAN character
-- eat all the pills to win
-- avoid all ghosts
-- eat super pills to put ghosts in a frightened state -> Ghosts are now edible and provide extra points
-- try to beat your high score by eating more ghosts and completing the level quickly.
-
-  4. How to play
-      0) SINGLE PLAYER GAME
-         ASSUME PLAYER WILL NOT TYPE CONTROL C MIDGAME -> This will exit the game as it is a command to exit runtime
-         MUST SET THE TERMINAL TO FULL SCREEN FIRST!
-      1) start the game with ./pacman after compiling and linking using "make compile"
-
-      2) use arrow keys to navigate the main menu, and press enter to click the selected button
-            - Press enter on "Play Game" to start the game
-            - Press enter on "HighScores" to see all high scores of your attempts
-            - Press enter on Quit to close the game and clear the screen
-
-      3) Once you press "Play Game", enter a name to save your high score. If you use a name you already used before, 
-         the high score will be overridden under    that name -> given that you beat the previous score under that name.
-         Press enter once you typed your name to begin playing
-
-      4) Playing the Game:
-         - Use arrow keys or WASD to move the playable character. The character will move in the direction you set it forever until you change direction.
-         - Eat all of the white pills on the map to win the game
-         - Ghosts will chase you and try to touch you
-         - If you touch a ghost, you lose the game
-         - Ghosts AI will increase in difficulty as your points increase.
-         - Eating white pills causes Ghosts to enter a frightened state for 10 seconds -> ghosts turn white -> you can eat the ghosts and gain extra points.
-         - The faster you finish the game, the larger the score bonus you receive at the end.
-         - You can enter the tunnel located at the left and right sides of the map to quickly cross over to the other side.
-
-      5) Winning/losing:
-          - when you win or lose, your score is saved.
-          - winning happens when you eat all the pills
-           - enter a winning page
-          - losing happens when a ghost touches you
-           - enter a losing page
-          - conclude winning/losing page
-          - Once you conclude the losing/winning page, you will be redirected to the main menu to view your high scores, play again, or quit.
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------
 
