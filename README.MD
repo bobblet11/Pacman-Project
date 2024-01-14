@@ -1,8 +1,7 @@
 README
 
+![Model](https://raw.githubusercontent.com/bobblet11/Pacman-Project/master/pacmangit3.png)
 
-
-![Model](https://raw.githubusercontent.com/bobblet11/Pacman-Project/master/pacmangit5.png)
 
 ![Model](https://raw.githubusercontent.com/bobblet11/Pacman-Project/master/pacmangit6.png)
 
@@ -22,7 +21,7 @@ PROJECT DESCRIPTION:
 
   2. Loading sequence
 
-![Model](https://raw.githubusercontent.com/bobblet11/Pacman-Project/master/pacmangit3.png)
+![Model](https://raw.githubusercontent.com/bobblet11/Pacman-Project/master/pacmangit5.png)
 
       - Enter a name for your scores to be recorded under
       - Loading animation
