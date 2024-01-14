@@ -1,7 +1,6 @@
 README
 
-![Model](Untitled video - Made with Clipchamp.mp4)
-
+![Model](https://raw.githubusercontent.com/bobblet11/Pacman-Project/master/Untitled video - Made with Clipchamp.mp4)
 
 
 
