@@ -1,19 +1,43 @@
-README
+Pacman clone
 
-PROJECT DESCRIPTION:
-  A pacman game that utilises ncurses, Unicode and termios. 
-  1. Main menu
+A Pacman clone written in C++ that plays inside the terminal using ncurses and termios libraries.
+
+Table of Contents:
+1) how to install and run the project
+  1.1) dependencies
+2) showcasing
+3) implementation notes
+4) documentation
+
+--------------------------------------------
+
+QUICKSTART:
+
+![Model](https://raw.githubusercontent.com/bobblet11/Pacman-Project/master/pacmangit1.png)
+
+-Download the GitHub repo.
+-Open the terminal in the downloaded folder.
+-Build the project by typing "make compile" or "make" into the terminal.
+-Enter fullscreen before running.
+-Run the game by typing "./pacman".
+
+DEPENDENCIES:
+-require ncurses to render the game.
+
+--------------------------------------------
+
+SHOWCASE:
 
 ![Model](https://raw.githubusercontent.com/bobblet11/Pacman-Project/master/pacmangit2.png)
 
-      - use arrow keys to navigate the main menu.
-      - view your previous high scores -> tied to the name you input
-      - quit the game
-      - play the game
-
-  2. Loading sequence
+-Use arrow keys to navigate the main menu.
+-View your previous high scores attached to the username you input.
+-Quit the game.
+-Play the game.
 
 ![Model](https://raw.githubusercontent.com/bobblet11/Pacman-Project/master/pacmangit4.png)
+
+-Enter a username which will be used to store your high score, previous scores under the same name will be overwritten if beaten.
 
 ![Model](https://raw.githubusercontent.com/bobblet11/Pacman-Project/master/pacmangit5.png)
 
@@ -113,23 +137,7 @@ In-code documentation
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-QUICKSTART:
 
-![Model](https://raw.githubusercontent.com/bobblet11/Pacman-Project/master/pacmangit1.png)
-
-  download the GitHub repo
-  enter the directory of the repo
-  open terminal in repo
-  build the project by typing "make compile" or "make"
-  please enter fullscreen BEFORE running the game.
-  run the game by typing "./pacman"
-  to quit midgame, press ctrl + C and clear the terminal with "clear"
-  Otherwise, the player must finish the game -> WIN or LOSE -> then quit at the main menu.
-
-
-DEPENDENCIES
-  require ncurses to render the game
-  ncurses is used to draw all characters at (y,x) coordinates only.
 
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------
