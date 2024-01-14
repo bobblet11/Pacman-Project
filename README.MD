@@ -22,10 +22,9 @@ PROJECT DESCRIPTION:
 
   3. Game
 
-![Model](https://raw.githubusercontent.com/bobblet11/Pacman-Project/master/pacmangit3.png)
-
-
 ![Model](https://raw.githubusercontent.com/bobblet11/Pacman-Project/master/pacmangit6.png)
+
+![Model](https://raw.githubusercontent.com/bobblet11/Pacman-Project/master/pacmangit3.png)
 
        - use the WASD or arrow keys to control the PACMAN character
        - eat all the pills to win
