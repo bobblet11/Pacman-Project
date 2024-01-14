@@ -67,6 +67,9 @@ PROJECT DESCRIPTION:
           - Once you conclude the losing/winning page, you will be redirected to the main menu to view your high scores, play again, or quit.
 
 
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
 IMPLEMENTATION NOTES:
 
 Generation of random game sets or events:
@@ -108,6 +111,7 @@ Proper indentation and naming styles
 In-code documentation
     all code contains comments describing what the parameters are, what the output is and what the function does.
 
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 QUICKSTART:
 
@@ -127,6 +131,8 @@ DEPENDENCIES
   require ncurses to render the game
   ncurses is used to draw all characters at (y,x) coordinates only.
 
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 DOCUMENTATION:
 - Screen.cpp + Screen.h                                                     
