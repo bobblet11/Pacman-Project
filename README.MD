@@ -1,7 +1,4 @@
 README
-![Model](https://raw.githubusercontent.com/bobblet11/Pacman-Project/master/showcase.mp4)
-
-![Model](https://raw.githubusercontent.com/bobblet11/Pacman-Project/master/pacmangit1.png)
 
 ![Model](https://raw.githubusercontent.com/bobblet11/Pacman-Project/master/pacmangit2.png)
 
@@ -17,11 +14,7 @@ README
 
 
 PROJECT DESCRIPTION:
-
-  -notes
-    -> The counter on the top left of the load screens is INTENTIONAL. it is a timer.
-    -> The name displayed will only show the first word, this is intentional to prevent long names. Also displayed names are shortened so they fit on the screen.
-  A pacman-type game that utilises ncurses, Unicode and termios. 
+  A pacman game that utilises ncurses, Unicode and termios. 
   1. Main menu
       - use arrow keys to navigate the main menu.
       - view your previous high scores -> tied to the name you input
@@ -36,7 +29,7 @@ PROJECT DESCRIPTION:
        - use the WASD or arrow keys to control the PACMAN character
        - eat all the pills to win
        - avoid all ghosts
-       - eat super pills to put ghosts in frightened state -> ghosts are now edible and provide extra points
+       - eat super pills to put ghosts in a frightened state -> Ghosts are now edible and provide extra points
        - try to beat your high score by eating more ghosts and completing the level quickly.
 
   4. How to play
@@ -65,7 +58,6 @@ PROJECT DESCRIPTION:
          - You can enter the tunnel located at the left and right sides of the map to quickly cross over to the other side.
 
       5) Winning/losing:
-
           - when you win or lose, your score is saved.
           - winning happens when you eat all the pills
            - enter a winning page
@@ -118,6 +110,9 @@ In-code documentation
 
 
 QUICKSTART:
+
+![Model](https://raw.githubusercontent.com/bobblet11/Pacman-Project/master/pacmangit1.png)
+
   download the GitHub repo
   enter the directory of the repo
   open terminal in repo
